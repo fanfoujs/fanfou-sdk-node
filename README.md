@@ -4,7 +4,7 @@ Fanfou SDK for Node.js
 ## Installation
 
 ```bash
-$ npm install fanfou-oauth 
+$ npm install fanfou-sdk
 ```
 ## Initialization
 
