@@ -9,7 +9,7 @@ $ npm install fanfou-sdk
 ## Initialization
 
 ```javascript
-var Fanfou = require('fanfou-oauth');
+var Fanfou = require('fanfou-sdk');
 var ff = new Fanfou(
   consumer_key,
   consumer_secret,
