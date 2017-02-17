@@ -1,6 +1,9 @@
 # fanfou-sdk-node
 Fanfou SDK for Node.js
 
+![](https://img.shields.io/npm/v/fanfou-sdk.svg)
+![](https://img.shields.io/npm/l/fanfou-sdk.svg)
+
 ## Installation
 
 ```bash
