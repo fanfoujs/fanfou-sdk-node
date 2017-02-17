@@ -34,7 +34,7 @@ class Fanfou {
       this.oauth_token_secret,
       (e, data, res) => {
         if (e) callback(e, null);
-        else callback(null, require('util').inspect(data));
+        else callback(null, data);
       }
     );
   }
@@ -48,7 +48,7 @@ class Fanfou {
       parameters,
       (e, data, res) => {
         if (e) callback(e, null);
-        else callback(null, require('util').inspect(data));
+        else callback(null, data);
       }
     )
   }
