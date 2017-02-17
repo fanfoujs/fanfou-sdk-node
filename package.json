@@ -1,6 +1,6 @@
 {
   "name": "fanfou-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fanfou SDK for Node.js",
   "main": "index.js",
   "dependencies": {
@@ -24,7 +24,7 @@
     "fanfou"
   ],
   "author": "LitoMore",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/LitoMore/fanfou-sdk-node/issues"
   },
