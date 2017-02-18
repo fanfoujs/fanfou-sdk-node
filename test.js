@@ -1,6 +1,11 @@
 var Fanfou = require('fanfou-sdk');
 
-var ff = new Fanfou(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET);
+var ff = new Fanfou(
+  process.env.CONSUMER_KEY,
+  process.env.CONSUMER_SECRET,
+  process.env.OAUTH_TOKEN,
+  process.env.OAUTH_TOKEN_SECRET
+);
 
 ff.get('/statuses/home_timeline', {id: 'lito'}, function (e, res) {
   if (e) console.error(e);

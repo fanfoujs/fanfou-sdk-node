@@ -13,7 +13,7 @@
     "babel-preset-es2015": "^6.22.0"
   },
   "scripts": {
-    "test": "node test",
+    "test": "npm run build && node test",
     "build": "babel src -d lib"
   },
   "repository": {
