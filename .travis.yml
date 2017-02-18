@@ -1,3 +1,4 @@
 language: node_js
-  - "6"
-  - "7"
+node_js:
+  - "stable"
+  - "latest"
