@@ -49,9 +49,12 @@ ff.upload(path, text, callback);
 **Examples**
 
 ```javascript
-ff.get('/statuses/home_timeline', {}, function (e, res) {
+ff.get('/statuses/home_timeline', {}, function (e, res, timeline) {
   if (e) console.error(e);
-  else console.log(res);
+  else {
+    console.log(res);
+    console.log(timeline);
+  }
 });
 
 ff.post('/statuses/update', {status: 'post test'}, function (e, res) {

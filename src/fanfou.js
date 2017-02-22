@@ -5,6 +5,7 @@ const {OAuth} = require('oauth');
 const qs = require('querystring');
 const request = require('request');
 const oauthSignature = require('oauth-signature');
+const Timeline = require('./timeline');
 
 class Fanfou {
   constructor(consumer_key, consumer_secret, oauth_token, oauth_token_secret) {
@@ -26,6 +27,11 @@ class Fanfou {
     );
   }
 
+  /**
+   * @param uri
+   * @param parameters
+   * @param callback
+   */
   get(uri, parameters, callback) {
     const url = this.protocol + '//' + this.api_domain + uri + '.' + this.type;
     this.oauth.get(
@@ -33,12 +39,25 @@ class Fanfou {
       this.oauth_token,
       this.oauth_token_secret,
       (e, data, res) => {
-        if (e) callback(e, null);
-        else callback(null, data);
+        // TODO http status code
+        if (e) callback(e, null, null);
+        else {
+          if (Fanfou._uriType(uri) === 'timeline') {
+            const timeline = new Timeline(JSON.parse(data));
+            callback(null, data, timeline);
+          } else {
+            callback(null, data, null);
+          }
+        }
       }
     );
   }
 
+  /**
+   * @param uri
+   * @param parameters
+   * @param callback
+   */
   post(uri, parameters, callback) {
     const url = this.protocol + '//' + this.api_domain + uri + '.' + this.type;
     this.oauth.post(
@@ -53,6 +72,11 @@ class Fanfou {
     )
   }
 
+  /**
+   * @param path
+   * @param text
+   * @param callback
+   */
   upload(path, text, callback) {
     const method = 'POST';
     const url = this.protocol + '//' + this.api_domain + '/photos/upload.' + this.type;
@@ -90,6 +114,38 @@ class Fanfou {
       else if (httpResponse.statusCode !== 200) callback(body, null);
       else callback(null, body);
     });
+  }
+
+  /**
+   * @param uri
+   * @returns {string}
+   * @private
+   */
+  static _uriType(uri) {
+    const uriList = {
+      timeline: [
+        '/search/public_timeline',
+        '/search/user_timeline',
+        '/photos/user_timeline',
+        '/statuses/friends_timeine',
+        '/statuses/home_timeline',
+        '/statuses/public_timeline',
+        '/statuses/user_timeline',
+        '/statuses/context_timeline'
+      ]
+    };
+    for (const type in uriList) {
+      if (uriList.hasOwnProperty(type)) {
+        for (const i in uriList[type]) {
+          if (uriList[type].hasOwnProperty(i)) {
+            if (uriList[type][i] === uri) {
+              return type;
+            }
+          }
+        }
+      }
+    }
+    return null;
   }
 }
 
