@@ -48,7 +48,7 @@ class Status {
     return !(this.isReply() || this.isRepost());
   }
 
-  isOriginRt() {
+  isOriginRepost() {
     return this.isOrigin() && this.text.match(/转@/g);
   }
 
