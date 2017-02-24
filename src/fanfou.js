@@ -6,6 +6,7 @@ const qs = require('querystring');
 const request = require('request');
 const oauthSignature = require('oauth-signature');
 const Timeline = require('./timeline');
+const Status = require('./status');
 
 class Fanfou {
   constructor(consumer_key, consumer_secret, oauth_token, oauth_token_secret) {
@@ -43,8 +44,9 @@ class Fanfou {
         if (e) callback(e, null, null);
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            const timeline = new Timeline(JSON.parse(data));
-            callback(null, data, timeline);
+            callback(null, data, new Timeline(JSON.parse(data)));
+          } else if (Fanfou._uriType(uri) === 'status') {
+            callback(null, data, new Status(JSON.parse(data)));
           } else {
             callback(null, data, null);
           }
@@ -67,7 +69,16 @@ class Fanfou {
       parameters,
       (e, data, res) => {
         if (e) callback(e, null);
-        else callback(null, data);
+        else {
+          if (Fanfou._uriType(uri) === 'timeline') {
+            callback(null, data, new Timeline(JSON.parse(data)));
+          } else if (Fanfou._uriType(uri) === 'status') {
+            callback(null, data, new Status(JSON.parse(data)));
+          } else {
+            callback(null, data, null);
+          }
+          callback(null, data, null);
+        }
       }
     )
   }
@@ -110,9 +121,9 @@ class Fanfou {
       formData,
       headers: {Authorization: authorizationHeader},
     }, (err, httpResponse, body) => {
-      if (err) callback(err, null);
-      else if (httpResponse.statusCode !== 200) callback(body, null);
-      else callback(null, body);
+      if (err) callback(err, null, null);
+      else if (httpResponse.statusCode !== 200) callback(body, null, null);
+      else callback(null, body, new Status(JSON.parse(body)));
     });
   }
 
@@ -130,8 +141,16 @@ class Fanfou {
         '/statuses/friends_timeine',
         '/statuses/home_timeline',
         '/statuses/public_timeline',
+        '/statuses/replies',
         '/statuses/user_timeline',
-        '/statuses/context_timeline'
+        '/statuses/context_timeline',
+        '/statuses/mentions',
+        '/favorites'
+      ],
+      status: [
+        '/statuses/destroy',
+        '/statuses/update',
+        '/statuses/show'
       ]
     };
     for (const type in uriList) {
@@ -144,6 +163,12 @@ class Fanfou {
           }
         }
       }
+    }
+    if (uri.match(/^\/favorites\/((destroy)|(create))\/.+$/g)) {
+      return 'status';
+    }
+    if (uri.match(/^\/favorites\/.+$/g)) {
+      return 'timeline';
     }
     return null;
   }
