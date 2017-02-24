@@ -1,9 +1,9 @@
 # fanfou-sdk-node
 Fanfou SDK for Node.js
 
-![](https://img.shields.io/travis/LitoMore/fanfou-sdk-node.svg)
-![](https://img.shields.io/npm/v/fanfou-sdk.svg)
-![](https://img.shields.io/npm/l/fanfou-sdk.svg)
+[![](https://img.shields.io/travis/LitoMore/fanfou-sdk-node.svg)](https://travis-ci.org/LitoMore/fanfou-sdk-node)
+[![](https://img.shields.io/npm/v/fanfou-sdk.svg)](https://www.npmjs.com/package/fanfou-sdk)
+[![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/LitoMore/fanfou-sdk-node/blob/master/LICENSE)
 
 ## Installation
 
@@ -49,18 +49,27 @@ ff.upload(path, text, callback);
 **Examples**
 
 ```javascript
-ff.get('/statuses/home_timeline', {}, function (e, res) {
+ff.get('/statuses/home_timeline', {}, function (e, res, timeline) {
   if (e) console.error(e);
-  else console.log(res);
+  else {
+    console.log(res);
+    console.log(timeline);
+  }
 });
 
-ff.post('/statuses/update', {status: 'post test'}, function (e, res) {
+ff.post('/statuses/update', {status: 'post test'}, function (e, res, status) {
   if (e) console.error(e);
-  else console.log(res);
+  else {
+    console.log(res);
+    console.log(status);
+  }
 });
 
-ff.upload('/Users/litomore/Desktop/fanfou.png', 'nice day', function (e, res) {
+ff.upload('/Users/litomore/Desktop/fanfou.png', 'nice day', function (e, res, status) {
   if (e) console.error(e);
-  else console.log(res);
+  else {
+    console.log(res);
+    console.log(status);
+  }
 });
 ```
