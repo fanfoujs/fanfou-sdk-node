@@ -33,3 +33,20 @@ ff.upload(__dirname + '/img/parentheses.png', Math.random().toString(36).substr(
     console.log(status);
   }
 });
+
+let streamer = ff.stream();
+streamer.on('connected', function () {
+  console.log('connected');
+});
+
+streamer.on('close', function () {
+  console.log('disconnected');
+});
+
+streamer.on('error', function (err) {
+  console.log(err);
+});
+
+setTimeout(function () {
+  streamer.stop()
+}, 1000);
