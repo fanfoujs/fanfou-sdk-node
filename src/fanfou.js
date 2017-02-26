@@ -3,20 +3,25 @@
 const fs = require('fs');
 const {OAuth} = require('oauth');
 const qs = require('querystring');
+const events = require('events');
+const util = require('util');
 const request = require('request');
 const oauthSignature = require('oauth-signature');
 const Timeline = require('./timeline');
 const Status = require('./status');
+const Streaming = require('./streaming');
 
 class Fanfou {
   constructor(consumer_key, consumer_secret, oauth_token, oauth_token_secret) {
     this.protocol = 'http:';
     this.api_domain = 'api.fanfou.com';
+    this.streaming_domain = 'stream.fanfou.com';
     this.type = 'json';
     this.consumer_key = consumer_key;
     this.consumer_secret = consumer_secret;
     this.oauth_token = oauth_token;
     this.oauth_token_secret = oauth_token_secret;
+    this.is_streaming = false;
     this.oauth = new OAuth(
       'http://api.fanfou.com/oauth/request_token',
       'http://api.fanfou.com/oauth/access_token',
@@ -81,6 +86,99 @@ class Fanfou {
         }
       }
     )
+  }
+
+  /**
+   * @param uri
+   * @param parameters
+   */
+  stream (uri, parameters) {
+    // prevent concurrences
+    if (this.is_streaming === true) {
+      console.warn('A previous streamer of this instance is currently running, cannot create more.');
+      return;
+    }
+
+    // params validation
+    if (uri === undefined) {
+      uri = '/user';
+    }
+
+    if (typeof parameters !== 'object') {
+      parameters = {};
+    }
+
+    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.' + this.type;
+    let request = this.oauth.post(url, this.oauth_token, this.oauth_token_secret, parameters, null);
+
+    let ee = new events.EventEmitter();
+
+    ee.stop = () => {
+      request.abort();
+      this.is_streaming = false;
+    };
+
+    request.on('error', error => {
+      ee.emit('error', {type: 'request', data: error});
+      this.is_streaming = false;
+    });
+
+    // init and subsequent response data
+    request.on('response', response => {
+      if(response.statusCode > 200) {
+        ee.emit('error', {type: 'response', data: {code: response.statusCode}});
+        this.is_streaming = false;
+      }
+      else {
+        this.is_streaming = true;
+
+        ee.emit('connected');
+
+        response.setEncoding('utf8');
+        let data = '';
+
+        response.on('data', chunk => {
+          data += chunk.toString('utf8');
+
+          if (data === '\r\n') {
+            ee.emit('heartbeat');
+            return;
+          }
+
+          let index, json;
+
+          while((index = data.indexOf('\r\n')) > -1) {
+            json = data.slice(0, index);
+            data = data.slice(index + 2);
+            if(json.length > 0) {
+              try {
+                let newStreaming = new Streaming(JSON.parse(json));
+                ee.emit(newStreaming.schema, newStreaming);
+              } catch(e) {
+                ee.emit('garbage', data);
+              }
+            }
+          }
+        });
+
+        response.on('error', error => {
+          ee.emit('close', error);
+        });
+
+        response.on('end', () => {
+          ee.emit('close', 'connection dropped');
+        });
+
+        response.on('close', () => {
+          request.abort();
+          this.is_streaming = false;
+        });
+      }
+    });
+
+    request.end();
+
+    return ee;
   }
 
   /**
