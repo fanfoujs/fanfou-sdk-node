@@ -1,14 +1,15 @@
 var Fanfou = require('./../lib/fanfou');
 
-var ff = new Fanfou(
-  process.env.CONSUMER_KEY,
-  process.env.CONSUMER_SECRET,
-  process.env.OAUTH_TOKEN,
-  process.env.OAUTH_TOKEN_SECRET
-);
+var ff_oauth = new Fanfou({
+  auth_type: 'oauth',
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  oauth_token: process.env.OAUTH_TOKEN,
+  oauth_token_secret: process.env.OAUTH_TOKEN_SECRET
+});
 
 // GET test
-ff.get('/favorites', {id: 'lito', count: 1}, function (e, res, timeline) {
+ff_oauth.get('/favorites', {id: 'lito', count: 1}, function (e, res, timeline) {
   if (e) console.error(e);
   else {
     console.log('GET ok.')
@@ -16,7 +17,7 @@ ff.get('/favorites', {id: 'lito', count: 1}, function (e, res, timeline) {
 });
 
 // POST test
-ff.post('/statuses/update', {
+ff_oauth.post('/statuses/update', {
   status: Math.random().toString(36).substr(2, 8),
   count: 1
 }, function (e, res, status) {
@@ -27,7 +28,7 @@ ff.post('/statuses/update', {
 });
 
 // Photo upload test
-ff.upload(__dirname + '/img/parentheses.png', Math.random().toString(36).substr(2, 8), function (e, res, status) {
+ff_oauth.upload(__dirname + '/img/parentheses.png', Math.random().toString(36).substr(2, 8), function (e, res, status) {
   if (e) console.error(e);
   else {
     console.log('Photo upload ok.');
@@ -35,7 +36,7 @@ ff.upload(__dirname + '/img/parentheses.png', Math.random().toString(36).substr(
 });
 
 // Streaming test
-let streamer = ff.stream();
+let streamer = ff_oauth.stream();
 streamer.on('connected', function () {
   console.log('Streaming connected.');
 });
@@ -53,19 +54,19 @@ setTimeout(function () {
 }, 1000);
 
 // XAuth test
-ff.oauth.getXAuthAccessToken(
-  process.env.FANFOU_USERNAME,
-  process.env.FANFOU_PASSWORD,
-  function (error, oauth_token, oauth_token_secret, result) {
-    if (error) console.error(error);
-    else {
-      console.log('Get XAuth Access Token ok.');
-      ff.oauth.oauth_token = oauth_token;
-      ff.oauth.oauth_token_secret = oauth_token_secret;
-      ff.get('/statuses/public_timeline', {count: 1}, function (e, res, timeline) {
-        if (e) console.error(e);
-        else console.log('Get public timeline by XAuth ok.');
-      })
-    }
+var ff_xauth = new Fanfou({
+  auth_type: 'xauth',
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  username: process.env.FANFOU_USERNAME,
+  password: process.env.FANFOU_PASSWORD
+});
+
+ff_xauth.xauth(function (e, res) {
+  if (e) console.error(e);
+  else {
+    ff_xauth.get('/statuses/public_timeline', {count: 1}, function (e, res, timeline) {
+      console.log('XAuth get public timeline ok.')
+    });
   }
-);
+});

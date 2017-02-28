@@ -12,25 +12,55 @@ const Status = require('./status');
 const Streaming = require('./streaming');
 
 class Fanfou {
-  constructor(consumer_key, consumer_secret, oauth_token, oauth_token_secret) {
-    this.protocol = 'http:';
-    this.api_domain = 'api.fanfou.com';
-    this.streaming_domain = 'stream.fanfou.com';
-    this.type = 'json';
-    this.consumer_key = consumer_key;
-    this.consumer_secret = consumer_secret;
-    this.oauth_token = oauth_token;
-    this.oauth_token_secret = oauth_token_secret;
+  constructor(options) {
+    options = options || {};
+
+    // required
+    this.consumer_key = options.consumer_key;
+    this.consumer_secret = options.consumer_secret;
+    this.auth_type = options.auth_type;
+
+    // optional
+    this.protocol = options.protocol || 'http:';
+    this.api_domain = options.api_domain || 'api.fanfou.com';
+    this.streaming_domain = options.streaming_domain || 'stream.fanfou.com';
+
+    // oauth required
+    if (this.auth_type === 'oauth') {
+      this.oauth_token = options.oauth_token || '';
+      this.oauth_token_secret = options.oauth_token_secret || '';
+    }
+
+    // xauth required
+    if (this.auth_type === 'xauth') {
+      this.username = options.username || '';
+      this.password = options.password || '';
+    }
+
     this.is_streaming = false;
     this.oauth = new OAuth(
       'http://fanfou.com/oauth/request_token',
       'http://fanfou.com/oauth/access_token',
-      consumer_key,
-      consumer_secret,
+      this.consumer_key,
+      this.consumer_secret,
       '1.0',
       null,
       'HMAC-SHA1'
     );
+  }
+
+  xauth(callback) {
+    this.oauth.getXAuthAccessToken(this.username, this.password, (e, oauth_token, oauth_token_secret, result) => {
+      if (e) callback(e);
+      else {
+        this.oauth.oauth_token = oauth_token;
+        this.oauth.oauth_token_secret = oauth_token_secret;
+        callback(null, {
+          oauth_token: oauth_token,
+          oauth_token_secret: oauth_token_secret
+        });
+      }
+    });
   }
 
   /**
@@ -39,7 +69,7 @@ class Fanfou {
    * @param callback
    */
   get(uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.' + this.type;
+    const url = this.protocol + '//' + this.api_domain + uri + '.json';
     this.oauth.get(
       url + '?' + qs.stringify(parameters),
       this.oauth_token,
@@ -66,7 +96,7 @@ class Fanfou {
    * @param callback
    */
   post(uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.' + this.type;
+    const url = this.protocol + '//' + this.api_domain + uri + '.json';
     this.oauth.post(
       url,
       this.oauth_token,
@@ -91,7 +121,7 @@ class Fanfou {
    * @param uri
    * @param parameters
    */
-  stream (uri, parameters) {
+  stream(uri, parameters) {
     // prevent concurrences
     if (this.is_streaming === true) {
       console.warn('A previous streamer of this instance is currently running, cannot create more.');
@@ -107,7 +137,7 @@ class Fanfou {
       parameters = {};
     }
 
-    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.' + this.type;
+    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.json';
     let request = this.oauth.post(url, this.oauth_token, this.oauth_token_secret, parameters, null);
 
     let ee = new events.EventEmitter();
@@ -124,7 +154,7 @@ class Fanfou {
 
     // init and subsequent response data
     request.on('response', response => {
-      if(response.statusCode > 200) {
+      if (response.statusCode > 200) {
         ee.emit('error', {type: 'response', data: {code: response.statusCode}});
         this.is_streaming = false;
       }
@@ -146,14 +176,14 @@ class Fanfou {
 
           let index, json;
 
-          while((index = data.indexOf('\r\n')) > -1) {
+          while ((index = data.indexOf('\r\n')) > -1) {
             json = data.slice(0, index);
             data = data.slice(index + 2);
-            if(json.length > 0) {
+            if (json.length > 0) {
               try {
                 let newStreaming = new Streaming(JSON.parse(json));
                 ee.emit(newStreaming.schema, newStreaming);
-              } catch(e) {
+              } catch (e) {
                 ee.emit('garbage', data);
               }
             }
@@ -187,7 +217,7 @@ class Fanfou {
    */
   upload(path, text, callback) {
     const method = 'POST';
-    const url = this.protocol + '//' + this.api_domain + '/photos/upload.' + this.type;
+    const url = this.protocol + '//' + this.api_domain + '/photos/upload.json';
     const params = {
       oauth_consumer_key: this.consumer_key,
       oauth_token: this.oauth_token,
