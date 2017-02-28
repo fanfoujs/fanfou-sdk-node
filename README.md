@@ -36,6 +36,7 @@ var ff = new Fanfou(
 ff.get(uri, parameters, callback);
 ff.post(uri, parameters, callback);
 ff.upload(path, text, callback);
+ff.stream(uri);
 ```
 
 **Parameters**
@@ -73,3 +74,50 @@ ff.upload('/Users/litomore/Desktop/fanfou.png', 'nice day', function (e, res, st
   }
 });
 ```
+
+**Streaming API**
+
+Fanfou SDK offers the ability to work with the Streaming API, based on the EventEmitter.
+
+```javascript
+// To start a streamer
+var streamer = ff.stream();
+
+// Now post a new status on fanfou, this will trigger the 'message' event
+streamer.on('message', function (data) {
+  console.log(data.schema + ' ' + data.action + ': ' + data.object.text);
+  // OUTPUT: message create: hello fanfou
+});
+
+// Listen to reply or mention events
+streamer.on('message', function (data) {
+  if (data.is_mentioned) {
+    console.log('Is mentioned by @' + data.mentioned_by);
+    // OUTPUT: Is mentioned by @fanfou
+  }
+
+  if (data.is_replied) {
+    console.log('Is replied by @' + data.replied_by);
+    // OUTPUT: Is replied by @fanfou
+  }
+});
+
+// Or listen to the favourite events
+streamer.on('fav', function (data) {
+  console.log(data.schema + ' ' + data.action + ': ' + data.object.text);
+});
+
+// To stop the streamer
+streamer.stop();
+```
+
+Available events:
+
+|Event|Available Actions|
+:---|:---
+message|<p>`create`: Current user posts a new status, or receives a reply/mention from another user</p><p>`delete`: Current user deletes a status
+user|`updateprofile`: Current user updates the profile</p>
+friends|<p>`create`: Current user follows a user</p><p>`delete`: Current user unfollows a user (being unfollowed will not trigger any events)</p><p>`request`: Current user makes a follow request to a user</p>
+fav|<p>`create`: Current user favourites a status</p><p>`delete`: Current user deletes a favourite</p>
+
+For the `data` structures of these events respectively please refer to the Fanfou [Streaming API](http://wiki.fanfou.com/Streaming-API) docs.
