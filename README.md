@@ -14,12 +14,24 @@ $ npm install fanfou-sdk
 
 ```javascript
 var Fanfou = require('fanfou-sdk');
-var ff = new Fanfou(
-  consumer_key,
-  consumer_secret,
-  oauth_token,
-  oauth_token_secret
-);
+
+// OAuth
+var ff = new Fanfou({
+  auth_type: 'oauth',
+  consumer_key: consumer_key,
+  consumer_secret: consumer_secret,
+  oauth_token: oauth_token,
+  oauth_token_secret: oauth_token_secret
+});
+
+// XAuth
+var ff = new Fanfou({
+  auth_type: 'xauth',
+  consumer_key: consumer_key,
+  consumer_secret: consumer_secret,
+  username: username,
+  password: password
+});
 ````
 **Parameters**
 
@@ -27,6 +39,8 @@ var ff = new Fanfou(
 - `consumser_secret: String` The Consumer Secret
 - `oauth_token: String` The OAuth Token
 - `oauth_token_secret: String` The OAuth Token Secret
+- `username: String` The Fanfou username
+- `password: String` The Fanfou password
 
 ## Usage
 
@@ -50,6 +64,7 @@ ff.stream(uri);
 **Examples**
 
 ```javascript
+// OAuth
 ff.get('/statuses/home_timeline', {}, function (e, res, timeline) {
   if (e) console.error(e);
   else {
@@ -71,6 +86,20 @@ ff.upload('/Users/litomore/Desktop/fanfou.png', 'nice day', function (e, res, st
   else {
     console.log(res);
     console.log(status);
+  }
+});
+
+// XAuth
+ff.xauth(function(e, res) {
+  if (e) console.error(e);
+  else {
+    ff.get('/statuses/public_timeline', {}, function(e, res, timeline) {
+      if (e) console.error(e);
+      else {
+        console.log(res);
+        console.log(timeline);
+      }
+    })
   }
 });
 ```
