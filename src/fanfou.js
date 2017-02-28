@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const {OAuth} = require('oauth');
+const OAuth = require('./oauth');
 const qs = require('querystring');
 const events = require('events');
 const util = require('util');
@@ -23,8 +23,8 @@ class Fanfou {
     this.oauth_token_secret = oauth_token_secret;
     this.is_streaming = false;
     this.oauth = new OAuth(
-      'http://api.fanfou.com/oauth/request_token',
-      'http://api.fanfou.com/oauth/access_token',
+      'http://fanfou.com/oauth/request_token',
+      'http://fanfou.com/oauth/access_token',
       consumer_key,
       consumer_secret,
       '1.0',
@@ -82,7 +82,6 @@ class Fanfou {
           } else {
             callback(null, data, null);
           }
-          callback(null, data, null);
         }
       }
     )
