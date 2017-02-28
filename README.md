@@ -13,6 +13,7 @@ $ npm install fanfou-sdk
 ## Initialization
 
 ```javascript
+// OAuth
 var Fanfou = require('fanfou-sdk');
 var ff = new Fanfou(
   consumer_key,
@@ -20,6 +21,15 @@ var ff = new Fanfou(
   oauth_token,
   oauth_token_secret
 );
+
+// XAuth
+var ff = new Fanfou(consumer_key, consumer_secret, '', '');
+ff.oauth.getXAuthAccessToken(username, password, function(error, oauth_token, oauth_token_secret, result) {
+  ff.oauth.oauth_token = oauth_token;
+  ff.oauth.oauth_token_secret = oauth_token_secret;
+  
+  ff.get(uri, parameters, callback);
+});
 ````
 **Parameters**
 
@@ -27,6 +37,8 @@ var ff = new Fanfou(
 - `consumser_secret: String` The Consumer Secret
 - `oauth_token: String` The OAuth Token
 - `oauth_token_secret: String` The OAuth Token Secret
+- `username: String` The Fanfou username
+- `password: String` The Fanfou password
 
 ## Usage
 
