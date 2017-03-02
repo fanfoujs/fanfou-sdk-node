@@ -1,4 +1,5 @@
 var Fanfou = require('./../lib/fanfou');
+var fs = require('fs');
 
 var ff_oauth = new Fanfou({
   auth_type: 'oauth',
@@ -28,12 +29,15 @@ ff_oauth.post('/statuses/update', {
 });
 
 // Photo upload test
-ff_oauth.upload(__dirname + '/img/parentheses.png', Math.random().toString(36).substr(2, 8), function (e, res, status) {
-  if (e) console.error(e);
-  else {
-    console.log('Photo upload ok.');
-  }
-});
+ff_oauth.upload(
+  fs.createReadStream(__dirname + '/img/parentheses.png'),
+  Math.random().toString(36).substr(2, 8),
+  function (e, res, status) {
+    if (e) console.error(e);
+    else {
+      console.log('Photo upload ok.');
+    }
+  });
 
 // Streaming test
 let streamer = ff_oauth.stream();

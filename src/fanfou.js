@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('fs');
 const OAuth = require('./oauth');
 const qs = require('querystring');
 const events = require('events');
@@ -211,11 +210,11 @@ class Fanfou {
   }
 
   /**
-   * @param path
+   * @param stream
    * @param text
    * @param callback
    */
-  upload(path, text, callback) {
+  upload(stream, text, callback) {
     const method = 'POST';
     const url = this.protocol + '//' + this.api_domain + '/photos/upload.json';
     const params = {
@@ -240,7 +239,7 @@ class Fanfou {
       ).concat([['oauth_signature', signature]])
     );
     const formData = {
-      photo: fs.createReadStream(path),
+      photo: stream,
       status: text,
     };
     request.post({

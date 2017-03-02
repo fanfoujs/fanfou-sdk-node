@@ -81,7 +81,7 @@ ff.post('/statuses/update', {status: 'post test'}, function (e, res, status) {
   }
 });
 
-ff.upload('/Users/litomore/Desktop/fanfou.png', 'nice day', function (e, res, status) {
+ff.upload(fs.createReadStream(path), 'nice day', function (e, res, status) {
   if (e) console.error(e);
   else {
     console.log(res);
