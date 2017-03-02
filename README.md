@@ -49,7 +49,7 @@ var ff = new Fanfou({
 ```javascript
 ff.get(uri, parameters, callback);
 ff.post(uri, parameters, callback);
-ff.upload(path, text, callback);
+ff.upload(stream, text, callback);
 ff.stream(uri);
 ```
 
@@ -57,7 +57,7 @@ ff.stream(uri);
 
 - `uri: String` URI to be requested upon
 - `parameters: Object` Parameters to be submitted
-- `path: String` Photo absolute path
+- `stream: String | Buffer` Readable Stream
 - `text: String` Status content
 - `callback: Function` Method to be invoked upon result
 
