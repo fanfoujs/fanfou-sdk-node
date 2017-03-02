@@ -260,43 +260,24 @@ class Fanfou {
    */
   static _uriType(uri) {
     const uriList = {
-      timeline: [
-        '/search/public_timeline',
-        '/search/user_timeline',
-        '/photos/user_timeline',
-        '/statuses/friends_timeine',
-        '/statuses/home_timeline',
-        '/statuses/public_timeline',
-        '/statuses/replies',
-        '/statuses/user_timeline',
-        '/statuses/context_timeline',
-        '/statuses/mentions',
-        '/favorites'
-      ],
-      status: [
-        '/statuses/destroy',
-        '/statuses/update',
-        '/statuses/show'
-      ]
+      '/search/public_timeline': 'timeline',
+      '/search/user_timeline': 'timeline',
+      '/photos/user_timeline': 'timeline',
+      '/statuses/friends_timeine': 'timeline',
+      '/statuses/home_timeline': 'timeline',
+      '/statuses/public_timeline': 'timeline',
+      '/statuses/replies': 'timeline',
+      '/statuses/user_timeline': 'timeline',
+      '/statuses/context_timeline': 'timeline',
+      '/statuses/mentions': 'timeline',
+      '/favorites': 'timeline',
+      '/statuses/destroy': 'status',
+      '/statuses/update': 'status',
+      '/statuses/show': 'status',
+      '/favorites/destroy': 'status',
+      '/favorites/create': 'status',
     };
-    for (const type in uriList) {
-      if (uriList.hasOwnProperty(type)) {
-        for (const i in uriList[type]) {
-          if (uriList[type].hasOwnProperty(i)) {
-            if (uriList[type][i] === uri) {
-              return type;
-            }
-          }
-        }
-      }
-    }
-    if (uri.match(/^\/favorites\/((destroy)|(create))\/.+$/g)) {
-      return 'status';
-    }
-    if (uri.match(/^\/favorites\/.+$/g)) {
-      return 'timeline';
-    }
-    return null;
+    return uriList[uri] || null;
   }
 }
 
