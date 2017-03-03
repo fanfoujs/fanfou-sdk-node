@@ -3,6 +3,7 @@
 class User {
   constructor(user) {
     this.id = user.id;
+    this.name = user.name;
     this.screen_name = user.screen_name;
     this.unique_id = user.unique_id;
     this.location = user.location;
