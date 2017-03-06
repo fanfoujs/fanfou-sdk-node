@@ -33,7 +33,9 @@ class Status {
     if (status.hasOwnProperty('photo')) {
       this.photo = new Photo(status.photo);
     }
-    this.type = this.getType();
+    this.type = this._getType();
+    this.source_url = this._getSourceUrl();
+    this.source_name = this._getSourceName();
   }
 
   isReply() {
@@ -52,11 +54,27 @@ class Status {
     return this.isOrigin() && this.text.match(/转@/g);
   }
 
-  getType() {
+  _getType() {
     if (this.isReply()) return 'reply';
     if (this.isRepost()) return 'repost';
     if (this.isOrigin()) return 'origin';
     return 'unknown';
+  }
+
+  _getSourceUrl() {
+    if (this.source.match(/<a href=\"(.+)\" target=\"_blank\">.+<\/a>/)) {
+      return this.source.match(/<a href=\"(.+)\" target=\"_blank\">.+<\/a>/)[1];
+    } else {
+      return '';
+    }
+  }
+
+  _getSourceName() {
+    if (this.source.match(/<a href=\".+\" target=\"_blank\">(.+)<\/a>/)) {
+      return this.source.match(/<a href=\".+\" target=\"_blank\">(.+)<\/a>/)[1];
+    } else {
+      return this.source;
+    }
   }
 }
 
