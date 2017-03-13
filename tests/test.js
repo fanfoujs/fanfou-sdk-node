@@ -70,7 +70,8 @@ ff_xauth.xauth(function (e, res) {
   if (e) console.error(e);
   else {
     ff_xauth.get('/statuses/public_timeline', {count: 1}, function (e, res, timeline) {
-      console.log('XAuth get public timeline ok.')
+      if (e) console.log(e);
+      else console.log('XAuth get public timeline ok.');
     });
   }
 });
