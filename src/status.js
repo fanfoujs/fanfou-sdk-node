@@ -1,5 +1,6 @@
 'use strict';
 
+const he = require('he');
 const User = require('./user');
 const Photo = require('./photo');
 
@@ -8,7 +9,7 @@ class Status {
     this.created_at = status.created_at;
     this.id = status.id;
     this.rawid = status.rawid;
-    this.text = status.text;
+    this.text = he.decode(status.text);
     this.source = status.source;
     this.truncated = status.truncated;
     this.in_reply_to_status_id = status.in_reply_to_status_id;
