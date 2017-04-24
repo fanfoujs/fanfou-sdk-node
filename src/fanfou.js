@@ -1,42 +1,42 @@
-'use strict';
+'use strict'
 
-const OAuth = require('./oauth');
-const qs = require('querystring');
-const events = require('events');
-const util = require('util');
-const request = require('request');
-const oauthSignature = require('oauth-signature');
-const Timeline = require('./timeline');
-const Status = require('./status');
-const Streaming = require('./streaming');
+const OAuth = require('./oauth')
+const qs = require('querystring')
+const events = require('events')
+const util = require('util')
+const request = require('request')
+const oauthSignature = require('oauth-signature')
+const Timeline = require('./timeline')
+const Status = require('./status')
+const Streaming = require('./streaming')
 
 class Fanfou {
-  constructor(options) {
-    options = options || {};
+  constructor (options) {
+    options = options || {}
 
     // required
-    this.consumer_key = options.consumer_key;
-    this.consumer_secret = options.consumer_secret;
-    this.auth_type = options.auth_type;
+    this.consumer_key = options.consumer_key
+    this.consumer_secret = options.consumer_secret
+    this.auth_type = options.auth_type
 
     // optional
-    this.protocol = options.protocol || 'http:';
-    this.api_domain = options.api_domain || 'api.fanfou.com';
-    this.streaming_domain = options.streaming_domain || 'stream.fanfou.com';
+    this.protocol = options.protocol || 'http:'
+    this.api_domain = options.api_domain || 'api.fanfou.com'
+    this.streaming_domain = options.streaming_domain || 'stream.fanfou.com'
 
     // oauth required
     if (this.auth_type === 'oauth') {
-      this.oauth_token = options.oauth_token || '';
-      this.oauth_token_secret = options.oauth_token_secret || '';
+      this.oauth_token = options.oauth_token || ''
+      this.oauth_token_secret = options.oauth_token_secret || ''
     }
 
     // xauth required
     if (this.auth_type === 'xauth') {
-      this.username = options.username || '';
-      this.password = options.password || '';
+      this.username = options.username || ''
+      this.password = options.password || ''
     }
 
-    this.is_streaming = false;
+    this.is_streaming = false
     this.oauth = new OAuth(
       'http://fanfou.com/oauth/request_token',
       'http://fanfou.com/oauth/access_token',
@@ -45,21 +45,21 @@ class Fanfou {
       '1.0',
       null,
       'HMAC-SHA1'
-    );
+    )
   }
 
-  xauth(callback) {
+  xauth (callback) {
     this.oauth.getXAuthAccessToken(this.username, this.password, (e, oauth_token, oauth_token_secret, result) => {
-      if (e) callback(e);
+      if (e) callback(e)
       else {
-        this.oauth_token = oauth_token;
-        this.oauth_token_secret = oauth_token_secret;
+        this.oauth_token = oauth_token
+        this.oauth_token_secret = oauth_token_secret
         callback(null, {
           oauth_token: oauth_token,
           oauth_token_secret: oauth_token_secret
-        });
+        })
       }
-    });
+    })
   }
 
   /**
@@ -67,26 +67,26 @@ class Fanfou {
    * @param parameters
    * @param callback
    */
-  get(uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.json';
+  get (uri, parameters, callback) {
+    const url = this.protocol + '//' + this.api_domain + uri + '.json'
     this.oauth.get(
       url + '?' + qs.stringify(parameters),
       this.oauth_token,
       this.oauth_token_secret,
       (e, data, res) => {
         // TODO http status code
-        if (e) callback(e, null, null);
+        if (e) callback(e, null, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            callback(null, data, new Timeline(JSON.parse(data)));
+            callback(null, data, new Timeline(JSON.parse(data)))
           } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, data, new Status(JSON.parse(data)));
+            callback(null, data, new Status(JSON.parse(data)))
           } else {
-            callback(null, data, null);
+            callback(null, data, null)
           }
         }
       }
-    );
+    )
   }
 
   /**
@@ -94,22 +94,22 @@ class Fanfou {
    * @param parameters
    * @param callback
    */
-  post(uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.json';
+  post (uri, parameters, callback) {
+    const url = this.protocol + '//' + this.api_domain + uri + '.json'
     this.oauth.post(
       url,
       this.oauth_token,
       this.oauth_token_secret,
       parameters,
       (e, data, res) => {
-        if (e) callback(e, null);
+        if (e) callback(e, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            callback(null, data, new Timeline(JSON.parse(data)));
+            callback(null, data, new Timeline(JSON.parse(data)))
           } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, data, new Status(JSON.parse(data)));
+            callback(null, data, new Status(JSON.parse(data)))
           } else {
-            callback(null, data, null);
+            callback(null, data, null)
           }
         }
       }
@@ -120,93 +120,93 @@ class Fanfou {
    * @param uri
    * @param parameters
    */
-  stream(uri, parameters) {
+  stream (uri, parameters) {
     // prevent concurrences
     if (this.is_streaming === true) {
-      console.warn('A previous streamer of this instance is currently running, cannot create more.');
-      return;
+      console.warn('A previous streamer of this instance is currently running, cannot create more.')
+      return
     }
 
     // params validation
     if (uri === undefined) {
-      uri = '/user';
+      uri = '/user'
     }
 
     if (typeof parameters !== 'object') {
-      parameters = {};
+      parameters = {}
     }
 
-    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.json';
-    let request = this.oauth.post(url, this.oauth_token, this.oauth_token_secret, parameters, null);
+    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.json'
+    let request = this.oauth.post(url, this.oauth_token, this.oauth_token_secret, parameters, null)
 
-    let ee = new events.EventEmitter();
+    let ee = new events.EventEmitter()
 
     ee.stop = () => {
-      request.abort();
-      this.is_streaming = false;
-    };
+      request.abort()
+      this.is_streaming = false
+    }
 
     request.on('error', error => {
-      ee.emit('error', {type: 'request', data: error});
-      this.is_streaming = false;
-    });
+      ee.emit('error', {type: 'request', data: error})
+      this.is_streaming = false
+    })
 
     // init and subsequent response data
     request.on('response', response => {
       if (response.statusCode > 200) {
-        ee.emit('error', {type: 'response', data: {code: response.statusCode}});
-        this.is_streaming = false;
+        ee.emit('error', {type: 'response', data: {code: response.statusCode}})
+        this.is_streaming = false
       }
       else {
-        this.is_streaming = true;
+        this.is_streaming = true
 
-        ee.emit('connected');
+        ee.emit('connected')
 
-        response.setEncoding('utf8');
-        let data = '';
+        response.setEncoding('utf8')
+        let data = ''
 
         response.on('data', chunk => {
-          data += chunk.toString('utf8');
+          data += chunk.toString('utf8')
 
           if (data === '\r\n') {
-            ee.emit('heartbeat');
-            return;
+            ee.emit('heartbeat')
+            return
           }
 
-          let index, json;
+          let index, json
 
           while ((index = data.indexOf('\r\n')) > -1) {
-            json = data.slice(0, index);
-            data = data.slice(index + 2);
+            json = data.slice(0, index)
+            data = data.slice(index + 2)
             if (json.length > 0) {
               try {
-                let newStreaming = new Streaming(JSON.parse(json));
-                ee.emit(newStreaming.schema, newStreaming);
+                let newStreaming = new Streaming(JSON.parse(json))
+                ee.emit(newStreaming.schema, newStreaming)
               } catch (e) {
-                ee.emit('garbage', data);
+                ee.emit('garbage', data)
               }
             }
           }
-        });
+        })
 
         response.on('error', error => {
-          ee.emit('close', error);
-        });
+          ee.emit('close', error)
+        })
 
         response.on('end', () => {
-          ee.emit('close', 'connection dropped');
-        });
+          ee.emit('close', 'connection dropped')
+        })
 
         response.on('close', () => {
-          request.abort();
-          this.is_streaming = false;
-        });
+          request.abort()
+          this.is_streaming = false
+        })
       }
-    });
+    })
 
-    request.end();
+    request.end()
 
-    return ee;
+    return ee
   }
 
   /**
@@ -214,9 +214,9 @@ class Fanfou {
    * @param text
    * @param callback
    */
-  upload(stream, text, callback) {
-    const method = 'POST';
-    const url = this.protocol + '//' + this.api_domain + '/photos/upload.json';
+  upload (stream, text, callback) {
+    const method = 'POST'
+    const url = this.protocol + '//' + this.api_domain + '/photos/upload.json'
     const params = {
       oauth_consumer_key: this.consumer_key,
       oauth_token: this.oauth_token,
@@ -224,7 +224,7 @@ class Fanfou {
       oauth_timestamp: Math.floor(Date.now() / 1000),
       oauth_nonce: this.oauth._getNonce(6),
       oauth_version: '1.0',
-    };
+    }
     const signature = oauthSignature.generate(
       method,
       url,
@@ -232,25 +232,25 @@ class Fanfou {
       this.consumer_secret,
       this.oauth_token_secret,
       {encodeSignature: false}
-    );
+    )
     const authorizationHeader = this.oauth._buildAuthorizationHeaders(
       this.oauth._sortRequestParams(
         this.oauth._makeArrayOfArgumentsHash(params)
       ).concat([['oauth_signature', signature]])
-    );
+    )
     const formData = {
       photo: stream,
       status: text,
-    };
+    }
     request.post({
       url,
       formData,
       headers: {Authorization: authorizationHeader},
     }, (err, httpResponse, body) => {
-      if (err) callback(err, null, null);
-      else if (httpResponse.statusCode !== 200) callback(body, null, null);
-      else callback(null, body, new Status(JSON.parse(body)));
-    });
+      if (err) callback(err, null, null)
+      else if (httpResponse.statusCode !== 200) callback(body, null, null)
+      else callback(null, body, new Status(JSON.parse(body)))
+    })
   }
 
   /**
@@ -258,7 +258,7 @@ class Fanfou {
    * @returns {string}
    * @private
    */
-  static _uriType(uri) {
+  static _uriType (uri) {
     const uriList = {
       '/search/public_timeline': 'timeline',
       '/search/user_timeline': 'timeline',
@@ -276,9 +276,9 @@ class Fanfou {
       '/statuses/show': 'status',
       '/favorites/destroy': 'status',
       '/favorites/create': 'status',
-    };
-    return uriList[uri] || null;
+    }
+    return uriList[uri] || null
   }
 }
 
-module.exports = Fanfou;
+module.exports = Fanfou
