@@ -6,7 +6,6 @@ const events = require('events')
 const util = require('util')
 const request = require('request')
 const oauthSignature = require('oauth-signature')
-const Timeline = require('./timeline')
 const Status = require('./status')
 const Streaming = require('./streaming')
 
@@ -78,7 +77,14 @@ class Fanfou {
         if (e) callback(e, null, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            callback(null, data, new Timeline(JSON.parse(data)))
+            const timeline = JSON.parse(data)
+            const arr = []
+            for (let i in timeline) {
+              if (timeline.hasOwnProperty(i)) {
+                arr.push(new Status(timeline[i]))
+              }
+            }
+            callback(null, data, arr)
           } else if (Fanfou._uriType(uri) === 'status') {
             callback(null, data, new Status(JSON.parse(data)))
           } else {
@@ -105,7 +111,14 @@ class Fanfou {
         if (e) callback(e, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            callback(null, data, new Timeline(JSON.parse(data)))
+            const timeline = JSON.parse(data)
+            const arr = []
+            for (let i in timeline) {
+              if (timeline.hasOwnProperty(i)) {
+                arr.push(new Status(timeline[i]))
+              }
+            }
+            callback(null, data, arr)
           } else if (Fanfou._uriType(uri) === 'status') {
             callback(null, data, new Status(JSON.parse(data)))
           } else {
