@@ -7,6 +7,11 @@ class Photo {
     this.thumburl = photo.thumburl
     this.largeurl = photo.largeurl
     this.originurl = photo.largeurl.replace(/@.+\..+$/g, '')
+    this.type = this.originurl.match(/^.+\.(.+)$/)[1].toLowerCase()
+  }
+
+  isGif () {
+    return this.type === 'gif'
   }
 }
 
