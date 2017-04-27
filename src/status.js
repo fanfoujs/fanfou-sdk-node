@@ -9,7 +9,7 @@ class Status {
     this.created_at = status.created_at
     this.id = status.id
     this.rawid = status.rawid
-    this.text = he.decode(status.text)
+    this.text = status.text
     this.source = status.source
     this.truncated = status.truncated
     this.in_reply_to_status_id = status.in_reply_to_status_id
@@ -37,6 +37,8 @@ class Status {
     this.type = this._getType()
     this.source_url = this._getSourceUrl()
     this.source_name = this._getSourceName()
+    this.txt = this._getTxt()
+    this.plain_text = this._getPlainText()
   }
 
   isReply () {
@@ -76,6 +78,60 @@ class Status {
     } else {
       return this.source
     }
+  }
+
+  _getTxt () {
+    const pattern = /[@#]?<a href=\"(.*?)\".*?>(.*?)<\/a>#?/g
+    const match = this.text.match(pattern)
+    const txt = []
+    let theText = this.text
+    if (match) {
+      match.forEach(item => {
+        const index = theText.indexOf(item)
+        if (index > 0) txt.push({type: 'text', text: he.decode(theText.substr(0, index))})
+        if (item.substr(0, 1) === '#') {
+          const matchText = item.match(/#<a href=\".*?\".?>(.*?)<\/a>#/)
+          txt.push({
+            type: 'tag',
+            text: `#${he.decode(matchText[1])}#`,
+            query: he.decode(matchText[1])
+          })
+        }
+        if (item.substr(0, 1) === '@') {
+          const matchText = item.match(/@<a href=\"http:\/\/fanfou.com\/(.*?)\".*?>(.*?)<\/a>/)
+          txt.push({
+            type: 'at',
+            text: `@${he.decode(matchText[2])}`,
+            name: he.decode(matchText[2]),
+            id: matchText[1]
+          })
+        }
+        if (item.substr(0, 1) === '<') {
+          const matchText = item.match(/<a href=\"(.*?)\".*?>(.*?)<\/a>/)
+          txt.push({
+            type: 'link',
+            text: matchText[2],
+            link: matchText[1]
+          })
+        }
+        theText = theText.substr(index + item.length)
+      })
+      if (theText.length) txt.push({
+        type: 'text',
+        text: he.decode(theText)
+      })
+      return txt
+    } else {
+      return [{type: 'text', text: he.decode(theText)}]
+    }
+  }
+
+  _getPlainText () {
+    let text = ''
+    this.txt.forEach(t => {
+      text += t.text
+    })
+    return he.decode(text)
   }
 }
 
