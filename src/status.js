@@ -65,23 +65,23 @@ class Status {
   }
 
   _getSourceUrl () {
-    if (this.source.match(/<a href=\"(.+)\" target=\"_blank\">.+<\/a>/)) {
-      return this.source.match(/<a href=\"(.+)\" target=\"_blank\">.+<\/a>/)[1]
+    if (this.source.match(/<a href="(.+)" target="_blank">.+<\/a>/)) {
+      return this.source.match(/<a href="(.+)" target="_blank">.+<\/a>/)[1]
     } else {
       return ''
     }
   }
 
   _getSourceName () {
-    if (this.source.match(/<a href=\".+\" target=\"_blank\">(.+)<\/a>/)) {
-      return this.source.match(/<a href=\".+\" target=\"_blank\">(.+)<\/a>/)[1]
+    if (this.source.match(/<a href=".+" target="_blank">(.+)<\/a>/)) {
+      return this.source.match(/<a href=".+" target="_blank">(.+)<\/a>/)[1]
     } else {
       return this.source
     }
   }
 
   _getTxt () {
-    const pattern = /[@#]?<a href=\"(.*?)\".*?>(.*?)<\/a>#?/g
+    const pattern = /[@#]?<a href="(.*?)".*?>(.*?)<\/a>#?/g
     const match = this.text.match(pattern)
     const txt = []
     let theText = this.text
@@ -90,7 +90,7 @@ class Status {
         const index = theText.indexOf(item)
         if (index > 0) txt.push({type: 'text', text: he.decode(theText.substr(0, index))})
         if (item.substr(0, 1) === '#') {
-          const matchText = item.match(/#<a href=\".*?\".?>(.*?)<\/a>#/)
+          const matchText = item.match(/#<a href=".*?".?>(.*?)<\/a>#/)
           txt.push({
             type: 'tag',
             text: `#${he.decode(matchText[1])}#`,
@@ -98,7 +98,7 @@ class Status {
           })
         }
         if (item.substr(0, 1) === '@') {
-          const matchText = item.match(/@<a href=\"http:\/\/fanfou.com\/(.*?)\".*?>(.*?)<\/a>/)
+          const matchText = item.match(/@<a href="http:\/\/fanfou.com\/(.*?)".*?>(.*?)<\/a>/)
           txt.push({
             type: 'at',
             text: `@${he.decode(matchText[2])}`,
@@ -107,7 +107,7 @@ class Status {
           })
         }
         if (item.substr(0, 1) === '<') {
-          const matchText = item.match(/<a href=\"(.*?)\".*?>(.*?)<\/a>/)
+          const matchText = item.match(/<a href="(.*?)".*?>(.*?)<\/a>/)
           txt.push({
             type: 'link',
             text: matchText[2],
@@ -116,10 +116,12 @@ class Status {
         }
         theText = theText.substr(index + item.length)
       })
-      if (theText.length) txt.push({
-        type: 'text',
-        text: he.decode(theText)
-      })
+      if (theText.length) {
+        txt.push({
+          type: 'text',
+          text: he.decode(theText)
+        })
+      }
       return txt
     } else {
       return [{type: 'text', text: he.decode(theText)}]

@@ -3,7 +3,6 @@
 const OAuth = require('./oauth')
 const qs = require('querystring')
 const events = require('events')
-const util = require('util')
 const request = require('request')
 const oauthSignature = require('oauth-signature')
 const Status = require('./status')
@@ -48,14 +47,14 @@ class Fanfou {
   }
 
   xauth (callback) {
-    this.oauth.getXAuthAccessToken(this.username, this.password, (e, oauth_token, oauth_token_secret, result) => {
+    this.oauth.getXAuthAccessToken(this.username, this.password, (e, oauthToken, oauthTokenSecret, result) => {
       if (e) callback(e)
       else {
-        this.oauth_token = oauth_token
-        this.oauth_token_secret = oauth_token_secret
+        this.oauth_token = oauthToken
+        this.oauth_token_secret = oauthTokenSecret
         callback(null, {
-          oauth_token: oauth_token,
-          oauth_token_secret: oauth_token_secret
+          oauth_token: oauthToken,
+          oauth_token_secret: oauthTokenSecret
         })
       }
     })
@@ -169,8 +168,7 @@ class Fanfou {
       if (response.statusCode > 200) {
         ee.emit('error', {type: 'response', data: {code: response.statusCode}})
         this.is_streaming = false
-      }
-      else {
+      } else {
         this.is_streaming = true
 
         ee.emit('connected')
@@ -236,7 +234,7 @@ class Fanfou {
       oauth_signature_method: 'HMAC-SHA1',
       oauth_timestamp: Math.floor(Date.now() / 1000),
       oauth_nonce: this.oauth._getNonce(6),
-      oauth_version: '1.0',
+      oauth_version: '1.0'
     }
     const signature = oauthSignature.generate(
       method,
@@ -253,12 +251,12 @@ class Fanfou {
     )
     const formData = {
       photo: stream,
-      status: text,
+      status: text
     }
     request.post({
       url,
       formData,
-      headers: {Authorization: authorizationHeader},
+      headers: {Authorization: authorizationHeader}
     }, (err, httpResponse, body) => {
       if (err) callback(err, null, null)
       else if (httpResponse.statusCode !== 200) callback(body, null, null)
@@ -288,7 +286,7 @@ class Fanfou {
       '/statuses/update': 'status',
       '/statuses/show': 'status',
       '/favorites/destroy': 'status',
-      '/favorites/create': 'status',
+      '/favorites/create': 'status'
     }
     return uriList[uri] || null
   }

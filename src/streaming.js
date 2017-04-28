@@ -1,7 +1,6 @@
 /**
  * Created by mogita on 2/24/17.
  */
-/*jslint node: true*/
 'use strict'
 
 const User = require('./user')
@@ -45,8 +44,7 @@ class Streaming {
       if (this.target !== null) {
         this.is_replied = true
         this.replied_by = by
-      }
-      else {
+      } else {
         let ruid = this.object.repost_user_id
         if (ruid !== undefined && ruid !== '' && ruid !== this.source.id) {
           this.is_mentioned = true
