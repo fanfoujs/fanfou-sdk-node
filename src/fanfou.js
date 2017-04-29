@@ -71,23 +71,23 @@ class Fanfou {
       url + '?' + qs.stringify(parameters),
       this.oauth_token,
       this.oauth_token_secret,
-      (e, data, res) => {
+      (e, rawData, res) => {
         // TODO http status code
         if (e) callback(e, null, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            const timeline = JSON.parse(data)
+            const timeline = JSON.parse(rawData)
             const arr = []
             for (let i in timeline) {
               if (timeline.hasOwnProperty(i)) {
                 arr.push(new Status(timeline[i]))
               }
             }
-            callback(null, data, arr)
+            callback(null, arr, rawData)
           } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, data, new Status(JSON.parse(data)))
+            callback(null, new Status(JSON.parse(rawData)), rawData)
           } else {
-            callback(null, data, null)
+            callback(null, JSON.parse(rawData), rawData)
           }
         }
       }
@@ -106,22 +106,22 @@ class Fanfou {
       this.oauth_token,
       this.oauth_token_secret,
       parameters,
-      (e, data, res) => {
+      (e, rawData, res) => {
         if (e) callback(e, null)
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
-            const timeline = JSON.parse(data)
+            const timeline = JSON.parse(rawData)
             const arr = []
             for (let i in timeline) {
               if (timeline.hasOwnProperty(i)) {
                 arr.push(new Status(timeline[i]))
               }
             }
-            callback(null, data, arr)
+            callback(null, arr, rawData)
           } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, data, new Status(JSON.parse(data)))
+            callback(null, new Status(JSON.parse(rawData)), rawData)
           } else {
-            callback(null, data, null)
+            callback(null, JSON.parse(rawData), rawData)
           }
         }
       }
@@ -260,7 +260,7 @@ class Fanfou {
     }, (err, httpResponse, body) => {
       if (err) callback(err, null, null)
       else if (httpResponse.statusCode !== 200) callback(body, null, null)
-      else callback(null, body, new Status(JSON.parse(body)))
+      else callback(null, new Status(JSON.parse(body)), body)
     })
   }
 

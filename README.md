@@ -65,26 +65,23 @@ ff.stream(uri);
 
 ```javascript
 // OAuth
-ff.get('/statuses/home_timeline', {}, function (e, res, timeline) {
+ff.get('/statuses/home_timeline', {}, function (e, timeline) {
   if (e) console.error(e);
   else {
-    console.log(res);
     console.log(timeline);
   }
 });
 
-ff.post('/statuses/update', {status: 'post test'}, function (e, res, status) {
+ff.post('/statuses/update', {status: 'post test'}, function (e, status) {
   if (e) console.error(e);
   else {
-    console.log(res);
     console.log(status);
   }
 });
 
-ff.upload(fs.createReadStream(path), 'nice day', function (e, res, status) {
+ff.upload(fs.createReadStream(path), 'nice day', function (e, status) {
   if (e) console.error(e);
   else {
-    console.log(res);
     console.log(status);
   }
 });
@@ -93,10 +90,9 @@ ff.upload(fs.createReadStream(path), 'nice day', function (e, res, status) {
 ff.xauth(function(e, res) {
   if (e) console.error(e);
   else {
-    ff.get('/statuses/public_timeline', {}, function(e, res, timeline) {
+    ff.get('/statuses/public_timeline', {}, function(e, timeline) {
       if (e) console.error(e);
       else {
-        console.log(res);
         console.log(timeline);
       }
     })
