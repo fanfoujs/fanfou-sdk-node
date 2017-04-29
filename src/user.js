@@ -30,6 +30,8 @@ class User {
     this.profile_sidebar_border_color = user.profile_sidebar_border_color
     this.profile_background_image_url = user.profile_background_image_url
     this.profile_background_tile = user.profile_background_tile
+    this.profile_image_origin = this.profile_image_url.replace(/\?\d{10}/, '')
+    this.profile_image_origin_large = this.profile_image_url_large.replace(/\?\d{10}/, '')
   }
 }
 
