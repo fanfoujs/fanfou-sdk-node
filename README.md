@@ -32,7 +32,7 @@ var ff = new Fanfou({
   username: username,
   password: password
 });
-````
+```
 **Parameters**
 
 - `consumser_key: String` The Consumser Key
