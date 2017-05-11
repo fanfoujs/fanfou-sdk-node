@@ -81,7 +81,7 @@ class Status {
   }
 
   _getTxt () {
-    const pattern = /[@#]?<a href="(.*?)".*?>(.*?)<\/a>#?/g
+    const pattern = /[@#]?<a href="(.*?)".*?>([\s\S\n]*?)<\/a>#?/g
     const match = this.text.match(pattern)
     const txt = []
     let theText = this.text
@@ -90,7 +90,7 @@ class Status {
         const index = theText.indexOf(item)
         if (index > 0) txt.push({type: 'text', text: he.decode(theText.substr(0, index))})
         if (item.substr(0, 1) === '#') {
-          const matchText = item.match(/#<a href=".*?".?>(.*?)<\/a>#/)
+          const matchText = item.match(/#<a href=".*?".?>([\s\S\n]*?)<\/a>#/)
           txt.push({
             type: 'tag',
             text: `#${he.decode(matchText[1])}#`,
