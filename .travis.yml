@@ -6,6 +6,11 @@ install:
   - npm --version
   - npm install -g babel-cli
   - npm install
-
 os:
   - linux
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
