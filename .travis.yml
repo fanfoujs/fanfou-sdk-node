@@ -1,16 +1,22 @@
 language: node_js
 node_js:
   - "6"
-install:
-  - node --version
-  - npm --version
-  - npm install -g babel-cli
-  - npm install
 os:
   - linux
+compiler:
+  - gcc
+  - clang
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - gcc-4.8
+    - g++-4.8
+    - clang
+install:
+  - node --version
+  - npm --version
+  - npm install -g babel-cli
+  - npm install
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
