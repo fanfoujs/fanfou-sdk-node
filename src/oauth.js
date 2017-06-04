@@ -2,6 +2,7 @@
 
 const {OAuth} = require('oauth')
 const qs = require('querystring')
+const FanfouError = require('./ff-error')
 
 Object.assign(OAuth.prototype, {
   getXAuthAccessToken (username, password, callback) {
@@ -12,7 +13,8 @@ Object.assign(OAuth.prototype, {
     }
 
     this._performSecureRequest(null, null, this._clientOptions.accessTokenHttpMethod, this._accessUrl, xauthParams, null, null, function (error, data, response) {
-      if (error) callback(error)
+      response.body = data
+      if (error) callback(new FanfouError(response))
       else {
         const results = qs.parse(data)
         const oauthAccessToken = results['oauth_token']
