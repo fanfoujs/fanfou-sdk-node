@@ -7,6 +7,7 @@ const request = require('request')
 const oauthSignature = require('oauth-signature')
 const Status = require('./status')
 const Streaming = require('./streaming')
+const FanfouError = require('./ff-error')
 
 class Fanfou {
   constructor (options) {
@@ -73,7 +74,8 @@ class Fanfou {
       this.oauth_token_secret,
       (e, rawData, res) => {
         // TODO http status code
-        if (e) callback(e, null, null)
+        res.body = rawData
+        if (e) callback(new FanfouError(res))
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
             const timeline = JSON.parse(rawData)
@@ -106,8 +108,9 @@ class Fanfou {
       this.oauth_token,
       this.oauth_token_secret,
       parameters,
-      (e, rawData, res) => {
-        if (e) callback(e, null)
+      (e, rawData, httpResponse) => {
+        httpResponse.body = rawData
+        if (e) callback(new FanfouError(httpResponse))
         else {
           if (Fanfou._uriType(uri) === 'timeline') {
             const timeline = JSON.parse(rawData)
@@ -258,9 +261,13 @@ class Fanfou {
       formData,
       headers: {Authorization: authorizationHeader}
     }, (err, httpResponse, body) => {
-      if (err) callback(err, null, null)
-      else if (httpResponse.statusCode !== 200) callback(body, null, null)
-      else callback(null, new Status(JSON.parse(body)), body)
+      if (err) {
+        callback(err)
+      } else if (httpResponse.statusCode !== 200) {
+        callback(new FanfouError(httpResponse))
+      } else {
+        callback(null, new Status(JSON.parse(body)), body)
+      }
     })
   }
 

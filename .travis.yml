@@ -1,11 +1,10 @@
 language: node_js
 node_js:
   - "6"
+os:
+  - linux
 install:
   - node --version
   - npm --version
   - npm install -g babel-cli
   - npm install
-
-os:
-  - linux
