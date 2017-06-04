@@ -17,9 +17,6 @@
     "babel-preset-es2016": "^6.24.1",
     "standard": "^10.0.2"
   },
-  "engines": {
-    "node": ">=4"
-  },
   "scripts": {
     "build": "babel src -d lib",
     "test": "npm run build && node tests/test"
