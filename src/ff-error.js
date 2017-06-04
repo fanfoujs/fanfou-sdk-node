@@ -1,6 +1,6 @@
 'use strict'
 
-const xml2Json = require('xml2json').toJson
+const xml2js = require('xml-js').xml2js
 
 class FanfouError extends Error {
   constructor (httpResponse) {
@@ -17,7 +17,7 @@ class FanfouError extends Error {
         this.message = JSON.parse(this.httpResponse.body).error
         break
       case 'application/xml':
-        this.message = JSON.parse(xml2Json(this.httpResponse.body)).hash.error
+        this.message = xml2js(this.httpResponse.body, {compact: true}).hash.error._text
         break
       case 'text/html':
         this.message = this.httpResponse.body.match(/<title>(.+)<\/title>/)[1]
