@@ -88,43 +88,87 @@ class Status {
     if (match) {
       match.forEach(item => {
         const index = theText.indexOf(item)
-        if (index > 0) txt.push({type: 'text', text: he.decode(theText.substr(0, index))})
-        if (item.substr(0, 1) === '#') {
-          const matchText = item.match(/#<a href=".*?".?>([\s\S\n]*?)<\/a>#/)
-          txt.push({
-            type: 'tag',
-            text: `#${he.decode(matchText[1])}#`,
-            query: he.decode(matchText[1])
-          })
+
+        // text
+        if (index > 0) {
+          const text = theText.substr(0, index)
+          const originText = he.decode(Status._removeBoldTag(theText.substr(0, index)))
+          const thisTxt = {
+            type: 'text',
+            text: originText,
+            _text: originText.replace(/\n{3,}/g, '\n\n')
+          }
+          if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+          txt.push(thisTxt)
         }
+
+        // tag
+        if (item.substr(0, 1) === '#') {
+          const matchText = item.match(/#<a href=".*?".?>([\s\S\n]*)<\/a>#/)
+          const text = `#${matchText[1]}#`
+          const originText = he.decode(Status._removeBoldTag(text))
+          const thisTxt = {
+            type: 'tag',
+            text: originText,
+            _text: originText.replace(/\n{2,}/g, '\n'),
+            query: he.decode(matchText[1])
+          }
+          if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+          txt.push(thisTxt)
+        }
+
+        // at
         if (item.substr(0, 1) === '@') {
           const matchText = item.match(/@<a href="http:\/\/fanfou.com\/(.*?)".*?>(.*?)<\/a>/)
-          txt.push({
+          const text = `@${matchText[2]}`
+          const originText = he.decode(Status._removeBoldTag(text))
+          const thisTxt = {
             type: 'at',
-            text: `@${he.decode(matchText[2])}`,
+            text: originText,
             name: he.decode(matchText[2]),
             id: matchText[1]
-          })
+          }
+          if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+          txt.push(thisTxt)
         }
+
+        // link
         if (item.substr(0, 1) === '<') {
           const matchText = item.match(/<a href="(.*?)".*?>(.*?)<\/a>/)
-          txt.push({
+          const text = Status._removeBoldTag(matchText[2])
+          const link = matchText[1]
+          const thisTxt = {
             type: 'link',
-            text: matchText[2],
-            link: matchText[1]
-          })
+            text: text,
+            link: link
+          }
+          if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+          txt.push(thisTxt)
         }
         theText = theText.substr(index + item.length)
       })
       if (theText.length) {
-        txt.push({
+        const text = theText
+        const originText = he.decode(Status._removeBoldTag(text))
+        const thisTxt = {
           type: 'text',
-          text: he.decode(theText)
-        })
+          text: originText,
+          _text: originText.replace(/\n{3,}/g, '\n\n')
+        }
+        if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+        txt.push(thisTxt)
       }
       return txt
     } else {
-      return [{type: 'text', text: he.decode(theText)}]
+      const text = theText
+      const originText = he.decode(Status._removeBoldTag(theText))
+      const thisTxt = {
+        type: 'text',
+        text: originText,
+        _text: originText.replace(/\n{3,}/g, '\n\n')
+      }
+      if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
+      return [thisTxt]
     }
   }
 
@@ -134,6 +178,51 @@ class Status {
       text += t.text
     })
     return he.decode(text)
+  }
+
+  static _hasBold (text) {
+    return text.match(/<b>[\s\S\n]*?<\/b>/g)
+  }
+
+  static _getBoldArr (text) {
+    const pattern = /<b>[\s\S\n]*?<\/b>/g
+    let theText = text
+    const match = text.match(pattern)
+    const textArr = []
+    if (match) {
+      match.forEach(item => {
+        const index = theText.indexOf(item)
+        if (index > 0) {
+          const t = theText.substr(0, index)
+          textArr.push({
+            text: he.decode(t),
+            bold: false
+          })
+        }
+        const t = item.match(/<b>([\s\S\n]*?)<\/b>/)[1]
+        textArr.push({
+          text: he.decode(t),
+          bold: true
+        })
+        theText = theText.substr(index + item.length)
+      })
+      if (theText.length) {
+        textArr.push({
+          text: he.decode(theText),
+          bold: false
+        })
+      }
+      return textArr
+    } else {
+      return [{
+        text: he.decode(text),
+        bold: false
+      }]
+    }
+  }
+
+  static _removeBoldTag (text) {
+    return text.replace(/<b>/g, '').replace(/<\/b>/g, '')
   }
 }
 
