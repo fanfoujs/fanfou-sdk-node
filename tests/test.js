@@ -63,9 +63,7 @@ var ffXAuth = new Fanfou({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
   username: process.env.FANFOU_USERNAME,
-  password: process.env.FANFOU_PASSWORD,
-  protocol: 'https:',
-  api_domain: 'api2.fanfou.com'
+  password: process.env.FANFOU_PASSWORD
 })
 
 ffXAuth.xauth(function (e, res) {
