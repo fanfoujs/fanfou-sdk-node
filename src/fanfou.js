@@ -20,6 +20,7 @@ class Fanfou {
 
     // optional
     this.protocol = options.protocol || 'http:'
+    this.oauth_domain = options.oauth_domain || 'fanfou.com'
     this.api_domain = options.api_domain || 'api.fanfou.com'
     this.streaming_domain = options.streaming_domain || 'stream.fanfou.com'
 
@@ -37,8 +38,8 @@ class Fanfou {
 
     this.is_streaming = false
     this.oauth = new OAuth(
-      'http://fanfou.com/oauth/request_token',
-      'http://fanfou.com/oauth/access_token',
+      `${this.protocol}//${this.oauth_domain}/oauth/request_token`,
+      `${this.protocol}//${this.oauth_domain}/oauth/access_token`,
       this.consumer_key,
       this.consumer_secret,
       '1.0',
