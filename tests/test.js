@@ -1,7 +1,7 @@
 var Fanfou = require('./../lib/fanfou')
 var fs = require('fs')
 
-/* var ffOAuth = new Fanfou({
+var ffOAuth = new Fanfou({
   auth_type: 'oauth',
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
@@ -55,7 +55,7 @@ streamer.on('error', function (err) {
 
 setTimeout(function () {
   streamer.stop()
-}, 1000) */
+}, 1000)
 
 // XAuth test
 var ffXAuth = new Fanfou({
