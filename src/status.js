@@ -119,14 +119,14 @@ class Status {
 
         // at
         if (item.substr(0, 1) === '@') {
-          const matchText = item.match(/@<a href="http:\/\/fanfou.com\/(.*?)".*?>(.*?)<\/a>/)
-          const text = `@${matchText[2]}`
+          const matchText = item.match(/@<a href="(http|https):\/\/fanfou.com\/(.*?)".*?>(.*?)<\/a>/)
+          const text = `@${matchText[3]}`
           const originText = he.decode(Status._removeBoldTag(text))
           const thisTxt = {
             type: 'at',
             text: originText,
-            name: he.decode(matchText[2]),
-            id: matchText[1]
+            name: he.decode(matchText[3]),
+            id: matchText[2]
           }
           if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
           txt.push(thisTxt)
