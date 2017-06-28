@@ -74,10 +74,12 @@ class Fanfou {
       this.oauth_token,
       this.oauth_token_secret,
       (e, rawData, res) => {
-        // TODO http status code
-        res.body = rawData
-        if (e) callback(new FanfouError(res))
-        else {
+        if (e) {
+          if (res && rawData) {
+            res.body = rawData
+            callback(new FanfouError(res))
+          } else callback(e)
+        } else {
           if (Fanfou._uriType(uri) === 'timeline') {
             const timeline = JSON.parse(rawData)
             const arr = []
@@ -110,9 +112,12 @@ class Fanfou {
       this.oauth_token_secret,
       parameters,
       (e, rawData, httpResponse) => {
-        httpResponse.body = rawData
-        if (e) callback(new FanfouError(httpResponse))
-        else {
+        if (e) {
+          if (httpResponse && rawData) {
+            httpResponse.body = rawData
+            callback(new FanfouError(res))
+          } else callback(e)
+        } else {
           if (Fanfou._uriType(uri) === 'timeline') {
             const timeline = JSON.parse(rawData)
             const arr = []
