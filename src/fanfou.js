@@ -115,7 +115,7 @@ class Fanfou {
         if (e) {
           if (httpResponse && rawData) {
             httpResponse.body = rawData
-            callback(new FanfouError(res))
+            callback(new FanfouError(httpResponse))
           } else callback(e)
         } else {
           if (Fanfou._uriType(uri) === 'timeline') {
