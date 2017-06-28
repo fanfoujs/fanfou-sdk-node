@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "babel src -d lib",
-    "test": "npm run build && standard && ava -s -v"
+    "test": "npm run build && standard && ava -v"
   },
   "repository": {
     "type": "git",
