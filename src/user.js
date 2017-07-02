@@ -1,5 +1,7 @@
 'use strict'
 
+const mzsi = require('mzsi')
+
 class User {
   constructor (user) {
     this.id = user.id
@@ -32,6 +34,17 @@ class User {
     this.profile_background_tile = user.profile_background_tile
     this.profile_image_origin = this.profile_image_url.replace(/\?\d{10}/, '')
     this.profile_image_origin_large = this.profile_image_url_large.replace(/\?\d{10}/, '')
+    this.sign_name = this._getSignName()
+  }
+
+  _getSignName () {
+    if (this.birthday.length) {
+      const matchYMD = this.birthday.match(/\d{4}-(\d{2})-(\d{2})/)
+      const month = parseInt(matchYMD[1])
+      const day = parseInt(matchYMD[2])
+      if (month > 0 && day > 0) return mzsi(month, day, 'zh-cn').name
+    }
+    return ''
   }
 }
 
