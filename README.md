@@ -1,4 +1,6 @@
 # fanfou-sdk-node
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/LitoMore/fanfou-sdk-node.svg)](https://greenkeeper.io/)
 Fanfou SDK for Node.js
 
 [![](https://img.shields.io/travis/LitoMore/fanfou-sdk-node/master.svg)](https://travis-ci.org/LitoMore/fanfou-sdk-node)
