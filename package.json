@@ -17,11 +17,12 @@
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2016": "^6.24.1",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "standard-markdown": "^4.0.1"
   },
   "scripts": {
     "build": "babel src -d lib",
-    "test": "npm run build && standard && ava -v"
+    "test": "npm run build && standard && standard-markdown && ava -v"
   },
   "repository": {
     "type": "git",

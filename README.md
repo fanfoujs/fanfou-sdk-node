@@ -16,25 +16,25 @@ $ npm install fanfou-sdk
 ## Initialization
 
 ```javascript
-const Fanfou = require('fanfou-sdk');
+const Fanfou = require('fanfou-sdk')
 
 // OAuth
-const ff = new Fanfou({
+const ffOAuth = new Fanfou({
   auth_type: 'oauth',
   consumer_key: consumer_key,
   consumer_secret: consumer_secret,
   oauth_token: oauth_token,
   oauth_token_secret: oauth_token_secret
-});
+})
 
 // XAuth
-const ff = new Fanfou({
+const ffXAuth = new Fanfou({
   auth_type: 'xauth',
   consumer_key: consumer_key,
   consumer_secret: consumer_secret,
   username: username,
   password: password
-});
+})
 ```
 **Parameters**
 
@@ -50,10 +50,10 @@ const ff = new Fanfou({
 **Methods**
 
 ```javascript
-ff.get(uri, parameters, callback);
-ff.post(uri, parameters, callback);
-ff.upload(stream, text, callback);
-ff.stream(uri);
+ff.get(uri, parameters, callback)
+ff.post(uri, parameters, callback)
+ff.upload(stream, text, callback)
+ff.stream(uri)
 ```
 
 **Parameters**
@@ -68,39 +68,39 @@ ff.stream(uri);
 
 ```javascript
 // OAuth
-ff.get('/statuses/home_timeline', {}, function (e, timeline) {
-  if (e) console.error(e);
+ff.get('/statuses/home_timeline', {}, (e, timeline) => {
+  if (e) console.error(e)
   else {
-    console.log(timeline);
+    console.log(timeline)
   }
-});
+})
 
-ff.post('/statuses/update', {status: 'post test'}, function (e, status) {
-  if (e) console.error(e);
+ff.post('/statuses/update', {status: 'post test'}, (e, status) => {
+  if (e) console.error(e)
   else {
-    console.log(status);
+    console.log(status)
   }
-});
+})
 
-ff.upload(fs.createReadStream(path), 'nice day', function (e, status) {
-  if (e) console.error(e);
+ff.upload(fs.createReadStream(path), 'nice day', (e, status) => {
+  if (e) console.error(e)
   else {
-    console.log(status);
+    console.log(status)
   }
-});
+})
 
 // XAuth
-ff.xauth(function(e, res) {
-  if (e) console.error(e);
+ff.xauth((e, res) => {
+  if (e) console.error(e)
   else {
-    ff.get('/statuses/public_timeline', {}, function(e, timeline) {
-      if (e) console.error(e);
+    ff.get('/statuses/public_timeline', {}, (e, timeline) => {
+      if (e) console.error(e)
       else {
-        console.log(timeline);
+        console.log(timeline)
       }
     })
   }
-});
+})
 ```
 
 **Streaming API**
@@ -109,34 +109,34 @@ Fanfou SDK offers the ability to work with the Streaming API, based on the Event
 
 ```javascript
 // To start a streamer
-const streamer = ff.stream();
+const streamer = ff.stream()
 
 // Now post a new status on fanfou, this will trigger the 'message' event
-streamer.on('message', function (data) {
-  console.log(data.schema + ' ' + data.action + ': ' + data.object.text);
+streamer.on('message', data => {
+  console.log(data.schema + ' ' + data.action + ': ' + data.object.text)
   // OUTPUT: message create: hello fanfou
-});
+})
 
 // Listen to reply or mention events
-streamer.on('message', function (data) {
+streamer.on('message', data => {
   if (data.is_mentioned) {
-    console.log('Is mentioned by @' + data.mentioned_by);
+    console.log('Is mentioned by @' + data.mentioned_by)
     // OUTPUT: Is mentioned by @fanfou
   }
 
   if (data.is_replied) {
-    console.log('Is replied by @' + data.replied_by);
+    console.log('Is replied by @' + data.replied_by)
     // OUTPUT: Is replied by @fanfou
   }
-});
+})
 
 // Or listen to the favourite events
-streamer.on('fav', function (data) {
-  console.log(data.schema + ' ' + data.action + ': ' + data.object.text);
-});
+streamer.on('fav', data => {
+  console.log(data.schema + ' ' + data.action + ': ' + data.object.text)
+})
 
 // To stop the streamer
-streamer.stop();
+streamer.stop()
 ```
 
 Available events:
