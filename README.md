@@ -70,21 +70,21 @@ ff.stream(uri)
 ```javascript
 // OAuth
 ff.get('/statuses/home_timeline', {}, (e, timeline) => {
-  if (e) console.error(e)
+  if (e) console.log(e.message)
   else {
     console.log(timeline)
   }
 })
 
 ff.post('/statuses/update', {status: 'post test'}, (e, status) => {
-  if (e) console.error(e)
+  if (e) console.log(e.message)
   else {
     console.log(status)
   }
 })
 
 ff.upload(fs.createReadStream(path), 'nice day', (e, status) => {
-  if (e) console.error(e)
+  if (e) console.log(e.message)
   else {
     console.log(status)
   }
@@ -92,10 +92,10 @@ ff.upload(fs.createReadStream(path), 'nice day', (e, status) => {
 
 // XAuth
 ff.xauth((e, res) => {
-  if (e) console.error(e)
+  if (e) console.log(e.message)
   else {
     ff.get('/statuses/public_timeline', {}, (e, timeline) => {
-      if (e) console.error(e)
+      if (e) console.log(e.message)
       else {
         console.log(timeline)
       }
