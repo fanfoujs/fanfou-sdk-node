@@ -3,7 +3,10 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - set CI=true
   - npm install
+
+build: off
 
 test_script:
   - node --version
