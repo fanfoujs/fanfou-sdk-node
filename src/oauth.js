@@ -27,4 +27,12 @@ Object.assign(OAuth.prototype, {
   }
 })
 
+Object.assign(OAuth.prototype, {
+  _getSignature (method, url, parameters, tokenSecret) {
+    if (this.fakeHttps) url = url.replace('https', 'http')
+    const signatureBase = this._createSignatureBase(method, url, parameters)
+    return this._createSignature(signatureBase, tokenSecret)
+  }
+})
+
 module.exports = OAuth
