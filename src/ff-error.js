@@ -20,7 +20,9 @@ class FanfouError extends Error {
         this.message = xml2js(this.httpResponse.body, {compact: true}).hash.error._text
         break
       case 'text/html':
-        this.message = this.httpResponse.body.match(/<title>(.+)<\/title>/)[1]
+        const titleMatch = this.httpResponse.body.match(/<title>(.+)<\/title>/)
+        if (titleMatch) this.message = titleMatch[1]
+        else this.message = `http status code ${this.httpResponse.statusCode}`
         break
       default:
         break
