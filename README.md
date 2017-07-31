@@ -150,3 +150,13 @@ friends|<p>`create`: Current user follows a user</p><p>`delete`: Current user un
 fav|<p>`create`: Current user favourites a status</p><p>`delete`: Current user deletes a favourite</p>
 
 For the `data` structures of these events respectively please refer to the Fanfou [Streaming API](http://wiki.fanfou.com/Streaming-API) docs.
+
+## Related
+
+- [nofan](https://github.com/LitoMore/nofan) - Fanfou Cli for Node.js
+- [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
+- [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
+
+## License
+
+MIT @ [LitoMore](https://github.com/LitoMore)
