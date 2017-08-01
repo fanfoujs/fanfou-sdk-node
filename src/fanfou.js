@@ -1,13 +1,14 @@
 'use strict'
 
 const OAuth = require('./oauth')
-const qs = require('querystring')
 const events = require('events')
+const qs = require('querystring')
 const request = require('request')
-const oauthSignature = require('oauth-signature')
 const Status = require('./status')
 const Streaming = require('./streaming')
 const FanfouError = require('./ff-error')
+const isJson = require('validate.io-json')
+const oauthSignature = require('oauth-signature')
 
 class Fanfou {
   constructor (options) {
@@ -95,7 +96,8 @@ class Fanfou {
           } else if (Fanfou._uriType(uri) === 'status') {
             callback(null, new Status(JSON.parse(rawData)), rawData)
           } else {
-            callback(null, JSON.parse(rawData), rawData)
+            const result = isJson(rawData) ? JSON.parse(rawData) : rawData
+            callback(null, result, rawData)
           }
         }
       }
@@ -133,7 +135,8 @@ class Fanfou {
           } else if (Fanfou._uriType(uri) === 'status') {
             callback(null, new Status(JSON.parse(rawData)), rawData)
           } else {
-            callback(null, JSON.parse(rawData), rawData)
+            const result = isJson(rawData) ? JSON.parse(rawData) : rawData
+            callback(null, result, rawData)
           }
         }
       }
