@@ -159,4 +159,4 @@ For the `data` structures of these events respectively please refer to the Fanfo
 
 ## License
 
-MIT @ [LitoMore](https://github.com/LitoMore)
+MIT © [LitoMore](https://github.com/LitoMore)
