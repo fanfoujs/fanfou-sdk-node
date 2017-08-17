@@ -224,6 +224,7 @@ class Fanfou {
         })
 
         response.on('close', () => {
+          ee.emit('close', 'connection closed')
           request.abort()
           this.is_streaming = false
         })
