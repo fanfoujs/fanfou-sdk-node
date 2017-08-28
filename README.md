@@ -18,9 +18,12 @@ $ npm install fanfou-sdk
 
 ```javascript
 const Fanfou = require('fanfou-sdk')
+```
 
-// OAuth
-const ffOAuth = new Fanfou({
+**OAuth**
+
+```javascript
+const ff = new Fanfou({
   auth_type: 'oauth',
   consumer_key: consumer_key,
   consumer_secret: consumer_secret,
@@ -28,15 +31,40 @@ const ffOAuth = new Fanfou({
   oauth_token_secret: oauth_token_secret
 })
 
-// XAuth
-const ffXAuth = new Fanfou({
+ff.get('/statuses/home_timeline', {format: 'html'}, (err, res) => {
+  if (err) console.log(err.message)
+  else console.log(res)
+})
+```
+
+**XAuth**
+
+```javascript
+const ff = new Fanfou({
   auth_type: 'xauth',
   consumer_key: consumer_key,
   consumer_secret: consumer_secret,
   username: username,
   password: password
 })
+
+ff.xauth((err) => {
+  if (err) {
+    console.log(err.message)
+  } else {
+    ff.get('/statuses/public_timeline', {count: 10}, (e, res) => {
+      if (e) console.log(e.message)
+      else console.log(res)
+    })
+
+    ff.post('/statuses/update', {status: 'Hi Fanfou'}, (e, res) => {
+      if (e) console.log(e.message)
+      else console.log(res)
+    })
+  }
+})
 ```
+
 **Parameters**
 
 - `consumser_key: String` The Consumser Key
@@ -71,23 +99,17 @@ ff.stream(uri)
 // OAuth
 ff.get('/statuses/home_timeline', {}, (e, timeline) => {
   if (e) console.log(e.message)
-  else {
-    console.log(timeline)
-  }
+  else console.log(timeline)
 })
 
 ff.post('/statuses/update', {status: 'post test'}, (e, status) => {
   if (e) console.log(e.message)
-  else {
-    console.log(status)
-  }
+  else console.log(status)
 })
 
 ff.upload(fs.createReadStream(path), 'nice day', (e, status) => {
   if (e) console.log(e.message)
-  else {
-    console.log(status)
-  }
+  else console.log(status)
 })
 
 // XAuth
@@ -96,9 +118,7 @@ ff.xauth((e, res) => {
   else {
     ff.get('/statuses/public_timeline', {}, (e, timeline) => {
       if (e) console.log(e.message)
-      else {
-        console.log(timeline)
-      }
+      else console.log(timeline)
     })
   }
 })
