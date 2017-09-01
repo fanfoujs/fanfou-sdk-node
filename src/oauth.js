@@ -13,9 +13,14 @@ Object.assign(OAuth.prototype, {
     }
 
     this._performSecureRequest(null, null, this._clientOptions.accessTokenHttpMethod, this._accessUrl, xauthParams, null, null, function (error, data, response) {
-      response.body = data
-      if (error) callback(new FanfouError(response))
-      else {
+      if (error) {
+        if (response) {
+          response.body = data
+          callback(new FanfouError(response))
+        } else {
+          callback(error)
+        }
+      } else {
         const results = qs.parse(data)
         const oauthAccessToken = results['oauth_token']
         delete results['oauth_token']
