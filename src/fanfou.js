@@ -1,6 +1,8 @@
 'use strict'
 
+const User = require('./user')
 const OAuth = require('./oauth')
+const Photo = require('./photo')
 const events = require('events')
 const qs = require('querystring')
 const request = require('request')
@@ -311,5 +313,9 @@ class Fanfou {
     return uriList[uri] || null
   }
 }
+
+Fanfou.User = User
+Fanfou.Photo = Photo
+Fanfou.Status = Status
 
 module.exports = Fanfou
