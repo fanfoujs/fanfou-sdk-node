@@ -1,6 +1,6 @@
 {
   "name": "fanfou-sdk",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Fanfou SDK for Node.js",
   "main": "index.js",
   "dependencies": {
