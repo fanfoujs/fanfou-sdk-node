@@ -174,6 +174,7 @@ For the `data` structures of these events respectively please refer to the Fanfo
 ## Related
 
 - [nofan](https://github.com/LitoMore/nofan) - Fanfou Cli for Node.js
+- [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) - Fanfou Streaming SDK for Node.js
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
 
