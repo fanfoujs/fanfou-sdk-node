@@ -26,7 +26,7 @@ class Fanfou {
     this.oauth_domain = options.oauth_domain || 'fanfou.com'
     this.api_domain = options.api_domain || 'api.fanfou.com'
     this.streaming_domain = options.streaming_domain || 'stream.fanfou.com'
-    this.fakeHttps = options.fakeHttps || false
+    this.fakeHttps = options.fake_https || options.fakeHttps || false
 
     // oauth required
     if (this.auth_type === 'oauth') {
