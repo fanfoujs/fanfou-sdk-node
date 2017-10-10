@@ -290,8 +290,4 @@ class Fanfou {
   }
 }
 
-Fanfou.User = User
-Fanfou.Photo = Photo
-Fanfou.Status = Status
-
 module.exports = Fanfou
