@@ -31,8 +31,8 @@ class Fanfou {
 
     // oauth required
     if (this.auth_type === 'oauth') {
-      this.oauth_token = options.oauth_token || ''
-      this.oauth_token_secret = options.oauth_token_secret || ''
+      this.oauth_token = options.oauth_token || options.oauthToken || ''
+      this.oauth_token_secret = options.oauth_token_secret || options.oauthTokenSecret || ''
     }
 
     // xauth required
