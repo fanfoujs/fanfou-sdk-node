@@ -104,14 +104,14 @@ class Status {
 
         // tag
         if (item.substr(0, 1) === '#') {
-          const matchText = item.match(/#<a href=".*?".?>([\s\S\n]*)<\/a>#/)
-          const text = `#${matchText[1]}#`
+          const matchText = item.match(/#<a href="\/q\/(.*?)".?>([\s\S\n]*)<\/a>#/)
+          const text = `#${matchText[2]}#`
           const originText = he.decode(Status._removeBoldTag(text))
           const thisTxt = {
             type: 'tag',
             text: originText,
             _text: originText.replace(/\n{2,}/g, '\n'),
-            query: he.decode(matchText[1])
+            query: decodeURIComponent(he.decode(matchText[1]))
           }
           if (Status._hasBold(text)) thisTxt.bold_arr = Status._getBoldArr(text)
           txt.push(thisTxt)
