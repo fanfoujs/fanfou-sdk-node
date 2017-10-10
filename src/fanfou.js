@@ -68,11 +68,6 @@ class Fanfou {
     })
   }
 
-  /**
-   * @param uri
-   * @param parameters
-   * @param callback
-   */
   get (uri, parameters, callback) {
     const url = this.protocol + '//' + this.api_domain + uri + '.json'
     this.oauth.get(
@@ -106,11 +101,6 @@ class Fanfou {
     )
   }
 
-  /**
-   * @param uri
-   * @param parameters
-   * @param callback
-   */
   post (uri, parameters, callback) {
     const url = this.protocol + '//' + this.api_domain + uri + '.json'
     this.oauth.post(
@@ -145,10 +135,6 @@ class Fanfou {
     )
   }
 
-  /**
-   * @param uri
-   * @param parameters
-   */
   stream (uri, parameters) {
     // prevent concurrences
     if (this.is_streaming === true) {
@@ -238,11 +224,6 @@ class Fanfou {
     return ee
   }
 
-  /**
-   * @param stream
-   * @param text
-   * @param callback
-   */
   upload (stream, text, callback) {
     const method = 'POST'
     const url = this.protocol + '//' + this.api_domain + '/photos/upload.json'
@@ -286,11 +267,6 @@ class Fanfou {
     })
   }
 
-  /**
-   * @param uri
-   * @returns {string}
-   * @private
-   */
   static _uriType (uri) {
     const uriList = {
       '/search/public_timeline': 'timeline',
