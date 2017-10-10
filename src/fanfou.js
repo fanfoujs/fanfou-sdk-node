@@ -20,7 +20,7 @@ class Fanfou {
     // required
     this.consumer_key = options.consumer_key || options.consumerKey
     this.consumer_secret = options.consumer_secret || options.consumerSecret
-    this.auth_type = options.auth_type || options.authType
+    this.auth_type = options.auth_type || options.authType || 'oauth'
 
     // optional
     this.protocol = options.protocol || 'http:'
