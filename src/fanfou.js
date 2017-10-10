@@ -1,16 +1,17 @@
 'use strict'
 
-const User = require('./user')
-const OAuth = require('./oauth')
-const Photo = require('./photo')
 const events = require('events')
 const qs = require('querystring')
 const request = require('request')
+const isJson = require('validate.io-json')
+const oauthSignature = require('oauth-signature')
+
+const User = require('./user')
+const OAuth = require('./oauth')
 const Status = require('./status')
 const Streaming = require('./streaming')
 const FanfouError = require('./ff-error')
-const isJson = require('validate.io-json')
-const oauthSignature = require('oauth-signature')
+const DirectMessage = require('./direct-message')
 
 class Fanfou {
   constructor (options) {
@@ -74,29 +75,20 @@ class Fanfou {
       url + '?' + qs.stringify(parameters),
       this.oauth_token,
       this.oauth_token_secret,
-      (e, rawData, res) => {
+      (e, rawData, httpResponse) => {
         if (e) {
-          if (res && rawData) {
-            res.body = rawData
-            callback(new FanfouError(res))
+          if (httpResponse && rawData) {
+            httpResponse.body = rawData
+            callback(new FanfouError(httpResponse))
           } else callback(e)
-        } else {
-          if (Fanfou._uriType(uri) === 'timeline') {
-            const timeline = JSON.parse(rawData)
-            const arr = []
-            for (let i in timeline) {
-              if (timeline.hasOwnProperty(i)) {
-                arr.push(new Status(timeline[i]))
-              }
-            }
-            callback(null, arr, rawData)
-          } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, new Status(JSON.parse(rawData)), rawData)
-          } else {
-            const result = isJson(rawData) ? JSON.parse(rawData) : rawData
+        } else if (isJson(rawData)) {
+          const data = JSON.parse(rawData)
+          if (data.error) callback(null, data, rawData)
+          else {
+            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
             callback(null, result, rawData)
           }
-        }
+        } else callback(new Error('invalid body'))
       }
     )
   }
@@ -114,23 +106,14 @@ class Fanfou {
             httpResponse.body = rawData
             callback(new FanfouError(httpResponse))
           } else callback(e)
-        } else {
-          if (Fanfou._uriType(uri) === 'timeline') {
-            const timeline = JSON.parse(rawData)
-            const arr = []
-            for (let i in timeline) {
-              if (timeline.hasOwnProperty(i)) {
-                arr.push(new Status(timeline[i]))
-              }
-            }
-            callback(null, arr, rawData)
-          } else if (Fanfou._uriType(uri) === 'status') {
-            callback(null, new Status(JSON.parse(rawData)), rawData)
-          } else {
-            const result = isJson(rawData) ? JSON.parse(rawData) : rawData
+        } else if (isJson(rawData)) {
+          const data = JSON.parse(rawData)
+          if (data.error) callback(null, data, rawData)
+          else {
+            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
             callback(null, result, rawData)
           }
-        }
+        } else callback(new Error('invalid body'))
       }
     )
   }
@@ -269,6 +252,7 @@ class Fanfou {
 
   static _uriType (uri) {
     const uriList = {
+      // Timeline
       '/search/public_timeline': 'timeline',
       '/search/user_timeline': 'timeline',
       '/photos/user_timeline': 'timeline',
@@ -280,13 +264,82 @@ class Fanfou {
       '/statuses/context_timeline': 'timeline',
       '/statuses/mentions': 'timeline',
       '/favorites': 'timeline',
-      '/statuses/destroy': 'status',
+
+      // Status
       '/statuses/update': 'status',
       '/statuses/show': 'status',
       '/favorites/destroy': 'status',
-      '/favorites/create': 'status'
+      '/favorites/create': 'status',
+
+      // Users
+      '/users/tagged': 'users',
+      '/users/followers': 'users',
+      '/users/friends': 'users',
+      '/friendships/requests': 'users',
+
+      // User
+      '/users/show': 'user',
+      '/friendships/create': 'user',
+      '/friendships/destroy': 'user',
+
+      // Conversation
+      '/direct_messages/conversation': 'conversation',
+      '/direct_messages/inbox': 'conversation',
+      '/direct_messages/sent': 'conversation',
+
+      // Conversation List
+      '/direct_messages/conversation_list': 'conversation-list',
+
+      // Direct Message
+      '/direct_messages/new': 'dm',
+      '/direct_messages/destroy': 'dm'
+
     }
     return uriList[uri] || null
+  }
+
+  static _parseList (data, type) {
+    const arr = []
+    for (const i in data) {
+      if (data[i]) {
+        switch (type) {
+          case 'timeline':
+            arr.push(new Status(data[i]))
+            break
+          case 'users':
+            arr.push(new User(data[i]))
+            break
+          case 'conversation':
+            arr.push(new DirectMessage(data[i]))
+            break
+          case 'conversation-list':
+            data[i].dm = new DirectMessage(data[i].dm)
+            arr.push(data[i])
+            break
+          default:
+            break
+        }
+      }
+    }
+    return arr
+  }
+
+  static _parseData (data, type) {
+    switch (type) {
+      case 'timeline':
+      case 'users':
+      case 'conversation':
+      case 'conversation-list':
+        return Fanfou._parseList(data, type)
+      case 'status':
+        return new Status(data)
+      case 'user':
+        return new User(data)
+      case 'dm':
+        return new DirectMessage(data)
+      default:
+        return data
+    }
   }
 }
 
