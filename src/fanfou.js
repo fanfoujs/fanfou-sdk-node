@@ -18,14 +18,14 @@ class Fanfou {
     options = options || {}
 
     // required
-    this.consumer_key = options.consumer_key
-    this.consumer_secret = options.consumer_secret
-    this.auth_type = options.auth_type
+    this.consumer_key = options.consumer_key || options.consumerKey
+    this.consumer_secret = options.consumer_secret || options.consumerSecret
+    this.auth_type = options.auth_type || options.authType
 
     // optional
     this.protocol = options.protocol || 'http:'
-    this.oauth_domain = options.oauth_domain || 'fanfou.com'
-    this.api_domain = options.api_domain || 'api.fanfou.com'
+    this.oauth_domain = options.oauth_domain || options.oauthDomain || 'fanfou.com'
+    this.api_domain = options.api_domain || options.apiDomain || 'api.fanfou.com'
     this.streaming_domain = options.streaming_domain || 'stream.fanfou.com'
     this.fakeHttps = options.fake_https || options.fakeHttps || false
 
