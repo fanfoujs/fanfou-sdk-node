@@ -1,6 +1,6 @@
 # fanfou-sdk-node
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/LitoMore/fanfou-sdk-node.svg)](https://greenkeeper.io/)
+[![](https://badges.greenkeeper.io/LitoMore/fanfou-sdk-node.svg)](https://greenkeeper.io/)
 [![](https://img.shields.io/travis/LitoMore/fanfou-sdk-node/master.svg)](https://travis-ci.org/LitoMore/fanfou-sdk-node)
 [![](https://img.shields.io/appveyor/ci/LitoMore/fanfou-sdk-node/master.svg)](https://ci.appveyor.com/project/LitoMore/fanfou-sdk-node)
 [![](https://img.shields.io/npm/v/fanfou-sdk.svg)](https://www.npmjs.com/package/fanfou-sdk)
@@ -173,7 +173,8 @@ For the `data` structures of these events respectively please refer to the Fanfo
 
 ## Related
 
-- [nofan](https://github.com/LitoMore/nofan) - Fanfou Cli for Node.js
+- [nofan](https://github.com/LitoMore/nofan) - CLI for Fanfou
+- [xiaofan](https://github.com/fanfoujs/xiaofan) - WeApp for Fanfou
 - [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) - Fanfou Streaming SDK for Node.js
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
