@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "babel src -d lib",
-    "test": "npm run build && standard && standard-markdown && ava -v"
+    "test": "npm run build && standard && standard-markdown"
   },
   "repository": {
     "type": "git",
