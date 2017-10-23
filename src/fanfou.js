@@ -281,6 +281,7 @@ class Fanfou {
       '/users/show': 'user',
       '/friendships/create': 'user',
       '/friendships/destroy': 'user',
+      '/account/verify_credentials': 'user',
 
       // Conversation
       '/direct_messages/conversation': 'conversation',
