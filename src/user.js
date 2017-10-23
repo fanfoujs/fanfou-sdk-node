@@ -32,9 +32,21 @@ class User {
     this.profile_sidebar_border_color = user.profile_sidebar_border_color
     this.profile_background_image_url = user.profile_background_image_url
     this.profile_background_tile = user.profile_background_tile
-    this.profile_image_origin = this.profile_image_url.replace(/\?\d{10}/, '')
-    this.profile_image_origin_large = this.profile_image_url_large.replace(/\?\d{10}/, '')
+    if (user.status) {
+      this.status = user.status
+    }
+
+    this.profile_image_origin = this._getProfileImageOrigin()
+    this.profile_image_origin_large = this._getProfileImageOriginLarge()
     this.sign_name = this._getSignName()
+  }
+
+  _getProfileImageOrigin () {
+    return this.profile_image_url.replace(/\?\d{10}/, '')
+  }
+
+  _getProfileImageOriginLarge () {
+    return this.profile_image_url_large.replace(/\?\d{10}/, '')
   }
 
   _getSignName () {
