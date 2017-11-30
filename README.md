@@ -125,7 +125,7 @@ ff.xauth((e, res) => {
 
 **Streaming API**
 
-The built-in Streaming API has been deprecated.
+The built-in Streaming API has been deprecated. Please use [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) instead.
 
 ## Related
 
