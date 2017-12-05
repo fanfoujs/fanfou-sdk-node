@@ -250,6 +250,53 @@ class Fanfou {
     })
   }
 
+  up (uri, parameters, callback) {
+    const method = 'POST'
+    const url = this.protocol + '//' + this.api_domain + uri + '.json'
+    const params = {
+      oauth_consumer_key: this.consumer_key,
+      oauth_token: this.oauth_token,
+      oauth_signature_method: 'HMAC-SHA1',
+      oauth_timestamp: Math.floor(Date.now() / 1000),
+      oauth_nonce: this.oauth._getNonce(6),
+      oauth_version: '1.0'
+    }
+    const signature = oauthSignature.generate(
+      method,
+      this.fakeHttps ? url.replace('https', 'http') : url,
+      params,
+      this.consumer_secret,
+      this.oauth_token_secret,
+      {encodeSignature: false}
+    )
+    const authorizationHeader = this.oauth._buildAuthorizationHeaders(
+      this.oauth._sortRequestParams(
+        this.oauth._makeArrayOfArgumentsHash(params)
+      ).concat([['oauth_signature', signature]])
+    )
+    request.post({
+      url,
+      formData: parameters,
+      headers: {Authorization: authorizationHeader}
+    }, (err, httpResponse, body) => {
+      if (err) {
+        callback(err)
+      } else if (httpResponse.statusCode !== 200) {
+        callback(new FanfouError(httpResponse))
+      } else {
+        if (isJson(body)) {
+          const data = JSON.parse(body)
+          if (data.error) {
+            callback(null, data, body)
+          } else {
+            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+            callback(null, result, body)
+          }
+        } else callback(new Error('invalid body'))
+      }
+    })
+  }
+
   static _uriType (uri) {
     const uriList = {
       // Timeline
