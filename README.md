@@ -133,6 +133,7 @@ The built-in Streaming API has been deprecated. Please use [fanfou-streamer](htt
 - [xiaofan](https://github.com/fanfoujs/xiaofan) - WeApp for Fanfou
 - [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) - Fanfou Streaming SDK for Node.js
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
+- [kap-fanfou](https://github.com/LitoMore/kap-fanfou) - Kap plugin that share on Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
 
 ## License
