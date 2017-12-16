@@ -48,17 +48,17 @@ const ff = new Fanfou({
   password: password
 })
 
-ff.xauth((err) => {
+ff.xauth(err => {
   if (err) {
     console.log(err.message)
   } else {
-    ff.get('/statuses/public_timeline', {count: 10}, (e, res) => {
-      if (e) console.log(e.message)
+    ff.get('/statuses/public_timeline', {count: 10}, (err, res) => {
+      if (err) console.log(e.message)
       else console.log(res)
     })
 
-    ff.post('/statuses/update', {status: 'Hi Fanfou'}, (e, res) => {
-      if (e) console.log(e.message)
+    ff.post('/statuses/update', {status: 'Hi Fanfou'}, (err, res) => {
+      if (err) console.log(err.message)
       else console.log(res)
     })
   }
@@ -81,7 +81,8 @@ ff.xauth((err) => {
 ```javascript
 ff.get(uri, parameters, callback)
 ff.post(uri, parameters, callback)
-ff.upload(stream, text, callback)
+ff.up(uri, parameters, callback)
+ff.upload(stream, text, callback)  // This API has been deprecated, use `ff.up()` instead.
 ```
 
 **Parameters**
@@ -96,18 +97,24 @@ ff.upload(stream, text, callback)
 
 ```javascript
 // OAuth
-ff.get('/statuses/home_timeline', {}, (e, timeline) => {
-  if (e) console.log(e.message)
+ff.get('/statuses/home_timeline', {}, (err, timeline) => {
+  if (err) console.log(err.message)
   else console.log(timeline)
 })
 
-ff.post('/statuses/update', {status: 'post test'}, (e, status) => {
-  if (e) console.log(e.message)
+ff.post('/statuses/update', {status: 'post test'}, (err, status) => {
+  if (err) console.log(err.message)
   else console.log(status)
 })
 
-ff.upload(fs.createReadStream(path), 'nice day', (e, status) => {
-  if (e) console.log(e.message)
+ff.up('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'}, (err, res) => {
+  if (err) console.log(err.message)
+  else console.log(res)
+})
+
+// `ff.upload()` has been deprecated.
+ff.upload(fs.createReadStream(path), 'nice day', (err, status) => {
+  if (err) console.log(err.message)
   else console.log(status)
 })
 
