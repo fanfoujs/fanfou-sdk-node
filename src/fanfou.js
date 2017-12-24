@@ -81,7 +81,7 @@ class Fanfou {
             httpResponse.body = rawData
             callback(new FanfouError(httpResponse))
           } else callback(e)
-        } else if (isJson(rawData)) {
+        } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
           const data = JSON.parse(rawData)
           if (data.error) callback(null, data, rawData)
           else {
@@ -106,7 +106,7 @@ class Fanfou {
             httpResponse.body = rawData
             callback(new FanfouError(httpResponse))
           } else callback(e)
-        } else if (isJson(rawData)) {
+        } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
           const data = JSON.parse(rawData)
           if (data.error) callback(null, data, rawData)
           else {
@@ -284,7 +284,7 @@ class Fanfou {
       } else if (httpResponse.statusCode !== 200) {
         callback(new FanfouError(httpResponse))
       } else {
-        if (isJson(body)) {
+        if (typeof body === 'string' && isJson(body.trim())) {
           const data = JSON.parse(body)
           if (data.error) {
             callback(null, data, body)
