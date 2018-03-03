@@ -208,8 +208,9 @@ class Fanfou {
   }
 
   upload (stream, text, callback) {
+    const uri = '/photos/upload'
     const method = 'POST'
-    const url = this.protocol + '//' + this.api_domain + '/photos/upload.json'
+    const url = this.protocol + '//' + this.api_domain + uri + '.json'
     const params = {
       oauth_consumer_key: this.consumer_key,
       oauth_token: this.oauth_token,
@@ -245,7 +246,15 @@ class Fanfou {
       } else if (httpResponse.statusCode !== 200) {
         callback(new FanfouError(httpResponse))
       } else {
-        callback(null, new Status(JSON.parse(body)), body)
+        if (typeof body === 'string' && isJson(body.trim())) {
+          const data = JSON.parse(body)
+          if (data.error) {
+            callback(null, data, body)
+          } else {
+            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+            callback(null, result, body)
+          }
+        } else callback(new Error('invalid body'))
       }
     })
   }
@@ -317,6 +326,7 @@ class Fanfou {
       '/statuses/show': 'status',
       '/favorites/destroy': 'status',
       '/favorites/create': 'status',
+      '/photos/upload': 'status',
 
       // Users
       '/users/tagged': 'users',
