@@ -119,11 +119,11 @@ ff.upload(fs.createReadStream(path), 'nice day', (err, status) => {
 })
 
 // XAuth
-ff.xauth((e, res) => {
-  if (e) console.log(e.message)
+ff.xauth((err, res) => {
+  if (err) console.log(e.message)
   else {
-    ff.get('/statuses/public_timeline', {}, (e, timeline) => {
-      if (e) console.log(e.message)
+    ff.get('/statuses/public_timeline', {}, (err, timeline) => {
+      if (err) console.log(e.message)
       else console.log(timeline)
     })
   }
