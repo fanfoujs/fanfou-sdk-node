@@ -1,6 +1,5 @@
 'use strict'
 
-const events = require('events')
 const qs = require('querystring')
 const request = require('request')
 const isJson = require('validate.io-json')
@@ -9,7 +8,6 @@ const oauthSignature = require('oauth-signature')
 const User = require('./user')
 const OAuth = require('./oauth')
 const Status = require('./status')
-const Streaming = require('./streaming')
 const FanfouError = require('./ff-error')
 const DirectMessage = require('./direct-message')
 
@@ -26,7 +24,6 @@ class Fanfou {
     this.protocol = options.protocol || 'http:'
     this.oauth_domain = options.oauth_domain || options.oauthDomain || 'fanfou.com'
     this.api_domain = options.api_domain || options.apiDomain || 'api.fanfou.com'
-    this.streaming_domain = options.streaming_domain || 'stream.fanfou.com'
     this.fakeHttps = options.fake_https || options.fakeHttps || false
 
     // oauth required
@@ -116,95 +113,6 @@ class Fanfou {
         } else callback(new Error('invalid body'))
       }
     )
-  }
-
-  stream (uri, parameters) {
-    // prevent concurrences
-    if (this.is_streaming === true) {
-      console.warn('A previous streamer of this instance is currently running, cannot create more.')
-      return
-    }
-
-    // params validation
-    if (uri === undefined) {
-      uri = '/user'
-    }
-
-    if (typeof parameters !== 'object') {
-      parameters = {}
-    }
-
-    const url = this.protocol + '//' + this.streaming_domain + '/1' + uri + '.json'
-    let request = this.oauth.post(url, this.oauth_token, this.oauth_token_secret, parameters, null)
-
-    let ee = new events.EventEmitter()
-
-    ee.stop = () => {
-      request.abort()
-      this.is_streaming = false
-    }
-
-    request.on('error', error => {
-      ee.emit('error', {type: 'request', data: error})
-      this.is_streaming = false
-    })
-
-    // init and subsequent response data
-    request.on('response', response => {
-      if (response.statusCode > 200) {
-        ee.emit('error', {type: 'response', data: {code: response.statusCode}})
-        this.is_streaming = false
-      } else {
-        this.is_streaming = true
-
-        ee.emit('connected')
-
-        response.setEncoding('utf8')
-        let data = ''
-
-        response.on('data', chunk => {
-          data += chunk.toString('utf8')
-
-          if (data === '\r\n') {
-            ee.emit('heartbeat')
-            return
-          }
-
-          let index, json
-
-          while ((index = data.indexOf('\r\n')) > -1) {
-            json = data.slice(0, index)
-            data = data.slice(index + 2)
-            if (json.length > 0) {
-              try {
-                let newStreaming = new Streaming(JSON.parse(json))
-                ee.emit(newStreaming.schema, newStreaming)
-              } catch (e) {
-                ee.emit('garbage', data)
-              }
-            }
-          }
-        })
-
-        response.on('error', error => {
-          ee.emit('close', error)
-        })
-
-        response.on('end', () => {
-          ee.emit('close', 'connection dropped')
-        })
-
-        response.on('close', () => {
-          ee.emit('close', 'connection closed')
-          request.abort()
-          this.is_streaming = false
-        })
-      }
-    })
-
-    request.end()
-
-    return ee
   }
 
   upload (stream, text, callback) {
