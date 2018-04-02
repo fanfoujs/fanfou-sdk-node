@@ -9,17 +9,17 @@
     "oauth": "^0.9.15",
     "oauth-signature": "^1.5.0",
     "querystring": "^0.2.0",
-    "request": "^2.81.0",
+    "request": "^2.85.0",
     "validate.io-json": "^1.0.0",
     "xml-js": "^1.6.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.38",
-    "@babel/core": "^7.0.0-beta.38",
-    "@babel/plugin-transform-object-assign": "^7.0.0-beta.38",
-    "@babel/preset-env": "^7.0.0-beta.38",
+    "@babel/cli": "^7.0.0-beta.43",
+    "@babel/core": "^7.0.0-beta.43",
+    "@babel/plugin-transform-object-assign": "^7.0.0-beta.43",
+    "@babel/preset-env": "^7.0.0-beta.43",
     "ava": "^0.25.0",
-    "standard": "^11.0.0",
+    "standard": "^11.0.1",
     "standard-markdown": "^4.0.2"
   },
   "scripts": {
