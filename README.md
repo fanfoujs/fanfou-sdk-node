@@ -9,12 +9,13 @@
 
 Fanfou SDK for Node.js
 
-## Installation
+## Install
 
 ```bash
-$ npm install fanfou-sdk
+$ npm i fanfou-sdk
 ```
-## Initialization
+
+## Usage
 
 ```javascript
 const Fanfou = require('fanfou-sdk')
@@ -24,11 +25,10 @@ const Fanfou = require('fanfou-sdk')
 
 ```javascript
 const ff = new Fanfou({
-  auth_type: 'oauth',
-  consumer_key: consumer_key,
-  consumer_secret: consumer_secret,
-  oauth_token: oauth_token,
-  oauth_token_secret: oauth_token_secret
+  consumerKey: '',
+  consumerSecret: '',
+  oauthToken: '',
+  oauthTokenSecret: ''
 })
 
 ff.get('/statuses/home_timeline', {format: 'html'}, (err, res) => {
@@ -41,9 +41,9 @@ ff.get('/statuses/home_timeline', {format: 'html'}, (err, res) => {
 
 ```javascript
 const ff = new Fanfou({
-  auth_type: 'xauth',
-  consumer_key: consumer_key,
-  consumer_secret: consumer_secret,
+  authType: 'xauth',
+  consumerKey: '',
+  consumerSecret: '',
   username: username,
   password: password
 })
@@ -65,33 +65,32 @@ ff.xauth(err => {
 })
 ```
 
-**Parameters**
+> For more usages, see the [example](https://github.com/LitoMore/fanfou-sdk-node/blob/master/example.js).
 
-- `consumser_key: String` The Consumser Key
-- `consumser_secret: String` The Consumer Secret
-- `oauth_token: String` The OAuth Token
-- `oauth_token_secret: String` The OAuth Token Secret
-- `username: String` The Fanfou username
-- `password: String` The Fanfou password
+**Options**
 
-## Usage
+- `authType`: Support `oauth` and `xuath`, default is `oauth`
+- `consumerKey`: The consumer key
+- `consumerSecret`: The consumer secret
+- `oauthToken`: The OAuth token
+- `oauthTokenSecret`: The OAuth token secret
+- `username`: The Fanfou username
+- `password`: The Fanfou password
+- `protocol`: Set the prototol, default is `http:`
+- `fakeHttps`: A hook to replace the OAuth basestring, default is `false`
+- `apiDomain`: Set the API domain, default is `api.fanfou.com`
+- `oauthDomain`: Set the OAuth domain, default is `fanfou.com`
 
-**Methods**
+> For more Fanfou API docs, see the [Fanfou API doc](https://github.com/FanfouAPI/FanFouAPIDoc/wiki).
+
+## API
 
 ```javascript
-ff.get(uri, parameters, callback)
-ff.post(uri, parameters, callback)
-ff.up(uri, parameters, callback)
+ff.get(uri, params, callback)
+ff.post(uri, params, callback)
+ff.up(uri, params, callback)
 ff.upload(stream, text, callback)  // This API has been deprecated, use `ff.up()` instead.
 ```
-
-**Parameters**
-
-- `uri: String` URI to be requested upon
-- `parameters: Object` Parameters to be submitted
-- `stream: String | Buffer` Readable Stream
-- `text: String` Status content
-- `callback: Function` Method to be invoked upon result
 
 **Examples**
 

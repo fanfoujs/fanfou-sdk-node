@@ -6,3 +6,4 @@ appveyor.yml
 yarn.lock
 package-lock.json
 yarn-error.log*
+example.js
