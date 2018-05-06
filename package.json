@@ -19,12 +19,11 @@
     "@babel/plugin-transform-object-assign": "^7.0.0-beta.43",
     "@babel/preset-env": "^7.0.0-beta.43",
     "ava": "^0.25.0",
-    "standard": "^11.0.1",
-    "standard-markdown": "^4.0.2"
+    "xo": "^0.21.0"
   },
   "scripts": {
     "build": "babel src -d lib",
-    "test": "npm run build && standard && standard-markdown"
+    "test": "npm run build && xo"
   },
   "repository": {
     "type": "git",
@@ -38,5 +37,16 @@
   "bugs": {
     "url": "https://github.com/LitoMore/fanfou-sdk-node/issues"
   },
-  "homepage": "https://github.com/LitoMore/fanfou-sdk-node#readme"
+  "homepage": "https://github.com/LitoMore/fanfou-sdk-node#readme",
+  "xo": {
+    "rules": {
+      "camelcase": 0,
+      "space-before-function-paren": [
+        "error",
+        "always"
+      ]
+    },
+    "semicolon": false,
+    "space": 2
+  }
 }

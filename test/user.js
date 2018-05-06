@@ -1,6 +1,7 @@
 const test = require('ava')
 const User = require('../lib/user')
-const Fanfou = require('../')
+const Fanfou = require('..')
+
 const {
   CONSUMER_KEY,
   CONSUMER_SECRET,
@@ -9,7 +10,6 @@ const {
 } = process.env
 
 const ff = new Fanfou({
-  oauth_type: 'oauth',
   consumer_key: CONSUMER_KEY,
   consumer_secret: CONSUMER_SECRET,
   oauth_token: OAUTH_TOKEN,
@@ -19,8 +19,11 @@ const ff = new Fanfou({
 const getUser = () => {
   return new Promise((resolve, reject) => {
     ff.get('/users/show', {id: 'testcase'}, (err, res) => {
-      if (err) reject(err)
-      else resolve(res)
+      if (err) {
+        reject(err)
+      } else {
+        resolve(res)
+      }
     })
   })
 }

@@ -5,7 +5,7 @@
 [![](https://img.shields.io/appveyor/ci/LitoMore/fanfou-sdk-node/master.svg)](https://ci.appveyor.com/project/LitoMore/fanfou-sdk-node)
 [![](https://img.shields.io/npm/v/fanfou-sdk.svg)](https://www.npmjs.com/package/fanfou-sdk)
 [![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/LitoMore/fanfou-sdk-node/blob/master/LICENSE)
-[![](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 Fanfou SDK for Node.js
 
@@ -41,11 +41,10 @@ ff.get('/statuses/home_timeline', {format: 'html'}, (err, res) => {
 
 ```javascript
 const ff = new Fanfou({
-  authType: 'xauth',
   consumerKey: '',
   consumerSecret: '',
-  username: username,
-  password: password
+  username: '',
+  password: ''
 })
 
 ff.xauth(err => {
@@ -69,7 +68,6 @@ ff.xauth(err => {
 
 **Options**
 
-- `authType`: Support `oauth` and `xuath`, default is `oauth`
 - `consumerKey`: The consumer key
 - `consumerSecret`: The consumer secret
 - `oauthToken`: The OAuth token

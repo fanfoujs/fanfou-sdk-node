@@ -1,11 +1,11 @@
 'use strict'
 
-const xml2js = require('xml-js').xml2js
+const {xml2js} = require('xml-js')
 
 class FanfouError extends Error {
   constructor (httpResponse) {
-    super()
-    this.contentType = httpResponse.headers['content-type'].split(';')[0]
+    super();
+    [this.contentType] = httpResponse.headers['content-type'].split(';')
     this.httpResponse = httpResponse
     this.statusCode = httpResponse.statusCode
     this._parseError()
@@ -19,11 +19,15 @@ class FanfouError extends Error {
       case 'application/xml':
         this.message = xml2js(this.httpResponse.body, {compact: true}).hash.error._text
         break
-      case 'text/html':
+      case 'text/html': {
         const titleMatch = this.httpResponse.body.match(/<title>(.+)<\/title>/)
-        if (titleMatch) this.message = titleMatch[1]
-        else this.message = `http status code ${this.httpResponse.statusCode}`
+        if (titleMatch) {
+          [, this.message] = titleMatch
+        } else {
+          this.message = `http status code ${this.httpResponse.statusCode}`
+        }
         break
+      }
       default:
         break
     }

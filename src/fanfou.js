@@ -15,28 +15,23 @@ class Fanfou {
   constructor (options) {
     options = options || {}
 
-    // required
+    // Required
     this.consumer_key = options.consumer_key || options.consumerKey
     this.consumer_secret = options.consumer_secret || options.consumerSecret
-    this.auth_type = options.auth_type || options.authType || 'oauth'
 
-    // optional
+    // Optional
     this.protocol = options.protocol || 'http:'
     this.oauth_domain = options.oauth_domain || options.oauthDomain || 'fanfou.com'
     this.api_domain = options.api_domain || options.apiDomain || 'api.fanfou.com'
     this.fakeHttps = options.fake_https || options.fakeHttps || false
 
-    // oauth required
-    if (this.auth_type === 'oauth') {
-      this.oauth_token = options.oauth_token || options.oauthToken || ''
-      this.oauth_token_secret = options.oauth_token_secret || options.oauthTokenSecret || ''
-    }
+    // OAuth required
+    this.oauth_token = options.oauth_token || options.oauthToken || ''
+    this.oauth_token_secret = options.oauth_token_secret || options.oauthTokenSecret || ''
 
-    // xauth required
-    if (this.auth_type === 'xauth') {
-      this.username = options.username || ''
-      this.password = options.password || ''
-    }
+    // XAuth required
+    this.username = options.username || ''
+    this.password = options.password || ''
 
     this.is_streaming = false
     this.oauth = new OAuth(
@@ -53,9 +48,10 @@ class Fanfou {
   }
 
   xauth (callback) {
-    this.oauth.getXAuthAccessToken(this.username, this.password, (e, oauthToken, oauthTokenSecret, result) => {
-      if (e) callback(e)
-      else {
+    this.oauth.getXAuthAccessToken(this.username, this.password, (err, oauthToken, oauthTokenSecret) => {
+      if (err) {
+        callback(err)
+      } else {
         this.oauth_token = oauthToken
         this.oauth_token_secret = oauthTokenSecret
         callback(null, {
@@ -72,20 +68,25 @@ class Fanfou {
       url + '?' + qs.stringify(parameters),
       this.oauth_token,
       this.oauth_token_secret,
-      (e, rawData, httpResponse) => {
-        if (e) {
+      (err, rawData, httpResponse) => {
+        if (err) {
           if (httpResponse && rawData) {
             httpResponse.body = rawData
             callback(new FanfouError(httpResponse))
-          } else callback(e)
+          } else {
+            callback(err)
+          }
         } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
           const data = JSON.parse(rawData)
-          if (data.error) callback(null, data, rawData)
-          else {
+          if (data.error) {
+            callback(null, data, rawData)
+          } else {
             const result = Fanfou._parseData(data, Fanfou._uriType(uri))
             callback(null, result, rawData)
           }
-        } else callback(new Error('invalid body'))
+        } else {
+          callback(new Error('invalid body'))
+        }
       }
     )
   }
@@ -97,20 +98,25 @@ class Fanfou {
       this.oauth_token,
       this.oauth_token_secret,
       parameters,
-      (e, rawData, httpResponse) => {
-        if (e) {
+      (err, rawData, httpResponse) => {
+        if (err) {
           if (httpResponse && rawData) {
             httpResponse.body = rawData
             callback(new FanfouError(httpResponse))
-          } else callback(e)
+          } else {
+            callback(err)
+          }
         } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
           const data = JSON.parse(rawData)
-          if (data.error) callback(null, data, rawData)
-          else {
+          if (data.error) {
+            callback(null, data, rawData)
+          } else {
             const result = Fanfou._parseData(data, Fanfou._uriType(uri))
             callback(null, result, rawData)
           }
-        } else callback(new Error('invalid body'))
+        } else {
+          callback(new Error('invalid body'))
+        }
       }
     )
   }
@@ -153,16 +159,16 @@ class Fanfou {
         callback(err)
       } else if (httpResponse.statusCode !== 200) {
         callback(new FanfouError(httpResponse))
+      } else if (typeof body === 'string' && isJson(body.trim())) {
+        const data = JSON.parse(body)
+        if (data.error) {
+          callback(null, data, body)
+        } else {
+          const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+          callback(null, result, body)
+        }
       } else {
-        if (typeof body === 'string' && isJson(body.trim())) {
-          const data = JSON.parse(body)
-          if (data.error) {
-            callback(null, data, body)
-          } else {
-            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-            callback(null, result, body)
-          }
-        } else callback(new Error('invalid body'))
+        callback(new Error('invalid body'))
       }
     })
   }
@@ -200,16 +206,16 @@ class Fanfou {
         callback(err)
       } else if (httpResponse.statusCode !== 200) {
         callback(new FanfouError(httpResponse))
+      } else if (typeof body === 'string' && isJson(body.trim())) {
+        const data = JSON.parse(body)
+        if (data.error) {
+          callback(null, data, body)
+        } else {
+          const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+          callback(null, result, body)
+        }
       } else {
-        if (typeof body === 'string' && isJson(body.trim())) {
-          const data = JSON.parse(body)
-          if (data.error) {
-            callback(null, data, body)
-          } else {
-            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-            callback(null, result, body)
-          }
-        } else callback(new Error('invalid body'))
+        callback(new Error('invalid body'))
       }
     })
   }

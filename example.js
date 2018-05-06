@@ -2,7 +2,7 @@
 
 const Fanfou = require('.')
 
-let {
+const {
   FANFOU_CONSUMER_KEY: consumerKey,
   FANFOU_CONSUMER_SECRET: consumerSecret,
   FANFOU_OAUTH_TOKEN: oauthToken,
@@ -20,11 +20,14 @@ let {
 // password = ''
 
 const callback = (err, res) => {
-  if (err) console.log(err.message)
-  else console.log(res.length, 'statuses.')
+  if (err) {
+    console.log(err.message)
+  } else {
+    console.log(res.length, 'statuses.')
+  }
 }
 
-// camelCase options
+// CamelCase options
 const f1 = new Fanfou({
   consumerKey,
   consumerSecret,
@@ -33,7 +36,7 @@ const f1 = new Fanfou({
 })
 f1.get('/statuses/home_timeline', {count: 10}, callback)
 
-// snake_case options
+// Snake_case options
 const f2 = new Fanfou({
   consumer_key: consumerKey,
   consumer_secret: consumerSecret,
@@ -55,7 +58,6 @@ f3.get('/statuses/home_timeline', {count: 5}, callback)
 
 // XAuth
 const f4 = new Fanfou({
-  authType: 'xauth',
   consumerKey,
   consumerSecret,
   username,
@@ -63,8 +65,9 @@ const f4 = new Fanfou({
 })
 
 f4.xauth(err => {
-  if (err) console.log(err.message)
-  else {
+  if (err) {
+    console.log(err.message)
+  } else {
     f4.get('/statuses/home_timeline', {count: 5}, callback)
   }
 })
