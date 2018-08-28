@@ -9,16 +9,16 @@
     "oauth": "^0.9.15",
     "oauth-signature": "^1.5.0",
     "querystring": "^0.2.0",
-    "request": "^2.85.0",
+    "request": "^2.88.0",
     "validate.io-json": "^1.0.0",
-    "xml-js": "^1.6.2"
+    "xml-js": "^1.6.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.43",
     "@babel/core": "^7.0.0-beta.43",
     "@babel/plugin-transform-object-assign": "^7.0.0-beta.43",
     "@babel/preset-env": "^7.0.0-beta.43",
-    "ava": "^0.25.0",
+    "ava": "^1.0.0-beta.7",
     "xo": "^0.22.0"
   },
   "scripts": {
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/LitoMore/fanfou-sdk-node#readme",
   "xo": {
     "rules": {
+      "ava/no-ignored-test-files": 0,
       "camelcase": 0,
       "space-before-function-paren": [
         "error",

@@ -16,29 +16,28 @@ class Fanfou {
     options = options || {}
 
     // Required
-    this.consumer_key = options.consumer_key || options.consumerKey
-    this.consumer_secret = options.consumer_secret || options.consumerSecret
+    this.consumerKey = options.consumerKey
+    this.consumerSecret = options.consumerSecret
 
     // Optional
     this.protocol = options.protocol || 'http:'
-    this.oauth_domain = options.oauth_domain || options.oauthDomain || 'fanfou.com'
-    this.api_domain = options.api_domain || options.apiDomain || 'api.fanfou.com'
-    this.fakeHttps = options.fake_https || options.fakeHttps || false
+    this.oauthDomain = options.oauthDomain || 'fanfou.com'
+    this.apiDomain = options.apiDomain || 'api.fanfou.com'
+    this.fakeHttps = options.fakeHttps || false
 
     // OAuth required
-    this.oauth_token = options.oauth_token || options.oauthToken || ''
-    this.oauth_token_secret = options.oauth_token_secret || options.oauthTokenSecret || ''
+    this.oauthToken = options.oauthToken || ''
+    this.oauthTokenSecret = options.oauthTokenSecret || ''
 
     // XAuth required
     this.username = options.username || ''
     this.password = options.password || ''
 
-    this.is_streaming = false
     this.oauth = new OAuth(
-      `${this.protocol}//${this.oauth_domain}/oauth/request_token`,
-      `${this.protocol}//${this.oauth_domain}/oauth/access_token`,
-      this.consumer_key,
-      this.consumer_secret,
+      `${this.protocol}//${this.oauthDomain}/oauth/request_token`,
+      `${this.protocol}//${this.oauthDomain}/oauth/access_token`,
+      this.consumerKey,
+      this.consumerSecret,
       '1.0',
       null,
       'HMAC-SHA1'
@@ -47,87 +46,89 @@ class Fanfou {
     this.oauth.fakeHttps = this.fakeHttps
   }
 
-  xauth (callback) {
-    this.oauth.getXAuthAccessToken(this.username, this.password, (err, oauthToken, oauthTokenSecret) => {
-      if (err) {
-        callback(err)
-      } else {
-        this.oauth_token = oauthToken
-        this.oauth_token_secret = oauthTokenSecret
-        callback(null, {
-          oauth_token: oauthToken,
-          oauth_token_secret: oauthTokenSecret
-        })
-      }
+  xauth () {
+    return new Promise((resolve, reject) => {
+      this.oauth.getXAuthAccessToken(this.username, this.password, (err, oauthToken, oauthTokenSecret) => {
+        if (err) {
+          reject(err)
+        } else {
+          this.oauthToken = oauthToken
+          this.oauthTokenSecret = oauthTokenSecret
+          resolve({oauthToken, oauthTokenSecret})
+        }
+      })
     })
   }
 
-  get (uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.json'
-    this.oauth.get(
-      url + '?' + qs.stringify(parameters),
-      this.oauth_token,
-      this.oauth_token_secret,
-      (err, rawData, httpResponse) => {
-        if (err) {
-          if (httpResponse && rawData) {
-            httpResponse.body = rawData
-            callback(new FanfouError(httpResponse))
+  get (uri, parameters) {
+    const url = this.protocol + '//' + this.apiDomain + uri + '.json'
+    return new Promise((resolve, reject) => {
+      this.oauth.get(
+        url + '?' + qs.stringify(parameters),
+        this.oauthToken,
+        this.oauthTokenSecret,
+        (err, rawData, httpResponse) => {
+          if (err) {
+            if (httpResponse && rawData) {
+              httpResponse.body = rawData
+              reject(new FanfouError(httpResponse))
+            } else {
+              reject(err)
+            }
+          } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
+            const data = JSON.parse(rawData)
+            if (data.error) {
+              resolve(data)
+            } else {
+              const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+              resolve(result)
+            }
           } else {
-            callback(err)
+            reject(new Error('Invalid body'))
           }
-        } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
-          const data = JSON.parse(rawData)
-          if (data.error) {
-            callback(null, data, rawData)
-          } else {
-            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-            callback(null, result, rawData)
-          }
-        } else {
-          callback(new Error('invalid body'))
         }
-      }
-    )
+      )
+    })
   }
 
-  post (uri, parameters, callback) {
-    const url = this.protocol + '//' + this.api_domain + uri + '.json'
-    this.oauth.post(
-      url,
-      this.oauth_token,
-      this.oauth_token_secret,
-      parameters,
-      (err, rawData, httpResponse) => {
-        if (err) {
-          if (httpResponse && rawData) {
-            httpResponse.body = rawData
-            callback(new FanfouError(httpResponse))
+  post (uri, parameters) {
+    const url = this.protocol + '//' + this.apiDomain + uri + '.json'
+    return new Promise((resolve, reject) => {
+      this.oauth.post(
+        url,
+        this.oauthToken,
+        this.oauthTokenSecret,
+        parameters,
+        (err, rawData, httpResponse) => {
+          if (err) {
+            if (httpResponse && rawData) {
+              httpResponse.body = rawData
+              reject(new FanfouError(httpResponse))
+            } else {
+              reject(err)
+            }
+          } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
+            const data = JSON.parse(rawData)
+            if (data.error) {
+              resolve(data)
+            } else {
+              const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+              resolve(result)
+            }
           } else {
-            callback(err)
+            reject(new Error('Invalid body'))
           }
-        } else if (typeof rawData === 'string' && isJson(rawData.trim())) {
-          const data = JSON.parse(rawData)
-          if (data.error) {
-            callback(null, data, rawData)
-          } else {
-            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-            callback(null, result, rawData)
-          }
-        } else {
-          callback(new Error('invalid body'))
         }
-      }
-    )
+      )
+    })
   }
 
-  upload (stream, text, callback) {
-    const uri = '/photos/upload'
+  upload (uri, parameters) {
     const method = 'POST'
     const url = this.protocol + '//' + this.api_domain + uri + '.json'
     const params = {
-      oauth_consumer_key: this.consumer_key,
-      oauth_token: this.oauth_token,
+      oauth_consumer_key: this.consumerKey,
+      oauth_token: this.oauthToken,
       oauth_signature_method: 'HMAC-SHA1',
       oauth_timestamp: Math.floor(Date.now() / 1000),
       oauth_nonce: this.oauth._getNonce(6),
@@ -137,8 +138,8 @@ class Fanfou {
       method,
       this.fakeHttps ? url.replace('https', 'http') : url,
       params,
-      this.consumer_secret,
-      this.oauth_token_secret,
+      this.consumerSecret,
+      this.oauthTokenSecret,
       {encodeSignature: false}
     )
     const authorizationHeader = this.oauth._buildAuthorizationHeaders(
@@ -146,77 +147,28 @@ class Fanfou {
         this.oauth._makeArrayOfArgumentsHash(params)
       ).concat([['oauth_signature', signature]])
     )
-    const formData = {
-      photo: stream,
-      status: text
-    }
-    request.post({
-      url,
-      formData,
-      headers: {Authorization: authorizationHeader}
-    }, (err, httpResponse, body) => {
-      if (err) {
-        callback(err)
-      } else if (httpResponse.statusCode !== 200) {
-        callback(new FanfouError(httpResponse))
-      } else if (typeof body === 'string' && isJson(body.trim())) {
-        const data = JSON.parse(body)
-        if (data.error) {
-          callback(null, data, body)
+    return new Promise((resolve, reject) => {
+      request.post({
+        url,
+        formData: parameters,
+        headers: {Authorization: authorizationHeader}
+      }, (err, httpResponse, body) => {
+        if (err) {
+          reject(err)
+        } else if (httpResponse.statusCode !== 200) {
+          reject(new FanfouError(httpResponse))
+        } else if (typeof body === 'string' && isJson(body.trim())) {
+          const data = JSON.parse(body)
+          if (data.error) {
+            resolve(data)
+          } else {
+            const result = Fanfou._parseData(data, Fanfou._uriType(uri))
+            resolve(result)
+          }
         } else {
-          const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-          callback(null, result, body)
+          reject(new Error('invalid body'))
         }
-      } else {
-        callback(new Error('invalid body'))
-      }
-    })
-  }
-
-  up (uri, parameters, callback) {
-    const method = 'POST'
-    const url = this.protocol + '//' + this.api_domain + uri + '.json'
-    const params = {
-      oauth_consumer_key: this.consumer_key,
-      oauth_token: this.oauth_token,
-      oauth_signature_method: 'HMAC-SHA1',
-      oauth_timestamp: Math.floor(Date.now() / 1000),
-      oauth_nonce: this.oauth._getNonce(6),
-      oauth_version: '1.0'
-    }
-    const signature = oauthSignature.generate(
-      method,
-      this.fakeHttps ? url.replace('https', 'http') : url,
-      params,
-      this.consumer_secret,
-      this.oauth_token_secret,
-      {encodeSignature: false}
-    )
-    const authorizationHeader = this.oauth._buildAuthorizationHeaders(
-      this.oauth._sortRequestParams(
-        this.oauth._makeArrayOfArgumentsHash(params)
-      ).concat([['oauth_signature', signature]])
-    )
-    request.post({
-      url,
-      formData: parameters,
-      headers: {Authorization: authorizationHeader}
-    }, (err, httpResponse, body) => {
-      if (err) {
-        callback(err)
-      } else if (httpResponse.statusCode !== 200) {
-        callback(new FanfouError(httpResponse))
-      } else if (typeof body === 'string' && isJson(body.trim())) {
-        const data = JSON.parse(body)
-        if (data.error) {
-          callback(null, data, body)
-        } else {
-          const result = Fanfou._parseData(data, Fanfou._uriType(uri))
-          callback(null, result, body)
-        }
-      } else {
-        callback(new Error('invalid body'))
-      }
+      })
     })
   }
 

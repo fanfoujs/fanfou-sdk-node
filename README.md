@@ -31,10 +31,9 @@ const ff = new Fanfou({
   oauthTokenSecret: ''
 })
 
-ff.get('/statuses/home_timeline', {format: 'html'}, (err, res) => {
-  if (err) console.log(err.message)
-  else console.log(res)
-})
+ff.get('/statuses/home_timeline', {format: 'html'})
+  .then(res => console.log(res))
+  .catch(res => console.log(err))
 ```
 
 **XAuth**
@@ -62,6 +61,19 @@ ff.xauth(err => {
     })
   }
 })
+
+ff.xauth()
+  .then(res => {
+    console.log(res)
+    ff.get('/statuses/public_timeline', {count: 10})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+    ff.get('/statuses/update', {status: 'Hi Fanfou'})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  })
+  .catch(err => console.log(err))
 ```
 
 > For more usages, see the [example](https://github.com/LitoMore/fanfou-sdk-node/blob/master/example.js).
@@ -84,52 +96,27 @@ ff.xauth(err => {
 ## API
 
 ```javascript
-ff.get(uri, params, callback)
-ff.post(uri, params, callback)
-ff.up(uri, params, callback)
-ff.upload(stream, text, callback)  // This API has been deprecated, use `ff.up()` instead.
+ff.xuath()
+ff.get(uri, params)
+ff.post(uri, params)
+ff.upload(uri, params)
 ```
 
 **Examples**
 
 ```javascript
-// OAuth
-ff.get('/statuses/home_timeline', {}, (err, timeline) => {
-  if (err) console.log(err.message)
-  else console.log(timeline)
-})
+ff.get('/statuses/home_timeline', {})
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 
-ff.post('/statuses/update', {status: 'post test'}, (err, status) => {
-  if (err) console.log(err.message)
-  else console.log(status)
-})
+ff.post('/statuses/update', {status: 'post test'})
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 
-ff.up('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'}, (err, res) => {
-  if (err) console.log(err.message)
-  else console.log(res)
-})
-
-// `ff.upload()` has been deprecated.
-ff.upload(fs.createReadStream(path), 'nice day', (err, status) => {
-  if (err) console.log(err.message)
-  else console.log(status)
-})
-
-// XAuth
-ff.xauth((err, res) => {
-  if (err) console.log(e.message)
-  else {
-    ff.get('/statuses/public_timeline', {}, (err, timeline) => {
-      if (err) console.log(e.message)
-      else console.log(timeline)
-    })
-  }
-})
+ff.upload('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 ```
-
-### Streaming API
-
-The built-in Streaming API has been deprecated. Please use [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) instead.
 
 ## Related
 
