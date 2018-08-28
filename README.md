@@ -46,22 +46,6 @@ const ff = new Fanfou({
   password: ''
 })
 
-ff.xauth(err => {
-  if (err) {
-    console.log(err.message)
-  } else {
-    ff.get('/statuses/public_timeline', {count: 10}, (err, res) => {
-      if (err) console.log(e.message)
-      else console.log(res)
-    })
-
-    ff.post('/statuses/update', {status: 'Hi Fanfou'}, (err, res) => {
-      if (err) console.log(err.message)
-      else console.log(res)
-    })
-  }
-})
-
 ff.xauth()
   .then(res => {
     console.log(res)
