@@ -125,7 +125,7 @@ class Fanfou {
 
   upload (uri, parameters) {
     const method = 'POST'
-    const url = this.protocol + '//' + this.api_domain + uri + '.json'
+    const url = this.protocol + '//' + this.apiDomain + uri + '.json'
     const params = {
       oauth_consumer_key: this.consumerKey,
       oauth_token: this.oauthToken,
