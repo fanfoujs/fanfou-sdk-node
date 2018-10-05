@@ -2,11 +2,11 @@
 
 const qs = require('querystring')
 const request = require('request')
-const isJson = require('validate.io-json')
 const oauthSignature = require('oauth-signature')
 
 const User = require('./user')
 const OAuth = require('./oauth')
+const {isJson} = require('./util')
 const Status = require('./status')
 const FanfouError = require('./ff-error')
 const DirectMessage = require('./direct-message')
