@@ -80,7 +80,7 @@ ff.xauth()
 ## API
 
 ```javascript
-ff.xuath()
+ff.xauth()
 ff.get(uri, params)
 ff.post(uri, params)
 ff.upload(uri, params)
