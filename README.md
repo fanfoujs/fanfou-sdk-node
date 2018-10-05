@@ -107,6 +107,7 @@ ff.upload('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'
 - [nofan](https://github.com/LitoMore/nofan) - CLI for Fanfou
 - [xiaofan](https://github.com/fanfoujs/xiaofan) - WeApp for Fanfou
 - [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) - Fanfou Streaming SDK for Node.js
+- [fanfou-sdk-browser](https://github.com/LitoMore/fanfou-sdk-browser) - Fanfou SDK for browser
 - [fanfou-sdk-weapp](https://github.com/LitoMore/fanfou-sdk-weapp) - Fanfou SDK for WeApp
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [kap-fanfou](https://github.com/LitoMore/kap-fanfou) - Kap plugin that share on Fanfou
