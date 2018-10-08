@@ -45,8 +45,6 @@
         "error",
         "always"
       ]
-    },
-    "semicolon": false,
-    "space": 2
+    }
   }
 }
