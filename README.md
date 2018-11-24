@@ -29,11 +29,11 @@ const ff = new Fanfou({
   consumerSecret: '',
   oauthToken: '',
   oauthTokenSecret: ''
-})
+});
 
 ff.get('/statuses/home_timeline', {format: 'html'})
   .then(res => console.log(res))
-  .catch(res => console.log(err))
+  .catch(res => console.log(err));
 ```
 
 **XAuth**
@@ -44,20 +44,20 @@ const ff = new Fanfou({
   consumerSecret: '',
   username: '',
   password: ''
-})
+});
 
 ff.xauth()
   .then(res => {
-    console.log(res)
+    console.log(res);
     ff.get('/statuses/public_timeline', {count: 10})
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
 
     ff.get('/statuses/update', {status: 'Hi Fanfou'})
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 ```
 
 > For more usages, see the [example](https://github.com/LitoMore/fanfou-sdk-node/blob/master/example.js).
@@ -80,10 +80,10 @@ ff.xauth()
 ## API
 
 ```javascript
-ff.xauth()
-ff.get(uri, params)
-ff.post(uri, params)
-ff.upload(uri, params)
+ff.xauth();
+ff.get(uri, params);
+ff.post(uri, params);
+ff.upload(uri, params);
 ```
 
 **Examples**
@@ -91,16 +91,37 @@ ff.upload(uri, params)
 ```javascript
 ff.get('/statuses/home_timeline', {})
   .then(res => console.log(res))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
 ff.post('/statuses/update', {status: 'post test'})
   .then(res => console.log(res))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
 ff.upload('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
   .then(res => console.log(res))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 ```
+
+## TypeScript
+
+**Example**
+
+```typescript
+import * as Fanfou from 'fanfou-sdk';
+
+const opt: Fanfou.FanfouOptions = {
+  consumerKey: '',
+  consumerSecret: '',
+  oauthToken: '',
+  oauthTokenSecret: '',
+}
+
+const ff = new Fanfou(opt);
+
+ff.post('/user_timeline', {count: 10});
+```
+
+For more declarations, see the [declaration file](https://github.com/LitoMore/fanfou-sdk-node/blob/master/index.d.ts).
 
 ## Related
 
