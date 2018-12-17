@@ -20,6 +20,7 @@ declare namespace Fanfou {
         protocol?: string,
         fakeHttps?: boolean,
         apiDomain?: string,
-        oauthDomain?: string
+        oauthDomain?: string,
+        hooks?: object            
     }
 }

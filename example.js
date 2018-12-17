@@ -29,17 +29,8 @@ const {
 	});
 	await f1.get('/statuses/home_timeline', {count: 10});
 
-	// Snake_case options
-	const f2 = new Fanfou({
-		consumer_key: consumerKey,
-		consumer_secret: consumerSecret,
-		oauth_token: oauthToken,
-		oauth_token_secret: oauthTokenSecret
-	});
-	await f2.get('/statuses/home_timeline', {count: 5});
-
 	// HTTPS connection
-	const f3 = new Fanfou({
+	const f2 = new Fanfou({
 		consumerKey,
 		consumerSecret,
 		oauthToken,
@@ -47,15 +38,30 @@ const {
 		protocol: 'https:',
 		fakeHttps: true
 	});
-	await f3.get('/statuses/home_timeline', {count: 5});
+	await f2.get('/statuses/home_timeline', {count: 5});
 
 	// XAuth
-	const f4 = new Fanfou({
+	const f3 = new Fanfou({
 		consumerKey,
 		consumerSecret,
 		username,
 		password
 	});
-	await f4.xauth();
-	await f4.get('/statuses/home_timeline', {count: 5});
+	await f3.xauth();
+	await f3.get('/statuses/home_timeline', {count: 5});
+
+	// Use baseString hook
+	const f4 = new Fanfou({
+		consumerKey,
+		consumerSecret,
+		oauthToken,
+		oauthTokenSecret,
+		protocol: 'https:',
+		hooks: {
+			baseString: str => {
+				return str.replace('https', 'http');
+			}
+		}
+	});
+	await f4.get('/statuses/user_timeline', {count: 5});
 })();

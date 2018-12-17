@@ -74,6 +74,7 @@ ff.xauth()
 - `fakeHttps`: A hook to replace the OAuth basestring, default is `false`
 - `apiDomain`: Set the API domain, default is `api.fanfou.com`
 - `oauthDomain`: Set the OAuth domain, default is `fanfou.com`
+- `hooks`: Hooks allow modifications with OAuth
 
 > For more Fanfou API docs, see the [Fanfou API doc](https://github.com/FanfouAPI/FanFouAPIDoc/wiki).
 
@@ -100,6 +101,26 @@ ff.post('/statuses/update', {status: 'post test'})
 ff.upload('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
   .then(res => console.log(res))
   .catch(err => console.log(err));
+```
+
+**Tips**
+
+Use `hooks` for your reverse-proxy server
+
+```javascript
+const ff = new Fanfou({
+  consumerKey: '',
+  consumerSecret: '',
+  oauthToken: '',
+  oauthTokenSecret: '',
+  apiDomain: 'api.example.com',
+  oauthDomain: 'example.com',
+  hooks: {
+    baseString: str => {
+      return str.replace('example.com', 'fanfou.com')
+    }
+  }
+});
 ```
 
 ## TypeScript

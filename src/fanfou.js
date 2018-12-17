@@ -24,6 +24,7 @@ class Fanfou {
 		this.oauthDomain = options.oauthDomain || 'fanfou.com';
 		this.apiDomain = options.apiDomain || 'api.fanfou.com';
 		this.fakeHttps = options.fakeHttps || false;
+		this.hooks = options.hooks || {};
 
 		// OAuth required
 		this.oauthToken = options.oauthToken || '';
@@ -44,6 +45,7 @@ class Fanfou {
 		);
 
 		this.oauth.fakeHttps = this.fakeHttps;
+		this.oauth.hooks = this.hooks;
 	}
 
 	xauth () {

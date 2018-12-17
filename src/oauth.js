@@ -37,7 +37,10 @@ Object.assign(OAuth.prototype, {
 		if (this.fakeHttps) {
 			url = url.replace('https', 'http');
 		}
-		const signatureBase = this._createSignatureBase(method, url, parameters);
+		let signatureBase = this._createSignatureBase(method, url, parameters);
+		if (this.hooks.baseString) {
+			signatureBase = this.hooks.baseString(signatureBase);
+		}
 		return this._createSignature(signatureBase, tokenSecret);
 	}
 });
