@@ -18,7 +18,7 @@ $ npm i fanfou-sdk
 ## Usage
 
 ```javascript
-const Fanfou = require('fanfou-sdk')
+const Fanfou = require('fanfou-sdk');
 ```
 
 **OAuth**
@@ -117,7 +117,7 @@ const ff = new Fanfou({
   oauthDomain: 'example.com',
   hooks: {
     baseString: str => {
-      return str.replace('example.com', 'fanfou.com')
+      return str.replace('example.com', 'fanfou.com');
     }
   }
 });
@@ -135,7 +135,7 @@ const opt: Fanfou.FanfouOptions = {
   consumerSecret: '',
   oauthToken: '',
   oauthTokenSecret: '',
-}
+};
 
 const ff = new Fanfou(opt);
 
@@ -154,6 +154,7 @@ For more declarations, see the [declaration file](https://github.com/LitoMore/fa
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [kap-fanfou](https://github.com/LitoMore/kap-fanfou) - Kap plugin that share on Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
+- [bitbar-fanfou](https://github.com/LitoMore/bitbar-fanfou) - A BitBar plugin for Fanfou
 
 ## License
 
