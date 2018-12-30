@@ -154,6 +154,7 @@ For more declarations, see the [declaration file](https://github.com/LitoMore/fa
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [kap-fanfou](https://github.com/LitoMore/kap-fanfou) - Kap plugin that share on Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
+- [code-fanfou](https://github.com/LitoMore/code-fanfou) - A VS Code extension for Fanfou
 - [bitbar-fanfou](https://github.com/LitoMore/bitbar-fanfou) - A BitBar plugin for Fanfou
 
 ## License
