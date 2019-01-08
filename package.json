@@ -21,7 +21,7 @@
     "xo": "^0.23.0"
   },
   "scripts": {
-    "test": "npm run build && xo"
+    "test": "xo"
   },
   "repository": {
     "type": "git",
