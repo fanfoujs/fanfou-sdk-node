@@ -13,10 +13,6 @@
     "xml-js": "^1.6.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.43",
-    "@babel/core": "^7.0.0-beta.43",
-    "@babel/plugin-transform-object-assign": "^7.0.0-beta.43",
-    "@babel/preset-env": "^7.0.0-beta.43",
     "ava": "^1.0.0-beta.7",
     "xo": "^0.23.0"
   },
