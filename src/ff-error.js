@@ -3,7 +3,7 @@
 const {xml2js} = require('xml-js');
 
 class FanfouError extends Error {
-	constructor (httpResponse) {
+	constructor(httpResponse) {
 		super();
 		[this.contentType] = httpResponse.headers['content-type'].split(';');
 		this.httpResponse = httpResponse;
@@ -11,7 +11,7 @@ class FanfouError extends Error {
 		this._parseError();
 	}
 
-	_parseError () {
+	_parseError() {
 		switch (this.contentType) {
 			case 'application/json':
 				this.message = JSON.parse(this.httpResponse.body).error;

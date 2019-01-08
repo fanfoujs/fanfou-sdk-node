@@ -3,7 +3,7 @@
 const User = require('./user');
 
 class DirectMessage {
-	constructor (dm) {
+	constructor(dm) {
 		this.id = dm.id;
 		this.text = dm.text;
 		this.sender_id = dm.sender_id;

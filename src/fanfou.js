@@ -12,7 +12,7 @@ const FanfouError = require('./ff-error');
 const DirectMessage = require('./direct-message');
 
 class Fanfou {
-	constructor (options) {
+	constructor(options) {
 		options = options || {};
 
 		// Required
@@ -46,7 +46,7 @@ class Fanfou {
 		this.oauth.hooks = this.hooks;
 	}
 
-	xauth () {
+	xauth() {
 		return new Promise((resolve, reject) => {
 			this.oauth.getXAuthAccessToken(this.username, this.password, (err, oauthToken, oauthTokenSecret) => {
 				if (err) {
@@ -60,7 +60,7 @@ class Fanfou {
 		});
 	}
 
-	get (uri, parameters) {
+	get(uri, parameters) {
 		const url = this.protocol + '//' + this.apiDomain + uri + '.json';
 		return new Promise((resolve, reject) => {
 			this.oauth.get(
@@ -91,7 +91,7 @@ class Fanfou {
 		});
 	}
 
-	post (uri, parameters) {
+	post(uri, parameters) {
 		const url = this.protocol + '//' + this.apiDomain + uri + '.json';
 		return new Promise((resolve, reject) => {
 			this.oauth.post(
@@ -123,7 +123,7 @@ class Fanfou {
 		});
 	}
 
-	upload (uri, parameters) {
+	upload(uri, parameters) {
 		const method = 'POST';
 		const url = this.protocol + '//' + this.apiDomain + uri + '.json';
 		const params = {
@@ -172,7 +172,7 @@ class Fanfou {
 		});
 	}
 
-	static _uriType (uri) {
+	static _uriType(uri) {
 		const uriList = {
 			// Timeline
 			'/search/public_timeline': 'timeline',
@@ -222,7 +222,7 @@ class Fanfou {
 		return uriList[uri] || null;
 	}
 
-	static _parseList (data, type) {
+	static _parseList(data, type) {
 		const arr = [];
 		for (const i in data) {
 			if (data[i]) {
@@ -248,7 +248,7 @@ class Fanfou {
 		return arr;
 	}
 
-	static _parseData (data, type) {
+	static _parseData(data, type) {
 		switch (type) {
 			case 'timeline':
 			case 'users':

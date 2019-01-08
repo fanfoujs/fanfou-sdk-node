@@ -5,7 +5,7 @@ const {OAuth} = require('oauth');
 const FanfouError = require('./ff-error');
 
 Object.assign(OAuth.prototype, {
-	getXAuthAccessToken (username, password, callback) {
+	getXAuthAccessToken(username, password, callback) {
 		const xauthParams = {
 			x_auth_mode: 'client_auth',
 			x_auth_password: password,
@@ -33,7 +33,7 @@ Object.assign(OAuth.prototype, {
 });
 
 Object.assign(OAuth.prototype, {
-	_getSignature (method, url, parameters, tokenSecret) {
+	_getSignature(method, url, parameters, tokenSecret) {
 		let signatureBase = this._createSignatureBase(method, url, parameters);
 		if (this.hooks.baseString) {
 			signatureBase = this.hooks.baseString(signatureBase);

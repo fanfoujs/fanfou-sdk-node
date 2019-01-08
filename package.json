@@ -35,11 +35,7 @@
   "xo": {
     "rules": {
       "ava/no-ignored-test-files": 0,
-      "camelcase": 0,
-      "space-before-function-paren": [
-        "error",
-        "always"
-      ]
+      "camelcase": 0
     },
     "ignore": [
       "*.ts"
