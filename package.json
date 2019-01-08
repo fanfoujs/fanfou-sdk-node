@@ -21,7 +21,6 @@
     "xo": "^0.23.0"
   },
   "scripts": {
-    "build": "babel src -d lib",
     "test": "npm run build && xo"
   },
   "repository": {

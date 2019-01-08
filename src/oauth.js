@@ -34,9 +34,6 @@ Object.assign(OAuth.prototype, {
 
 Object.assign(OAuth.prototype, {
 	_getSignature (method, url, parameters, tokenSecret) {
-		if (this.fakeHttps) {
-			url = url.replace('https', 'http');
-		}
 		let signatureBase = this._createSignatureBase(method, url, parameters);
 		if (this.hooks.baseString) {
 			signatureBase = this.hooks.baseString(signatureBase);

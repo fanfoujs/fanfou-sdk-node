@@ -23,7 +23,6 @@ class Fanfou {
 		this.protocol = options.protocol || 'http:';
 		this.oauthDomain = options.oauthDomain || 'fanfou.com';
 		this.apiDomain = options.apiDomain || 'api.fanfou.com';
-		this.fakeHttps = options.fakeHttps || false;
 		this.hooks = options.hooks || {};
 
 		// OAuth required
@@ -44,7 +43,6 @@ class Fanfou {
 			'HMAC-SHA1'
 		);
 
-		this.oauth.fakeHttps = this.fakeHttps;
 		this.oauth.hooks = this.hooks;
 	}
 
