@@ -38,7 +38,6 @@ class User {
 
 		this.profile_image_origin = this._getProfileImageOrigin();
 		this.profile_image_origin_large = this._getProfileImageOriginLarge();
-		this.sign_name = this._getSignName();
 	}
 
 	_getProfileImageOrigin() {
@@ -47,18 +46,6 @@ class User {
 
 	_getProfileImageOriginLarge() {
 		return this.profile_image_url_large.replace(/\?\d{10}/, '');
-	}
-
-	_getSignName() {
-		if (this.birthday.length > 0) {
-			const matchYMD = this.birthday.match(/\d{4}-(\d{2})-(\d{2})/);
-			const month = parseInt(matchYMD[1], 10);
-			const day = parseInt(matchYMD[2], 10);
-			if (month > 0 && day > 0) {
-				return mzsi(month, day, 'zh-cn').name;
-			}
-		}
-		return '';
 	}
 }
 
