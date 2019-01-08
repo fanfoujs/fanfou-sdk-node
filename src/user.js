@@ -1,7 +1,5 @@
 'use strict';
 
-const mzsi = require('mzsi');
-
 class User {
 	constructor(user) {
 		this.id = user.id;
