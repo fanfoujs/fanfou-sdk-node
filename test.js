@@ -4,10 +4,10 @@ const test = require('ava');
 const Fanfou = require('.');
 
 const {
-	CONSUMER_KEY: consumerKey,
-	CONSUMER_SECRET: consumerSecret,
-	OAUTH_TOKEN: oauthToken,
-	OAUTH_TOKEN_SECRET: oauthTokenSecret,
+	FANOFU_CONSUMER_KEY: consumerKey,
+	FANFOU_CONSUMER_SECRET: consumerSecret,
+	FANFOU_OAUTH_TOKEN: oauthToken,
+	FANFOU_OAUTH_TOKEN_SECRET: oauthTokenSecret,
 	FANFOU_USERNAME: username,
 	FANFOU_PASSWORD: password
 } = process.env;

@@ -30,7 +30,9 @@ class Status {
 		if (status.repost_status) {
 			this.repost_status = new Status(status.repost_status);
 		}
-		this.user = new User(status.user);
+		if (status.user) {
+			this.user = new User(status.user);
+		}
 		if (status.photo) {
 			this.photo = new Photo(status.photo);
 		}

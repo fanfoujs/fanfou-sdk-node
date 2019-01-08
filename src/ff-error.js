@@ -1,37 +1,45 @@
 'use strict';
 
-const {xml2js} = require('xml-js');
-
 class FanfouError extends Error {
-	constructor(httpResponse) {
+	constructor(error) {
 		super();
-		[this.contentType] = httpResponse.headers['content-type'].split(';');
-		this.httpResponse = httpResponse;
-		this.statusCode = httpResponse.statusCode;
-		this._parseError();
-	}
-
-	_parseError() {
-		switch (this.contentType) {
-			case 'application/json':
-				this.message = JSON.parse(this.httpResponse.body).error;
-				break;
-			case 'application/xml':
-				this.message = xml2js(this.httpResponse.body, {compact: true}).hash.error._text;
-				break;
-			case 'text/html': {
-				const titleMatch = this.httpResponse.body.match(/<title>(.+)<\/title>/);
-				if (titleMatch) {
-					[, this.message] = titleMatch;
-				} else {
-					this.message = `http status code ${this.httpResponse.statusCode}`;
+		this.name = 'FanfouError';
+		this.err = error;
+		if (error.name === 'HTTPError') {
+			const [contentType] = error.headers['content-type'].split(';');
+			switch (contentType) {
+				case 'application/json': {
+					this.message = JSON.parse(error.body).error;
+					break;
 				}
-				break;
+				case 'text/html': {
+					const titleMatch = error.body.match(/<title>(.+)<\/title>/);
+					if (titleMatch) {
+						const [, msg] = titleMatch;
+						this.message = msg;
+					} else {
+						this.message = `${error.statusCode} error`;
+					}
+					break;
+				}
+				case 'application/xml': {
+					const errorMatch = error.body.match(/<error>(.+)<\/error>/);
+					if (errorMatch) {
+						const [, msg] = errorMatch;
+						this.message = msg;
+					} else {
+						this.message = `${error.statusCode} error`;
+					}
+					break;
+				}
+				default: {
+					this.message = 'Unknown error';
+					break;
+				}
 			}
-			default:
-				break;
 		}
 	}
 }
 
 module.exports = FanfouError;
+
