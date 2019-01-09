@@ -83,7 +83,6 @@ ff.xauth()
 ff.xauth();
 ff.get(uri, params);
 ff.post(uri, params);
-ff.upload(uri, params);
 ```
 
 **Examples**
@@ -97,7 +96,7 @@ ff.post('/statuses/update', {status: 'post test'})
   .then(res => console.log(res))
   .catch(err => console.log(err));
 
-ff.upload('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
+ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
   .then(res => console.log(res))
   .catch(err => console.log(err));
 ```
