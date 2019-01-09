@@ -71,7 +71,6 @@ ff.xauth()
 - `username`: The Fanfou username
 - `password`: The Fanfou password
 - `protocol`: Set the prototol, default is `http:`
-- `fakeHttps`: A hook to replace the OAuth basestring, default is `false`
 - `apiDomain`: Set the API domain, default is `api.fanfou.com`
 - `oauthDomain`: Set the OAuth domain, default is `fanfou.com`
 - `hooks`: Hooks allow modifications with OAuth
