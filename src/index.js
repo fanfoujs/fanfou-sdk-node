@@ -4,6 +4,7 @@ const got = require('got');
 const hmacsha1 = require('hmacsha1');
 const oauth = require('oauth-1.0a');
 const queryString = require('query-string');
+const FormData = require('form-data');
 
 const User = require('./user');
 const Status = require('./status');
@@ -98,14 +99,21 @@ class Fanfou {
 	async post(uri, params) {
 		const url = `${this.apiEndPoint}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
-		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'POST', data: params}, token));
+		const isUpload = ['/photos/upload', '/account/update_profile_image'].indexOf(uri) >= 0;
+		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'POST', data: isUpload ? null : params}, token));
+		let form = null;
+		const headers = {Authorization, 'Content-Type': 'application/x-www-form-urlencoded'};
+		if (isUpload) {
+			form = new FormData();
+			Object.keys(params).forEach(key => {
+				form.append(key, params[key]);
+			});
+			delete headers['Content-Type'];
+		}
 		try {
 			const {body} = await got.post(url, {
-				headers: {
-					Authorization,
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				body: queryString.stringify(params)
+				headers,
+				body: isUpload ? form : queryString.stringify(params)
 			});
 			const res = JSON.parse(body);
 			const result = Fanfou._parseData(res, Fanfou._uriType(uri));

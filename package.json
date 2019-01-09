@@ -4,6 +4,7 @@
   "description": "Fanfou SDK for Node.js",
   "main": "src/index.js",
   "dependencies": {
+    "form-data": "^2.3.3",
     "got": "^9.5.0",
     "he": "^1.1.1",
     "hmacsha1": "^1.0.0",
