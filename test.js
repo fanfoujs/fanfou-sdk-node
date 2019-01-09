@@ -4,7 +4,7 @@ const test = require('ava');
 const Fanfou = require('.');
 
 const {
-	FANOFU_CONSUMER_KEY: consumerKey,
+	FANFOU_CONSUMER_KEY: consumerKey,
 	FANFOU_CONSUMER_SECRET: consumerSecret,
 	FANFOU_OAUTH_TOKEN: oauthToken,
 	FANFOU_OAUTH_TOKEN_SECRET: oauthTokenSecret,
@@ -32,7 +32,7 @@ test('test o.get()', async t => {
 });
 
 test('test o.post()', async t => {
-	const res = await o.post('/statuses/update', {status: 'hi fanfou' + Math.random()});
+	const res = await o.post('/statuses/update', {status: 'hi fanfou'});
 	t.is(res.text, 'hi fanfou');
 });
 

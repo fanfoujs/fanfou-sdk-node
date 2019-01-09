@@ -17,7 +17,7 @@ class Fanfou {
 			consumerKey: this.consumerKey = '',
 			consumerSecret: this.consumerSecret = '',
 			oauthToken: this.oauthToken = '',
-			oauthTokenSedret: this.oauthTokenSecret = '',
+			oauthTokenSecret: this.oauthTokenSecret = '',
 			username: this.username = '',
 			password: this.password = '',
 			protocol: this.protocol = 'http:',
