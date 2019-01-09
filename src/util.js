@@ -9,6 +9,4 @@ const isJson = str => {
 	}
 };
 
-module.exports = {
-	isJson
-};
+module.exports = {isJson};

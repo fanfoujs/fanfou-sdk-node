@@ -5,7 +5,7 @@ const User = require('./user');
 const Photo = require('./photo');
 
 class Status {
-	constructor (status) {
+	constructor(status) {
 		this.created_at = status.created_at;
 		this.id = status.id;
 		this.rawid = status.rawid;
@@ -30,7 +30,9 @@ class Status {
 		if (status.repost_status) {
 			this.repost_status = new Status(status.repost_status);
 		}
-		this.user = new User(status.user);
+		if (status.user) {
+			this.user = new User(status.user);
+		}
 		if (status.photo) {
 			this.photo = new Photo(status.photo);
 		}
@@ -41,23 +43,23 @@ class Status {
 		this.plain_text = this._getPlainText();
 	}
 
-	isReply () {
+	isReply() {
 		return this.in_reply_to_status_id !== '' || this.in_reply_to_user_id !== '';
 	}
 
-	isRepost () {
+	isRepost() {
 		return this.repost_status_id && this.repost_status_id !== '';
 	}
 
-	isOrigin () {
+	isOrigin() {
 		return !(this.isReply() || this.isRepost());
 	}
 
-	isOriginRepost () {
+	isOriginRepost() {
 		return this.isOrigin() && this.text.match(/转@/g);
 	}
 
-	_getType () {
+	_getType() {
 		if (this.isReply()) {
 			return 'reply';
 		}
@@ -70,21 +72,21 @@ class Status {
 		return 'unknown';
 	}
 
-	_getSourceUrl () {
+	_getSourceUrl() {
 		if (this.source.match(/<a href="(.+)" target="_blank">.+<\/a>/)) {
 			return this.source.match(/<a href="(.+)" target="_blank">.+<\/a>/)[1];
 		}
 		return '';
 	}
 
-	_getSourceName () {
+	_getSourceName() {
 		if (this.source.match(/<a href=".+" target="_blank">(.+)<\/a>/)) {
 			return this.source.match(/<a href=".+" target="_blank">(.+)<\/a>/)[1];
 		}
 		return this.source;
 	}
 
-	_getTxt () {
+	_getTxt() {
 		const pattern = /[@#]?<a href="(.*?)".*?>([\s\S\n]*?)<\/a>#?/g;
 		const match = this.text.match(pattern);
 		const txt = [];
@@ -187,7 +189,7 @@ class Status {
 		return [thisTxt];
 	}
 
-	_getPlainText () {
+	_getPlainText() {
 		let text = '';
 		this.txt.forEach(t => {
 			text += t.text;
@@ -195,11 +197,11 @@ class Status {
 		return he.decode(text);
 	}
 
-	static _hasBold (text) {
+	static _hasBold(text) {
 		return text.match(/<b>[\s\S\n]*?<\/b>/g);
 	}
 
-	static _getBoldArr (text) {
+	static _getBoldArr(text) {
 		const pattern = /<b>[\s\S\n]*?<\/b>/g;
 		let theText = text;
 		const match = text.match(pattern);
@@ -235,7 +237,7 @@ class Status {
 		}];
 	}
 
-	static _removeBoldTag (text) {
+	static _removeBoldTag(text) {
 		return text.replace(/<b>/g, '').replace(/<\/b>/g, '');
 	}
 }

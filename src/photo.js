@@ -1,7 +1,7 @@
 'use strict';
 
 class Photo {
-	constructor (photo) {
+	constructor(photo) {
 		this.url = photo.url;
 		this.imageurl = photo.imageurl;
 		this.thumburl = photo.thumburl;
@@ -10,7 +10,7 @@ class Photo {
 		this.type = this.originurl.match(/^.+\.(.+)$/)[1].toLowerCase();
 	}
 
-	isGif () {
+	isGif() {
 		return this.type === 'gif';
 	}
 }
