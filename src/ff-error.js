@@ -12,6 +12,7 @@ class FanfouError extends Error {
 					this.message = JSON.parse(error.body).error;
 					break;
 				}
+
 				case 'text/html': {
 					const titleMatch = error.body.match(/<title>(.+)<\/title>/);
 					if (titleMatch) {
@@ -20,8 +21,10 @@ class FanfouError extends Error {
 					} else {
 						this.message = `${error.statusCode} error`;
 					}
+
 					break;
 				}
+
 				case 'application/xml': {
 					const errorMatch = error.body.match(/<error>(.+)<\/error>/);
 					if (errorMatch) {
@@ -30,8 +33,10 @@ class FanfouError extends Error {
 					} else {
 						this.message = `${error.statusCode} error`;
 					}
+
 					break;
 				}
+
 				default: {
 					this.message = 'Unknown error';
 					break;

@@ -39,6 +39,7 @@ class Fanfou {
 				if (baseStringHook) {
 					baseString = baseStringHook(baseString);
 				}
+
 				return hmacsha1(key, baseString);
 			}
 		});
@@ -110,6 +111,7 @@ class Fanfou {
 			});
 			delete headers['Content-Type'];
 		}
+
 		try {
 			const {body} = await got.post(url, {
 				headers,
@@ -196,6 +198,7 @@ class Fanfou {
 				}
 			}
 		}
+
 		return arr;
 	}
 
