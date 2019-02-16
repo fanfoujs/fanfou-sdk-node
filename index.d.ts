@@ -21,6 +21,8 @@ declare namespace Fanfou {
         fakeHttps?: boolean,
         apiDomain?: string,
         oauthDomain?: string,
-        hooks?: object            
+        hooks?: {
+            baseString?: (str: string) => any;
+        }
     }
 }
