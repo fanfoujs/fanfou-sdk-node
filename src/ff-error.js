@@ -42,6 +42,8 @@ class FanfouError extends Error {
 					break;
 				}
 			}
+		} else {
+			this.message = error.message ? error.message : 'Unknown error';
 		}
 	}
 }
