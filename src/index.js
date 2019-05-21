@@ -172,7 +172,13 @@ class Fanfou {
 			'/direct_messages/destroy': 'dm'
 
 		};
-		return uriList[uri] || null;
+
+		const type = uriList[uri] || null;
+		if (!type && /^\/favorites\/(create|destroy)\/.+/.test(uri)) {
+			return 'status';
+		}
+
+		return type;
 	}
 
 	static _parseList(data, type) {
