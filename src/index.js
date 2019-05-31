@@ -177,11 +177,11 @@ class Fanfou {
 		if (!type && /^\/favorites\/(create|destroy)\/.+/.test(uri)) {
 			return 'status';
 		}
-		
+
 		if (!type && /^\/favorites\/.+/.test(uri)) {
 			return 'timeline';
 		}
-		
+
 		return type;
 	}
 
