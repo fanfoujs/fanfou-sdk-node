@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LitoMore/fanfou-sdk-node.git"
+    "url": "git+https://github.com/fanfoujs/fanfou-sdk-node.git"
   },
   "keywords": [
     "fanfou"
@@ -28,9 +28,9 @@
   "author": "LitoMore",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LitoMore/fanfou-sdk-node/issues"
+    "url": "https://github.com/fanfoujs/fanfou-sdk-node/issues"
   },
-  "homepage": "https://github.com/LitoMore/fanfou-sdk-node#readme",
+  "homepage": "https://github.com/fanfoujs/fanfou-sdk-node#readme",
   "xo": {
     "rules": {
       "ava/no-ignored-test-files": 0,

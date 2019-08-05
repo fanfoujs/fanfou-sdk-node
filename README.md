@@ -1,10 +1,10 @@
 # fanfou-sdk-node
 
-[![](https://badges.greenkeeper.io/LitoMore/fanfou-sdk-node.svg)](https://greenkeeper.io/)
-[![](https://img.shields.io/travis/LitoMore/fanfou-sdk-node/master.svg)](https://travis-ci.org/LitoMore/fanfou-sdk-node)
-[![](https://img.shields.io/appveyor/ci/LitoMore/fanfou-sdk-node/master.svg)](https://ci.appveyor.com/project/LitoMore/fanfou-sdk-node)
+[![](https://badges.greenkeeper.io/fanfoujs/fanfou-sdk-node.svg)](https://greenkeeper.io/)
+[![](https://img.shields.io/travis/fanfoujs/fanfou-sdk-node/master.svg)](https://travis-ci.org/fanfoujs/fanfou-sdk-node)
+[![](https://img.shields.io/appveyor/ci/fanfoujs/fanfou-sdk-node/master.svg)](https://ci.appveyor.com/project/LitoMore/fanfou-sdk-node)
 [![](https://img.shields.io/npm/v/fanfou-sdk.svg)](https://www.npmjs.com/package/fanfou-sdk)
-[![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/LitoMore/fanfou-sdk-node/blob/master/LICENSE)
+[![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE)
 [![](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 Fanfou SDK for Node.js
@@ -65,8 +65,6 @@ ff.xauth()
   })
   .catch(err => console.log(err));
 ```
-
-> For more usages, see the [example](https://github.com/LitoMore/fanfou-sdk-node/blob/master/example.js).
 
 **Options**
 
@@ -146,15 +144,15 @@ const ff = new Fanfou(opt);
 ff.post('/user_timeline', {count: 10});
 ```
 
-For more declarations, see the [declaration file](https://github.com/LitoMore/fanfou-sdk-node/blob/master/index.d.ts).
+For more declarations, see the [declaration file](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/index.d.ts).
 
 ## Related
 
 - [nofan](https://github.com/LitoMore/nofan) - CLI for Fanfou
-- [xiaofan](https://github.com/fanfoujs/xiaofan) - WeApp for Fanfou
+- [xiaofan](https://github.com/fanfoujs/xiaofan-wechat) - WeApp for Fanfou
 - [fanfou-streamer](https://github.com/LitoMore/fanfou-streamer) - Fanfou Streaming SDK for Node.js
-- [fanfou-sdk-browser](https://github.com/LitoMore/fanfou-sdk-browser) - Fanfou SDK for browser
-- [fanfou-sdk-weapp](https://github.com/LitoMore/fanfou-sdk-weapp) - Fanfou SDK for WeApp
+- [fanfou-sdk-browser](https://github.com/fanfoujs/fanfou-sdk-browser) - Fanfou SDK for browser
+- [fanfou-sdk-weapp](https://github.com/fanfoujs/fanfou-sdk-weapp) - Fanfou SDK for WeApp
 - [alfred-fanfou](https://github.com/LitoMore/alfred-fanfou) - Alfred 3 workflow for Fanfou
 - [kap-fanfou](https://github.com/LitoMore/kap-fanfou) - Kap plugin that share on Fanfou
 - [cerebro-fanfou](https://github.com/LitoMore/cerebro-fanfou) - A cerebro plugin for Fanfou
@@ -163,4 +161,4 @@ For more declarations, see the [declaration file](https://github.com/LitoMore/fa
 
 ## License
 
-MIT © [LitoMore](https://github.com/LitoMore)
+MIT
