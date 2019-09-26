@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "ava": "^2.0.0",
-    "xo": "^0.24.0"
+    "xo": "^0.25.3"
   },
   "scripts": {
     "test": "xo"
