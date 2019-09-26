@@ -4,7 +4,7 @@ const isJson = str => {
 	try {
 		JSON.parse(str);
 		return true;
-	} catch (error) {
+	} catch (_) {
 		return false;
 	}
 };
