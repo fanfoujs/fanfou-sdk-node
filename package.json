@@ -1,6 +1,6 @@
 {
-  "name": "fanfou-sdk",
-  "version": "4.0.5",
+  "name": "rsshub-fanfou-sdk",
+  "version": "4.1.5",
   "description": "Fanfou SDK for Node.js",
   "main": "src/index.js",
   "dependencies": {

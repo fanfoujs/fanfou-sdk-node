@@ -20,7 +20,8 @@ class Fanfou {
 			oauthTokenSecret: this.oauthTokenSecret = '',
 			username: this.username = '',
 			password: this.password = '',
-			protocol: this.protocol = 'http:',
+			protocol: this.protocol = 'https:',
+			signProtocol: this.signProtocol = 'http:',
 			apiDomain: this.apiDomain = 'api.fanfou.com',
 			oauthDomain: this.oauthDomain = 'fanfou.com',
 			hooks: this.hooks = {}
@@ -80,8 +81,9 @@ class Fanfou {
 	async get(uri, params) {
 		const query = queryString.stringify(params);
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
+		const signUrl = `${this.signProtocol}//${this.apiDomain}${uri}.json${query ? `?${query}` : ''}`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
-		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'GET'}, token));
+		const {Authorization} = this.o.toHeader(this.o.authorize({url: signUrl, method: 'GET'}, token));
 		try {
 			const {body} = await got.get(url, {
 				headers: {
@@ -99,9 +101,14 @@ class Fanfou {
 
 	async post(uri, params) {
 		const url = `${this.apiEndPoint}${uri}.json`;
+		const signUrl = `${this.signProtocol}//${this.apiDomain}${uri}.json${query ? `?${query}` : ''}`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const isUpload = ['/photos/upload', '/account/update_profile_image'].includes(uri);
-		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'POST', data: isUpload ? null : params}, token));
+		const {Authorization} = this.o.toHeader(this.o.authorize({
+			url: signUrl,
+			method: 'POST',
+			data: isUpload ? null : params
+		}, token));
 		let form = null;
 		const headers = {Authorization, 'Content-Type': 'application/x-www-form-urlencoded'};
 		if (isUpload) {
