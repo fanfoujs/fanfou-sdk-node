@@ -101,7 +101,7 @@ class Fanfou {
 
 	async post(uri, params) {
 		const url = `${this.apiEndPoint}${uri}.json`;
-		const signUrl = `${this.signProtocol}//${this.apiDomain}${uri}.json${query ? `?${query}` : ''}`;
+		const signUrl = `${this.signProtocol}//${this.apiDomain}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const isUpload = ['/photos/upload', '/account/update_profile_image'].includes(uri);
 		const {Authorization} = this.o.toHeader(this.o.authorize({
