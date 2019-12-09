@@ -30,40 +30,36 @@ const Fanfou = require('fanfou-sdk');
 **OAuth**
 
 ```javascript
-const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  oauthToken: '',
-  oauthTokenSecret: ''
-});
+(async () => {
+  const ff = new Fanfou({
+    consumerKey: '',
+    consumerSecret: '',
+    oauthToken: '',
+    oauthTokenSecret: ''
+  });
 
-ff.get('/statuses/home_timeline', {format: 'html'})
-  .then(res => console.log(res))
-  .catch(res => console.log(err));
+  const timeline = await ff.get('/statuses/home_timeline', {format: 'html'});
+})();
+
 ```
 
 **XAuth**
 
 ```javascript
-const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  username: '',
-  password: ''
-});
+(async () => {
+  const ff = new Fanfou({
+    consumerKey: '',
+    consumerSecret: '',
+    username: '',
+    password: ''
+  });
 
-ff.xauth()
-  .then(res => {
-    console.log(res);
-    ff.get('/statuses/public_timeline', {count: 10})
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  await ff.xauth();
 
-    ff.post('/statuses/update', {status: 'Hi Fanfou'})
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  })
-  .catch(err => console.log(err));
+  const timeline = await ff.get('/statuses/public_timeline', {count: 10});
+  const status = await ff.post('/statuses/update', {status: 'Hi Fanfou'});
+})();
+
 ```
 
 **Options**
@@ -102,13 +98,13 @@ ff.post(uri, params);
   const token = await ff.getAccessToken(token);
 
   // Get timeline
-  const timeline = await ff.get('/statuses/home_timeline', {})
+  const timeline = await ff.get('/statuses/home_timeline', {});
 
   // Post status
-  const status = await ff.post('/statuses/update', {status: 'post test'})
+  const status = await ff.post('/statuses/update', {status: 'post test'});
 
   // Upload photo
-  const result = await ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
+  const result = await ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'});
 })();
 ```
 

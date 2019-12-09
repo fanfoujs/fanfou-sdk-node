@@ -3,6 +3,8 @@ export as namespace Fanfou;
 
 declare class Fanfou {
     constructor(opt?: Fanfou.FanfouOptions)
+    getRequestToken(): any;
+    getAccessToken(token :object): any;
     xauth(): any;
     get(uri: string, params: object): any;
     post(uri: string, params: object): any;
