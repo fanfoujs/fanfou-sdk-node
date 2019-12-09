@@ -52,6 +52,38 @@ class Fanfou {
 		return this;
 	}
 
+	async getRequestToken() {
+		const url = `${this.oauthEndPoint}/oauth/request_token`;
+		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'GET'}));
+		try {
+			const response = await got.get(url, {
+				headers: {Authorization}
+			});
+			const {body} = response;
+			const result = queryString.parse(body);
+			({oauth_token: this.oauthToken, oauth_token_secret: this.oauthTokenSecret} = result);
+			return this;
+		} catch (error) {
+			throw new FanfouError(error);
+		}
+	}
+
+	async getAccessToken(token) {
+		const url = `${this.oauthEndPoint}/oauth/access_token`;
+		const {Authorization} = this.o.toHeader(this.o.authorize({url, method: 'GET'}, {key: token.oauthToken, secret: token.oauthTokenSecret}));
+		try {
+			const response = await got.get(url, {
+				headers: {Authorization}
+			});
+			const {body} = response;
+			const result = queryString.parse(body);
+			({oauth_token: this.oauthToken, oauth_token_secret: this.oauthTokenSecret} = result);
+			return this;
+		} catch (error) {
+			throw new FanfouError(error);
+		}
+	}
+
 	async xauth() {
 		const url = `${this.oauthEndPoint}/oauth/access_token`;
 		const params = {

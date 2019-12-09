@@ -84,6 +84,8 @@ ff.xauth()
 ## API
 
 ```javascript
+ff.getRequestToken();
+ff.getAccessToken(token);
 ff.xauth();
 ff.get(uri, params);
 ff.post(uri, params);
@@ -92,17 +94,22 @@ ff.post(uri, params);
 **Examples**
 
 ```javascript
-ff.get('/statuses/home_timeline', {})
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+(async () => {
+  // Get request token
+  const token = await ff.getRequestToken();
 
-ff.post('/statuses/update', {status: 'post test'})
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+  // Get access token
+  const token = await ff.getAccessToken(token);
 
-ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+  // Get timeline
+  const timeline = await ff.get('/statuses/home_timeline', {})
+
+  // Post status
+  const status = await ff.post('/statuses/update', {status: 'post test'})
+
+  // Upload photo
+  const result = await ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'})
+})();
 ```
 
 **Tips**
