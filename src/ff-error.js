@@ -6,32 +6,32 @@ class FanfouError extends Error {
 		this.name = 'FanfouError';
 		this.err = error;
 		if (error.name === 'HTTPError') {
-			const [contentType] = error.headers['content-type'].split(';');
+			const [contentType] = error.response.headers['content-type'].split(';');
 			switch (contentType) {
 				case 'application/json': {
-					this.message = JSON.parse(error.body).error;
+					this.message = JSON.parse(error.response.body).error;
 					break;
 				}
 
 				case 'text/html': {
-					const titleMatch = error.body.match(/<title>(?<msg>.+)<\/title>/);
+					const titleMatch = error.response.body.match(/<title>(?<msg>.+)<\/title>/);
 					if (titleMatch) {
 						const {msg} = titleMatch.groups;
 						this.message = msg;
 					} else {
-						this.message = `${error.statusCode} error`;
+						this.message = `${error.response.statusCode} error`;
 					}
 
 					break;
 				}
 
 				case 'application/xml': {
-					const errorMatch = error.body.match(/<error>(?<msg>.+)<\/error>/);
+					const errorMatch = error.response.body.match(/<error>(?<msg>.+)<\/error>/);
 					if (errorMatch) {
 						const {msg} = errorMatch.groups;
 						this.message = msg;
 					} else {
-						this.message = `${error.statusCode} error`;
+						this.message = `${error.response.statusCode} error`;
 					}
 
 					break;
