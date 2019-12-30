@@ -82,26 +82,20 @@ class Status {
 	}
 
 	_getSourceUrl() {
-		if (this.source.match(/<a href="(.*)" target="_blank">.+<\/a>/)) {
-			return this.source.match(/<a href="(.*)" target="_blank">.+<\/a>/)[1];
-		}
-
-		return '';
+		const matched = this.source.match(/<a href="(?<link>.*)" target="_blank">.+<\/a>/);
+		return matched ? matched.groups.link : '';
 	}
 
 	_getSourceName() {
-		if (this.source.match(/<a href=".*" target="_blank">(.+)<\/a>/)) {
-			return this.source.match(/<a href=".*" target="_blank">(.+)<\/a>/)[1];
-		}
-
-		return this.source;
+		const matched = this.source.match(/<a href=".*" target="_blank">(?<name>.+)<\/a>/);
+		return matched ? matched.groups.name : this.source;
 	}
 
 	_getTxt() {
-		const pattern = /[@#]?<a href="(.*?)".*?>([\s\S\n]*?)<\/a>#?/g;
-		const tagPattern = /#<a href="\/q\/(.*?)".?>([\s\S\n]*)<\/a>#/;
-		const atPattern = /@<a href="(http|https):\/\/(?:[.a-z0-9-]*)fanfou.com\/(.*?)".*?>(.*?)<\/a>/;
-		const linkPattern = /<a href="(.*?)".*?>(.*?)<\/a>/;
+		const pattern = /[@#]?<a href="(?:.*?)".*?>(?:[\s\S\n]*?)<\/a>#?/g;
+		const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S\n]*)<\/a>#/;
+		const atPattern = /@<a href="(?:http|https):\/\/(?:[.a-z0-9-]*)fanfou.com\/(?<id>.*?)".*?>(?<at>.*?)<\/a>/;
+		const linkPattern = /<a href="(?<link>.*?)".*?>(?<text>.*?)<\/a>/;
 		const match = this.text.match(pattern);
 		const txt = [];
 		let theText = this.text;
@@ -128,13 +122,13 @@ class Status {
 				// Tag
 				if (item.slice(0, 1) === '#' && tagPattern.test(item)) {
 					const matchText = item.match(tagPattern);
-					const text = `#${matchText[2]}#`;
+					const text = `#${matchText.groups.tag}#`;
 					const originText = he.decode(Status._removeBoldTag(text));
 					const thisTxt = {
 						type: 'tag',
 						text: originText,
 						_text: originText.replace(/\n{2,}/g, '\n'),
-						query: decodeURIComponent(he.decode(matchText[1]))
+						query: decodeURIComponent(he.decode(matchText.groups.link))
 					};
 					if (Status._hasBold(text)) {
 						thisTxt.bold_arr = Status._getBoldArr(text);
@@ -146,13 +140,13 @@ class Status {
 				// At
 				if (item.slice(0, 1) === '@' && atPattern.test(item)) {
 					const matchText = item.match(atPattern);
-					const text = `@${matchText[3]}`;
+					const text = `@${matchText.groups.at}`;
 					const originText = he.decode(Status._removeBoldTag(text));
 					const thisTxt = {
 						type: 'at',
 						text: originText,
-						name: he.decode(matchText[3]),
-						id: matchText[2]
+						name: he.decode(matchText.groups.at),
+						id: matchText.groups.id
 					};
 					if (Status._hasBold(text)) {
 						thisTxt.bold_arr = Status._getBoldArr(text);
@@ -164,7 +158,7 @@ class Status {
 				// Link
 				if (item.slice(0, 1) === '<' && linkPattern.test(item)) {
 					const matchText = item.match(linkPattern);
-					const [, link, text] = matchText;
+					const {link, text} = matchText.groups;
 					const originText = Status._removeBoldTag(text);
 					const thisTxt = {
 						type: 'link',
@@ -240,9 +234,9 @@ class Status {
 					});
 				}
 
-				const [, t] = item.match(/<b>([\s\S\n]*?)<\/b>/);
+				const match = item.match(/<b>(?<t>[\s\S\n]*?)<\/b>/);
 				textArr.push({
-					text: he.decode(t),
+					text: he.decode(match.groups.t),
 					bold: true
 				});
 				theText = theText.slice(index + item.length);
