@@ -14,9 +14,9 @@ class FanfouError extends Error {
 				}
 
 				case 'text/html': {
-					const titleMatch = error.body.match(/<title>(.+)<\/title>/);
+					const titleMatch = error.body.match(/<title>(?<msg>.+)<\/title>/);
 					if (titleMatch) {
-						const [, msg] = titleMatch;
+						const {msg} = titleMatch.groups;
 						this.message = msg;
 					} else {
 						this.message = `${error.statusCode} error`;
@@ -26,9 +26,9 @@ class FanfouError extends Error {
 				}
 
 				case 'application/xml': {
-					const errorMatch = error.body.match(/<error>(.+)<\/error>/);
+					const errorMatch = error.body.match(/<error>(?<msg>.+)<\/error>/);
 					if (errorMatch) {
-						const [, msg] = errorMatch;
+						const {msg} = errorMatch.groups;
 						this.message = msg;
 					} else {
 						this.message = `${error.statusCode} error`;

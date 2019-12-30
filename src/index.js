@@ -206,7 +206,7 @@ class Fanfou {
 		};
 
 		const type = uriList[uri] || null;
-		if (!type && /^\/favorites\/(create|destroy)\/.+/.test(uri)) {
+		if (!type && /^\/favorites\/(?:create|destroy)\/.+/.test(uri)) {
 			return 'status';
 		}
 
