@@ -143,7 +143,7 @@ const opt: Fanfou.FanfouOptions = {
 
 const ff = new Fanfou(opt);
 
-ff.post('/user_timeline', {count: 10});
+ff.post('/statuses/user_timeline', {count: 10});
 ```
 
 For more declarations, see the [declaration file](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/index.d.ts).
