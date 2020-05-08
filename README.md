@@ -1,6 +1,5 @@
 # fanfou-sdk-node
 
-[![](https://badges.greenkeeper.io/fanfoujs/fanfou-sdk-node.svg)](https://greenkeeper.io/)
 [![](https://github.com/fanfoujs/fanfou-sdk-node/workflows/Node/badge.svg)](https://github.com/fanfoujs/fanfou-sdk-node/actions)
 [![](https://img.shields.io/npm/v/fanfou-sdk.svg)](https://www.npmjs.com/package/fanfou-sdk)
 [![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE)
