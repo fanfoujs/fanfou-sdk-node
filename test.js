@@ -27,13 +27,13 @@ const x = new Fanfou({
 });
 
 test('test o.get()', async t => {
-	const res = await o.get('/statuses/home_timeline', {});
-	t.true(res.length > 0);
+	const result = await o.get('/statuses/home_timeline', {});
+	t.true(result.length > 0);
 });
 
 test('test o.post()', async t => {
-	const res = await o.post('/statuses/update', {status: 'hi fanfou'});
-	t.is(res.text, 'hi fanfou');
+	const result = await o.post('/statuses/update', {status: 'hi fanfou'});
+	t.is(result.text, 'hi fanfou');
 });
 
 test('test xauth()', async t => {

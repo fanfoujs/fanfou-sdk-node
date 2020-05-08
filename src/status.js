@@ -92,9 +92,9 @@ class Status {
 	}
 
 	_getTxt() {
-		const pattern = /[@#]?<a href="(?:.*?)".*?>(?:[\s\S\n]*?)<\/a>#?/g;
+		const pattern = /[@#]?<a href=".*?".*?>[\s\S\n]*?<\/a>#?/g;
 		const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S\n]*)<\/a>#/;
-		const atPattern = /@<a href="(?:http|https):\/\/(?:[.a-z0-9-]*)fanfou.com\/(?<id>.*?)".*?>(?<at>.*?)<\/a>/;
+		const atPattern = /@<a href="(?:http|https):\/\/[.a-z\d-]*fanfou.com\/(?<id>.*?)".*?>(?<at>.*?)<\/a>/;
 		const linkPattern = /<a href="(?<link>.*?)".*?>(?<text>.*?)<\/a>/;
 		const match = this.text.match(pattern);
 		const txt = [];
@@ -222,33 +222,33 @@ class Status {
 		const pattern = /<b>[\s\S\n]*?<\/b>/g;
 		let theText = text;
 		const match = text.match(pattern);
-		const textArr = [];
+		const textArray = [];
 		if (match) {
 			match.forEach(item => {
 				const index = theText.indexOf(item);
 				if (index > 0) {
 					const t = theText.slice(0, index);
-					textArr.push({
+					textArray.push({
 						text: he.decode(t),
 						bold: false
 					});
 				}
 
 				const match = item.match(/<b>(?<t>[\s\S\n]*?)<\/b>/);
-				textArr.push({
+				textArray.push({
 					text: he.decode(match.groups.t),
 					bold: true
 				});
 				theText = theText.slice(index + item.length);
 			});
 			if (theText.length > 0) {
-				textArr.push({
+				textArray.push({
 					text: he.decode(theText),
 					bold: false
 				});
 			}
 
-			return textArr;
+			return textArray;
 		}
 
 		return [{

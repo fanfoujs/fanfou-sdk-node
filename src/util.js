@@ -1,8 +1,8 @@
 'use strict';
 
-const isJson = str => {
+const isJson = string => {
 	try {
-		JSON.parse(str);
+		JSON.parse(string);
 		return true;
 	} catch (_) {
 		return false;
