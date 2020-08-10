@@ -2,6 +2,16 @@ export = Fanfou;
 export as namespace Fanfou;
 
 declare class Fanfou {
+    consumerKey: string;
+    consumerSecret: string;
+    oauthToken: string;
+    oauthTokenSecret: string;
+    username: string;
+    password: string;
+    protocol: string;
+    apiDomain: string;
+    oauthDomain: string;
+    hooks: any;
     constructor(opt?: Fanfou.FanfouOptions)
     getRequestToken(): any;
     getAccessToken(token :object): any;
