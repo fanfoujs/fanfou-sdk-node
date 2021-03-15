@@ -138,9 +138,10 @@ class Fanfou {
 		const headers = {Authorization, 'Content-Type': 'application/x-www-form-urlencoded'};
 		if (isUpload) {
 			form = new FormData();
-			Object.keys(parameters).forEach(key => {
+			for (const key of Object.keys(parameters)) {
 				form.append(key, parameters[key]);
-			});
+			}
+
 			delete headers['Content-Type'];
 		}
 
