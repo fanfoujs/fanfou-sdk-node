@@ -22,7 +22,7 @@ $ npm i fanfou-sdk
 ## Usage
 
 ```javascript
-const Fanfou = require('fanfou-sdk');
+import Fanfou from 'fanfou-sdk';
 ```
 
 **OAuth**
@@ -38,7 +38,6 @@ const Fanfou = require('fanfou-sdk');
 
   const timeline = await ff.get('/statuses/home_timeline', {format: 'html'});
 })();
-
 ```
 
 **XAuth**
@@ -57,7 +56,6 @@ const Fanfou = require('fanfou-sdk');
   const timeline = await ff.get('/statuses/public_timeline', {count: 10});
   const status = await ff.post('/statuses/update', {status: 'Hi Fanfou'});
 })();
-
 ```
 
 **Options**
@@ -125,27 +123,6 @@ const ff = new Fanfou({
   }
 });
 ```
-
-## TypeScript
-
-**Example**
-
-```typescript
-import * as Fanfou from 'fanfou-sdk';
-
-const opt: Fanfou.FanfouOptions = {
-  consumerKey: '',
-  consumerSecret: '',
-  oauthToken: '',
-  oauthTokenSecret: '',
-};
-
-const ff = new Fanfou(opt);
-
-ff.post('/statuses/user_timeline', {count: 10});
-```
-
-For more declarations, see the [declaration file](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/index.d.ts).
 
 ## Related
 
