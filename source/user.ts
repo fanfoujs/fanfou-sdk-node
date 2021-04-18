@@ -1,7 +1,39 @@
-'use strict';
+import Status from './status.js';
 
 class User {
-	constructor(user) {
+	id: string;
+	name: string;
+	screen_name: string;
+	unique_id: string;
+	location: string;
+	gender: string;
+	birthday: string;
+	description: string;
+	profile_image_url: string;
+	profile_image_url_large: string;
+	url: string;
+	protected: boolean;
+	followers_count: number;
+	friends_count: number;
+	favourites_count: number;
+	statuses_count: number;
+	photo_count: number;
+	following: boolean;
+	notifications: boolean;
+	created_at: string;
+	utc_offset: number;
+	profile_image_origin?: string;
+	profile_image_origin_large?: string;
+	profile_background_color?: string;
+	profile_text_color?: string;
+	profile_link_color?: string;
+	profile_sidebar_fill_color?: string;
+	profile_sidebar_border_color?: string;
+	profile_background_image_url?: string;
+	profile_background_tile?: boolean;
+	status?: Status;
+
+	constructor(user: User) {
 		this.id = user.id;
 		this.name = user.name;
 		this.screen_name = user.screen_name;
@@ -47,4 +79,4 @@ class User {
 	}
 }
 
-module.exports = User;
+export default User;

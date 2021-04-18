@@ -2,7 +2,8 @@
   "name": "fanfou-sdk",
   "version": "4.2.0",
   "description": "Fanfou SDK for Node.js",
-  "main": "src/index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
   "dependencies": {
     "form-data": "^3.0.0",
     "got": "^10.2.0",
@@ -12,13 +13,16 @@
     "query-string": "^6.2.0"
   },
   "devDependencies": {
-    "ava": "^3.0.0",
+    "@sindresorhus/tsconfig": "^1.0.2",
+    "@types/he": "^1.1.1",
+    "typescript": "^4.2.4",
     "xo": "^0.38.2"
   },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
+    "build": "tsc",
     "test": "xo"
   },
   "repository": {
@@ -35,6 +39,7 @@
   },
   "homepage": "https://github.com/fanfoujs/fanfou-sdk-node#readme",
   "xo": {
+    "prettier": true,
     "rules": {
       "ava/no-ignored-test-files": 0,
       "camelcase": 0

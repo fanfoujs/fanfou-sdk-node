@@ -1,9 +1,18 @@
-'use strict';
-
-const User = require('./user');
+import User from './user.js';
 
 class DirectMessage {
-	constructor(dm) {
+	id: string;
+	text: string;
+	sender_id: string;
+	recipient_id: string;
+	created_at: string;
+	sender_screen_name: string;
+	recipient_screen_name: string;
+	sender: User;
+	recipient: User;
+	in_reply_to?: DirectMessage;
+
+	constructor(dm: DirectMessage) {
 		this.id = dm.id;
 		this.text = dm.text;
 		this.sender_id = dm.sender_id;
@@ -19,4 +28,4 @@ class DirectMessage {
 	}
 }
 
-module.exports = DirectMessage;
+export default DirectMessage;
