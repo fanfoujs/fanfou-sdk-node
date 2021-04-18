@@ -4,6 +4,9 @@
   "description": "Fanfou SDK for Node.js",
   "type": "module",
   "exports": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "form-data": "^3.0.0",
     "got": "^10.2.0",
