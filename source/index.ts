@@ -3,11 +3,13 @@ import got from 'got';
 import hmacsha1 from 'hmacsha1';
 import OAuth from 'oauth-1.0a';
 import queryString from 'query-string';
+import camelcaseKeys from 'camelcase-keys';
+// @ts-expect-error
+import decamelizedKeys from 'decamelize-keys';
 import FormData from 'form-data';
-import User from './user.js';
-import Status from './status.js';
-import DirectMessage from './direct-message.js';
+import * as api from './api.js';
 import FanfouError from './ff-error.js';
+import {uriType, parseData} from './utils.js';
 
 type Token = {
 	oauthToken: string;
@@ -41,131 +43,24 @@ class Fanfou {
 	protocol: string;
 	apiDomain: string;
 	oauthDomain: string;
-	// @ts-expect-error
 	apiEndPoint: string;
-	// @ts-expect-error
 	oauthEndPoint: string;
-	// @ts-expect-error
 	o: OAuth;
 	hooks: Hooks;
 
-	constructor(opt: FanfouOptions = {}) {
-		this.consumerKey = opt.consumerKey ?? '';
-		this.consumerSecret = opt.consumerSecret ?? '';
-		this.oauthToken = opt.oauthToken ?? '';
-		this.oauthTokenSecret = opt.oauthTokenSecret ?? '';
-		this.username = opt.username ?? '';
-		this.password = opt.password ?? '';
-		this.protocol = opt.protocol ?? '';
-		this.apiDomain = opt.apiDomain ?? 'api.fanfou.com';
-		this.oauthDomain = opt.oauthDomain ?? 'fanfou.com';
-		this.hooks = opt.hooks ?? {};
-		this.oauthInit();
-		this.apiInit();
-	}
-
-	private static uriType(uri: string) {
-		const uriList = {
-			// Timeline
-			'/search/public_timeline': 'timeline',
-			'/search/user_timeline': 'timeline',
-			'/photos/user_timeline': 'timeline',
-			'/statuses/friends_timeine': 'timeline',
-			'/statuses/home_timeline': 'timeline',
-			'/statuses/public_timeline': 'timeline',
-			'/statuses/replies': 'timeline',
-			'/statuses/user_timeline': 'timeline',
-			'/statuses/context_timeline': 'timeline',
-			'/statuses/mentions': 'timeline',
-			'/favorites': 'timeline',
-
-			// Status
-			'/statuses/update': 'status',
-			'/statuses/show': 'status',
-			'/favorites/destroy': 'status',
-			'/favorites/create': 'status',
-			'/photos/upload': 'status',
-
-			// Users
-			'/users/tagged': 'users',
-			'/users/followers': 'users',
-			'/users/friends': 'users',
-			'/friendships/requests': 'users',
-
-			// User
-			'/users/show': 'user',
-			'/friendships/create': 'user',
-			'/friendships/destroy': 'user',
-			'/account/verify_credentials': 'user',
-
-			// Conversation
-			'/direct_messages/conversation': 'conversation',
-			'/direct_messages/inbox': 'conversation',
-			'/direct_messages/sent': 'conversation',
-
-			// Conversation List
-			'/direct_messages/conversation_list': 'conversation-list',
-
-			// Direct Message
-			'/direct_messages/new': 'dm',
-			'/direct_messages/destroy': 'dm'
-		};
-
-		// @ts-expect-error
-		const type = uriList[uri] || null;
-		if (!type && /^\/favorites\/(?:create|destroy)\/.+/.test(uri)) {
-			return 'status';
-		}
-
-		return type;
-	}
-
-	private static parseList(data: any, type: string) {
-		const array = [];
-		for (const i in data) {
-			if (data[i]) {
-				switch (type) {
-					case 'timeline':
-						array.push(new Status(data[i]));
-						break;
-					case 'users':
-						array.push(new User(data[i]));
-						break;
-					case 'conversation':
-						array.push(new DirectMessage(data[i]));
-						break;
-					case 'conversation-list':
-						data[i].dm = new DirectMessage(data[i].dm);
-						array.push(data[i]);
-						break;
-					default:
-						break;
-				}
-			}
-		}
-
-		return array;
-	}
-
-	private static parseData(data: any, type: string) {
-		switch (type) {
-			case 'timeline':
-			case 'users':
-			case 'conversation':
-			case 'conversation-list':
-				return Fanfou.parseList(data, type);
-			case 'status':
-				return new Status(data);
-			case 'user':
-				return new User(data);
-			case 'dm':
-				return new DirectMessage(data);
-			default:
-				return data;
-		}
-	}
-
-	oauthInit() {
+	constructor(options: FanfouOptions = {}) {
+		this.consumerKey = options.consumerKey ?? '';
+		this.consumerSecret = options.consumerSecret ?? '';
+		this.oauthToken = options.oauthToken ?? '';
+		this.oauthTokenSecret = options.oauthTokenSecret ?? '';
+		this.username = options.username ?? '';
+		this.password = options.password ?? '';
+		this.protocol = options.protocol ?? 'http:';
+		this.apiDomain = options.apiDomain ?? 'api.fanfou.com';
+		this.oauthDomain = options.oauthDomain ?? 'fanfou.com';
+		this.hooks = options.hooks ?? {};
+		this.apiEndPoint = `${this.protocol}//${this.apiDomain}`;
+		this.oauthEndPoint = `${this.protocol}//${this.oauthDomain}`;
 		this.o = new OAuth({
 			consumer: {key: this.consumerKey, secret: this.consumerSecret},
 			signature_method: 'HMAC-SHA1',
@@ -179,13 +74,6 @@ class Fanfou {
 				return hmacsha1(key, baseString);
 			}
 		});
-		return this;
-	}
-
-	apiInit() {
-		this.apiEndPoint = `${this.protocol}//${this.apiDomain}`;
-		this.oauthEndPoint = `${this.protocol}//${this.oauthDomain}`;
-		return this;
 	}
 
 	async getRequestToken() {
@@ -266,7 +154,8 @@ class Fanfou {
 		}
 	}
 
-	async get(uri: string, parameters: any) {
+	async get(uri: string, parameters?: any) {
+		parameters = decamelizedKeys(parameters, '_');
 		const query = queryString.stringify(parameters);
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
@@ -280,8 +169,8 @@ class Fanfou {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			});
-			const response = JSON.parse(body);
-			const result = Fanfou.parseData(response, Fanfou.uriType(uri));
+			const response = camelcaseKeys(JSON.parse(body), {deep: true});
+			const result = parseData(this, response, uriType(uri));
 			return result;
 			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
 		} catch (error) {
@@ -289,7 +178,8 @@ class Fanfou {
 		}
 	}
 
-	async post(uri: string, parameters: any) {
+	async post(uri: string, parameters?: any) {
+		parameters = decamelizedKeys(parameters, '_');
 		const url = `${this.apiEndPoint}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const isUpload = [
@@ -322,14 +212,182 @@ class Fanfou {
 				headers,
 				body: isUpload ? form ?? undefined : queryString.stringify(parameters)
 			});
-			const response = JSON.parse(body);
-			const result = Fanfou.parseData(response, Fanfou.uriType(uri));
+			const response = camelcaseKeys(JSON.parse(body), {deep: true});
+			const result = parseData(this, response, uriType(uri));
 			return result;
 			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
 		} catch (error) {
 			throw new FanfouError(error);
 		}
 	}
+
+	acceptFriendship = async (options: api.AcceptFriendshipOptions) =>
+		api.acceptFriendship(this, options);
+
+	checkBlockExists = async (options: api.CheckBlockExistsOptions) =>
+		api.checkBlockExists(this, options);
+
+	checkFriendship = async (options: api.CheckFriendshipOptions) =>
+		api.checkFriendship(this, options);
+
+	checkFriendshipDetail = async (options: api.CheckFriendshipDetailOptions) =>
+		api.checkFriendshipDetail(this, options);
+
+	checkFriendshipRequests = async (
+		options: api.CheckFriendshipRequestsOptions
+	) => api.checkFriendshipRequests(this, options);
+
+	createBlockedUser = async (options: api.CreateBlockedUserOptions) =>
+		api.createBlockedUser(this, options);
+
+	createDirectMessage = async (options: api.CreateDirectMessageOptions) =>
+		api.createDirectMessage(this, options);
+
+	createFavorite = async (options: api.CreateFavoriteOptions) =>
+		api.createFavorite(this, options);
+
+	createFriendship = async (options: api.CreateFriendshipOptions) =>
+		api.createFriendship(this, options);
+
+	createSavedSearch = async (options: api.CreateSavedSearchOptions) =>
+		api.createSavedSearch(this, options);
+
+	createStatus = async (options: api.CreateStatusOptions) =>
+		api.createStatus(this, options);
+
+	denyFriendship = async (options: api.DenyFriendshipOptions) =>
+		api.denyFriendship(this, options);
+
+	dismissRecommendedUser = async (options: api.DismissRecommendedUserOptions) =>
+		api.dismissRecommendedUser(this, options);
+
+	dropBlockedUser = async (options: api.DropBlockedUserOptions) =>
+		api.dropBlockedUser(this, options);
+
+	dropDirectMessage = async (options: api.DropDirectMessageOptions) =>
+		api.dropDirectMessage(this, options);
+
+	dropFavorite = async (options: api.DropFavoriteOptions) =>
+		api.dropFavorite(this, options);
+
+	dropFriendship = async (options: api.DropFriendshipOptions) =>
+		api.dropFriendship(this, options);
+
+	dropSavedSearch = async (options: api.DropSavedSearchOptions) =>
+		api.dropSavedSearch(this, options);
+
+	dropStatus = async (options: api.DropStatusOptions) =>
+		api.dropStatus(this, options);
+
+	getBlockedIds = async () => api.getBlockedIds(this);
+
+	getBlockedUsers = async (options?: api.GetBlockedUsersOptions) =>
+		api.getBlockedUsers(this, options);
+
+	getContextTimeline = async (options: api.GetContextTimelineOptions) =>
+		api.getContextTimeline(this, options);
+
+	getConversation = async (options: api.GetConversationOptions) =>
+		api.getConversation(this, options);
+
+	getConversations = async (options?: api.GetConversationsOptions) =>
+		api.getConversations(this, options);
+
+	getFavorites = async (options?: api.GetFavoritesOptions) =>
+		api.getFavorites(this, options);
+
+	getFollowerIds = async (options?: api.GetFollowerIdsOptions) =>
+		api.getFollowerIds(this, options);
+
+	getFollowers = async (options?: api.GetFollowersOptions) =>
+		api.getFollowers(this, options);
+
+	getFollowingIds = async (options?: api.GetFollowingIdsOptions) =>
+		api.getFollowingIds(this, options);
+
+	getFollowings = async (options?: api.GetFollowingsOptions) =>
+		api.getFollowings(this, options);
+
+	getHomeTimeline = async (options?: api.GetHomeTimelineOptions) =>
+		api.getHomeTimeline(this, options);
+
+	getInbox = async (options?: api.GetInboxOptions) =>
+		api.getInbox(this, options);
+
+	getMentions = async (options: api.GetMentionsOptions) =>
+		api.getMentions(this, options);
+
+	getNotification = async () => api.getNotification(this);
+
+	getPublicTimeline = async (options: api.GetPublicTimelineOptions) =>
+		api.getPublicTimeline(this, options);
+
+	getRateLimitStatus = async (options: api.GetRateLimitStatusOptions) =>
+		api.getRateLimitStatus(this, options);
+
+	getRecentFollowers = async (options: api.GetRecentFollowersOptions) =>
+		api.getRecentFollowers(this, options);
+
+	getRecentUsers = async (options: api.GetRecentUsersOptions) =>
+		api.getRecentUsers(this, options);
+
+	getRecommendedUsers = async (options: api.GetRecommendedUsersOptions) =>
+		api.getRecommendedUsers(this, options);
+
+	getReplies = async (options: api.GetRepliesOptions) =>
+		api.getReplies(this, options);
+
+	getSavedSearch = async (options: api.GetSavedSearchOptions) =>
+		api.getSavedSearch(this, options);
+
+	getSavedSearches = async (options: api.GetSavedSearchesOptions) =>
+		api.getSavedSearches(this, options);
+
+	getSent = async (options: api.GetSentOptions) => api.getSent(this, options);
+
+	getStatus = async (options: api.GetStatusOptions) =>
+		api.getStatus(this, options);
+
+	getTaggedUsers = async (options: api.GetTaggedUsersOptions) =>
+		api.getTaggedUsers(this, options);
+
+	getTrends = async (options: api.GetTrendsOptions) =>
+		api.getTrends(this, options);
+
+	getUser = async (options: api.GetUserOptions) => api.getUser(this, options);
+
+	getUserPhotos = async (options: api.GetUserPhotosOptions) =>
+		api.getUserPhotos(this, options);
+
+	getUserTags = async (options: api.GetUserTagsOptions) =>
+		api.getUserTags(this, options);
+
+	getUserTimeline = async (options: api.GetUserTimelineOptions) =>
+		api.getUserTimeline(this, options);
+
+	searchPublicTimeline = async (options: api.SearchPublicTimelineOptions) =>
+		api.searchPublicTimeline(this, options);
+
+	searchUserTimeline = async (options: api.SearchUserTimelineOptions) =>
+		api.searchUserTimeline(this, options);
+
+	searchUsers = async (options: api.SearchUsersOptions) =>
+		api.searchUsers(this, options);
+
+	updateNotifyNumber = async (options: api.UpdateNotifyNumberOptions) =>
+		api.updateNotifyNumber(this, options);
+
+	updateProfile = async (options: api.UpdateProfileOptions) =>
+		api.updateProfile(this, options);
+
+	updateProfileImage = async (options: api.UpdateProfileImageOptions) =>
+		api.updateProfileImage(this, options);
+
+	uploadPhoto = async (options: api.UploadPhotoOptions) =>
+		api.uploadPhoto(this, options);
+
+	verifyCredentials = async (options: api.VerifyCredentialsOptions) =>
+		api.verifyCredentials(this, options);
 }
 
 export default Fanfou;

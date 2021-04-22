@@ -8,6 +8,8 @@
     "dist"
   ],
   "dependencies": {
+    "camelcase-keys": "^6.2.2",
+    "decamelize-keys": "^1.1.0",
     "form-data": "^3.0.0",
     "got": "^10.2.0",
     "he": "^1.1.1",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "@sindresorhus/tsconfig": "^1.0.2",
     "@types/he": "^1.1.1",
+    "del-cli": "^3.0.1",
     "typescript": "^4.2.4",
     "xo": "^0.38.2"
   },
@@ -25,7 +28,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "del-cli dist && tsc",
+    "pretest": "npm run build",
     "test": "xo"
   },
   "repository": {

@@ -5,6 +5,7 @@ class Photo {
 	largeurl: string;
 	originurl?: string;
 	type?: string;
+	isGif?: boolean;
 
 	constructor(photo: Photo) {
 		this.url = photo.url;
@@ -17,10 +18,7 @@ class Photo {
 			.exec(this.originurl)
 			// eslint-disable-next-line @typescript-eslint/dot-notation
 			.groups?.['type'].toLowerCase();
-	}
-
-	isGif() {
-		return this.type === 'gif';
+		this.isGif = this.type === 'gif';
 	}
 }
 

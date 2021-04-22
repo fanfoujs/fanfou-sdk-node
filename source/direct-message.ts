@@ -1,31 +1,67 @@
+import Fanfou from './index.js';
+import * as api from './api.js';
 import User from './user.js';
+
+type ReplyOptions = {
+	text: string;
+	user?: string;
+	inReplyToId?: string;
+	mode?: api.Mode;
+	callback?: string;
+};
+
+type DestroyOptions = {
+	id?: string;
+	callback?: string;
+};
 
 class DirectMessage {
 	id: string;
 	text: string;
-	sender_id: string;
-	recipient_id: string;
-	created_at: string;
-	sender_screen_name: string;
-	recipient_screen_name: string;
+	senderId: string;
+	recipientId: string;
+	createdAt: string;
+	senderScreenName: string;
+	recipientScreenName: string;
 	sender: User;
 	recipient: User;
-	in_reply_to?: DirectMessage;
+	inReplyTo?: DirectMessage;
+	private readonly ff: Fanfou;
 
-	constructor(dm: DirectMessage) {
+	constructor(ff: Fanfou, dm: DirectMessage) {
+		this.ff = ff;
 		this.id = dm.id;
 		this.text = dm.text;
-		this.sender_id = dm.sender_id;
-		this.recipient_id = dm.recipient_id;
-		this.created_at = dm.created_at;
-		this.sender_screen_name = dm.sender_screen_name;
-		this.recipient_screen_name = dm.recipient_screen_name;
-		this.sender = new User(dm.sender);
-		this.recipient = new User(dm.recipient);
-		if (dm.in_reply_to) {
-			this.in_reply_to = new DirectMessage(dm.in_reply_to);
+		this.senderId = dm.senderId;
+		this.recipientId = dm.recipientId;
+		this.createdAt = dm.createdAt;
+		this.senderScreenName = dm.senderScreenName;
+		this.recipientScreenName = dm.recipientScreenName;
+		this.sender =
+			dm.sender instanceof User ? dm.sender : new User(ff, dm.sender);
+		this.recipient =
+			dm.recipient instanceof User ? dm.recipient : new User(ff, dm.recipient);
+
+		if (dm.inReplyTo) {
+			this.inReplyTo =
+				dm.inReplyTo instanceof DirectMessage
+					? dm.inReplyTo
+					: new DirectMessage(ff, dm.inReplyTo);
 		}
 	}
+
+	reply = async (options: ReplyOptions) =>
+		api.createDirectMessage(this.ff, {
+			user: this.senderId,
+			inReplyToId: this.id,
+			...options
+		});
+
+	destroy = async (options?: DestroyOptions) =>
+		api.dropDirectMessage(this.ff, {
+			id: this.id,
+			...options
+		});
 }
 
 export default DirectMessage;
