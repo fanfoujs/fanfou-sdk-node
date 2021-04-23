@@ -12,4 +12,4 @@ export {default as User} from './user.js';
 export {default as DirectMessage} from './direct-message.js';
 export {default as Trend} from './trend.js';
 export {default as Photo} from './photo.js';
-export {default as FanfouError} from './ff-error';
+export {default as FanfouError} from './ff-error.js';
