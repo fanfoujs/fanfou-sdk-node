@@ -1,18 +1,18 @@
-import Fanfou from './index.js';
+import Fanfou from './fanfou.js';
 import Status from './status.js';
 import User from './user.js';
 import DirectMessage from './direct-message.js';
 
-export type Mode = 'default' | 'lite';
-export type Format = 'html';
+export type APIMode = 'default' | 'lite';
+export type APIFormat = 'html';
 
 export type SearchPublicTimelineOptions = {
 	q: string;
 	sinceId?: string;
 	maxId?: string;
 	count?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -25,8 +25,8 @@ export type SearchUsersOptions = {
 	q: string;
 	count?: number;
 	page?: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -46,8 +46,8 @@ export type SearchUserTimelineOptions = {
 	sinceId?: string;
 	maxId?: string;
 	count?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -60,7 +60,7 @@ export const getBlockedIds = async (ff: Fanfou): Promise<string[]> =>
 	ff.get('/blocks/ids');
 
 export type GetBlockedUsersOptions = {
-	mode?: Mode;
+	mode?: APIMode;
 	page?: number;
 	count?: number;
 };
@@ -72,8 +72,8 @@ export const getBlockedUsers = async (
 
 export type CreateBlockedUserOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -84,7 +84,7 @@ export const createBlockedUser = async (
 
 export type CheckBlockExistsOptions = {
 	id: string;
-	mode?: Mode;
+	mode?: APIMode;
 };
 
 export const checkBlockExists = async (
@@ -94,7 +94,7 @@ export const checkBlockExists = async (
 
 export type DropBlockedUserOptions = {
 	id: string;
-	mode?: Mode;
+	mode?: APIMode;
 };
 
 export const dropBlockedUser = async (
@@ -106,8 +106,8 @@ export type GetTaggedUsersOptions = {
 	tag?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -118,8 +118,8 @@ export const getTaggedUsers = async (
 
 export type GetUserOptions = {
 	id?: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -142,8 +142,8 @@ export type GetRecentFollowersOptions = {
 	id?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -155,8 +155,8 @@ export const getRecentFollowers = async (
 export type GetRecommendedUsersOptions = {
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -167,8 +167,8 @@ export const getRecommendedUsers = async (
 
 export type DismissRecommendedUserOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -181,8 +181,8 @@ export type GetRecentUsersOptions = {
 	id?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -192,8 +192,8 @@ export const getRecentUsers = async (
 ): Promise<User[]> => ff.get('/users/friends', options);
 
 export type VerifyCredentialsOptions = {
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -204,8 +204,8 @@ export const verifyCredentials = async (
 
 export type UpdateProfileImageOptions = {
 	image: ReadableStream;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -233,7 +233,7 @@ export const getRateLimitStatus = async (
 
 export type UpdateProfileOptions = {
 	url?: string;
-	mode?: Mode;
+	mode?: APIMode;
 	callback?: string;
 	location?: string;
 	description?: string;
@@ -316,8 +316,8 @@ export type GetUserPhotosOptions = {
 	maxId?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -331,8 +331,8 @@ export type UploadPhotoOptions = {
 	status?: string;
 	source?: string;
 	location?: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -360,7 +360,7 @@ export type GetTrendsResult = {
 export const getTrends = async (
 	ff: Fanfou,
 	options?: GetTrendsOptions
-): Promise<GetTrendsOptions[]> => ff.get('/trends/list', options);
+): Promise<GetTrendsResult> => ff.get('/trends/list', options);
 
 export type GetFollowerIdsOptions = {
 	id?: string;
@@ -376,8 +376,8 @@ export const getFollowerIds = async (
 
 export type DropFavoriteOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 };
 
 export const dropFavorite = async (
@@ -392,8 +392,8 @@ export type GetFavoritesOptions = {
 	id?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -407,8 +407,8 @@ export const getFavorites = async (
 
 export type CreateFavoriteOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -422,7 +422,7 @@ export const createFavorite = async (
 
 export type CreateFriendshipOptions = {
 	id: string;
-	mode?: Mode;
+	mode?: APIMode;
 };
 
 export const createFriendship = async (
@@ -432,8 +432,8 @@ export const createFriendship = async (
 
 export type DropFriendshipOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -445,8 +445,8 @@ export const dropFriendship = async (
 export type CheckFriendshipRequestsOptions = {
 	page?: number;
 	count?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -457,8 +457,8 @@ export const checkFriendshipRequests = async (
 
 export type DenyFriendshipOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -482,8 +482,8 @@ export const checkFriendship = async (
 
 export type AcceptFriendshipOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -553,8 +553,8 @@ export const getFollowingIds = async (
 
 export type DropStatusOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -569,8 +569,8 @@ export type GetHomeTimelineOptions = {
 	maxId?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -583,8 +583,8 @@ export type GetPublicTimelineOptions = {
 	count?: number;
 	sinceId?: string;
 	maxId?: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -598,8 +598,8 @@ export type GetRepliesOptions = {
 	maxId?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -612,8 +612,8 @@ export type GetFollowersOptions = {
 	id?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -628,7 +628,7 @@ export type CreateStatusOptions = {
 	inReplyToUserId?: string;
 	repostStatusId?: string;
 	source?: string;
-	mode?: Mode;
+	mode?: APIMode;
 	location?: string;
 	callback?: string;
 };
@@ -644,8 +644,8 @@ export type GetUserTimelineOptions = {
 	maxId?: string;
 	count?: string;
 	page?: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -658,7 +658,7 @@ export type GetFollowingsOptions = {
 	id?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
+	mode?: APIMode;
 	callback?: string;
 };
 
@@ -669,8 +669,8 @@ export const getFollowings = async (
 
 export type GetContextTimelineOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -684,8 +684,8 @@ export type GetMentionsOptions = {
 	maxId?: string;
 	count?: number;
 	page?: number;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 };
 
 export const getMentions = async (
@@ -695,8 +695,8 @@ export const getMentions = async (
 
 export type GetStatusOptions = {
 	id: string;
-	mode?: Mode;
-	format?: Format;
+	mode?: APIMode;
+	format?: APIFormat;
 	callback?: string;
 };
 
@@ -721,7 +721,7 @@ export type GetConversationOptions = {
 	page?: number;
 	maxId?: string;
 	sinceId?: string;
-	mode?: Mode;
+	mode?: APIMode;
 	callback?: string;
 };
 
@@ -734,7 +734,7 @@ export type CreateDirectMessageOptions = {
 	user: string;
 	text: string;
 	inReplyToId?: string;
-	mode?: Mode;
+	mode?: APIMode;
 	callback?: string;
 };
 
@@ -782,7 +782,7 @@ export type GetSentOptions = {
 	page?: number;
 	sinceId?: string;
 	maxId?: string;
-	mode?: Mode;
+	mode?: APIMode;
 	callback?: string;
 };
 

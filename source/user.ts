@@ -1,47 +1,65 @@
-import Fanfou from './index.js';
+import Fanfou from './fanfou.js';
 import * as api from './api.js';
 import Status from './status.js';
 
-type FollowOptions = {
+export type UserFollowOptions = {
 	id?: string;
-	mode?: api.Mode;
+	mode?: api.APIMode;
 };
 
-type UnfollowOptions = {
+export type UserUnfollowOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
-type BlockOptions = {
+export type UserBlockOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
-type UnblockOptions = {
+export type UserUnblockOptions = {
 	id?: string;
-	mode?: api.Mode;
+	mode?: api.APIMode;
 };
 
-type CheckBlockOptions = {
+export type UserCheckBlockOptions = {
 	id?: string;
-	mode?: api.Mode;
+	mode?: api.APIMode;
 };
 
-type AcceptFriendshipOptions = {
+export type UserTagsOptions = api.GetUserTagsOptions;
+
+export type UserShowOptions = api.GetUserOptions;
+
+export type UserTimelineOptions = api.GetUserTimelineOptions;
+
+export type UserSearchTimelineOptions = api.SearchUserTimelineOptions;
+
+export type UserRecentFollowersOptions = api.GetRecentFollowersOptions;
+
+export type UserFollowersOptions = api.GetFollowersOptions;
+
+export type UserFollowerIdsOptions = api.GetFollowerIdsOptions;
+
+export type UserFollowingsOptions = api.GetFollowingsOptions;
+
+export type UserFollowingIdsOptions = api.GetFollowingIdsOptions;
+
+export type UserAcceptFriendshipOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
-type DenyFriendshipOptions = {
+export type UserDenyFriendshipOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
@@ -79,7 +97,7 @@ class User {
 	status?: Status;
 	private readonly ff: Fanfou;
 
-	constructor(ff: Fanfou, user: User) {
+	constructor(ff: Fanfou, user: any) {
 		this.ff = ff;
 		this.id = user.id;
 		this.name = user.name;
@@ -123,97 +141,97 @@ class User {
 		}
 	}
 
-	follow = async (options?: FollowOptions) =>
+	follow = async (options?: UserFollowOptions) =>
 		api.createFriendship(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	unfollow = async (options?: UnfollowOptions) =>
+	unfollow = async (options?: UserUnfollowOptions) =>
 		api.dropFriendship(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	block = async (options?: BlockOptions) =>
+	block = async (options?: UserBlockOptions) =>
 		api.createBlockedUser(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	unblock = async (options?: UnblockOptions) =>
+	unblock = async (options?: UserUnblockOptions) =>
 		api.dropBlockedUser(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	checkBlock = async (options?: CheckBlockOptions) =>
+	checkBlock = async (options?: UserCheckBlockOptions) =>
 		api.checkBlockExists(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	tags = async (options?: api.GetUserTagsOptions) =>
+	tags = async (options?: UserTagsOptions) =>
 		api.getUserTags(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	show = async (options?: api.GetUserOptions) =>
+	show = async (options?: UserShowOptions) =>
 		api.getUser(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	timeline = async (options?: api.GetUserTimelineOptions) =>
+	timeline = async (options?: UserTimelineOptions) =>
 		api.getUserTimeline(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	searchTimeline = async (options: api.SearchUserTimelineOptions) =>
+	searchTimeline = async (options: UserSearchTimelineOptions) =>
 		api.searchUserTimeline(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	recentFollowers = async (options?: api.GetRecentFollowersOptions) =>
+	recentFollowers = async (options?: UserRecentFollowersOptions) =>
 		api.getRecentFollowers(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	followers = async (options?: api.GetFollowersOptions) =>
+	followers = async (options?: UserFollowersOptions) =>
 		api.getFollowers(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	followerIds = async (options?: api.GetFollowerIdsOptions) =>
+	followerIds = async (options?: UserFollowerIdsOptions) =>
 		api.getFollowerIds(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	followings = async (options?: api.GetFollowingsOptions) =>
+	followings = async (options?: UserFollowingsOptions) =>
 		api.getFollowings(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	followingIds = async (options?: api.GetFollowingIdsOptions) =>
+	followingIds = async (options?: UserFollowingIdsOptions) =>
 		api.getFollowingIds(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	acceptFriendship = async (options?: AcceptFriendshipOptions) =>
+	acceptFriendship = async (options?: UserAcceptFriendshipOptions) =>
 		api.acceptFriendship(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	denyFriendship = async (options?: DenyFriendshipOptions) =>
+	denyFriendship = async (options?: UserDenyFriendshipOptions) =>
 		api.denyFriendship(this.ff, {
 			id: this.id,
 			...options

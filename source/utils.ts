@@ -1,7 +1,8 @@
 import he from 'he';
-import Fanfou from './index.js';
-import Status, {BoldText, Entity} from './status.js';
+import Fanfou from './fanfou.js';
+import Status, {StatusBoldText, StatusEntity} from './status.js';
 import User from './user.js';
+import Trend from './trend.js';
 import DirectMessage from './direct-message.js';
 
 export const uriType = (uri: string) => {
@@ -48,7 +49,18 @@ export const uriType = (uri: string) => {
 
 		// Direct Message
 		'/direct_messages/new': 'dm',
-		'/direct_messages/destroy': 'dm'
+		'/direct_messages/destroy': 'dm',
+
+		// Saved Search
+		'/saved_searches/create': 'saved-search',
+		'/saved_searches/destroy': 'saved-search',
+		'/saved_searches/show': 'saved-search',
+
+		// Saved Search List
+		'/saved_searches/list': 'saved-search-list',
+
+		// Trend List
+		'/trends/list': 'trend-list'
 	};
 
 	// @ts-expect-error
@@ -61,35 +73,41 @@ export const uriType = (uri: string) => {
 };
 
 export const parseList = (ff: Fanfou, list: any, type: string) => {
-	const array = [];
-	for (const item of list) {
-		if (item) {
-			switch (type) {
-				case 'timeline':
-					array.push(item instanceof Status ? item : new Status(ff, item));
-					break;
-				case 'users':
-					array.push(item instanceof User ? item : new User(ff, item));
-					break;
-				case 'conversation':
-					array.push(
-						item instanceof DirectMessage ? item : new DirectMessage(ff, item)
-					);
-					break;
-				case 'conversation-list':
-					item.dm =
-						item.dm instanceof DirectMessage
-							? item.dm
-							: new DirectMessage(ff, item.dm);
-					array.push(item);
-					break;
-				default:
-					break;
-			}
+	switch (type) {
+		case 'timeline':
+			return list.map((item: any) =>
+				item instanceof Status ? item : new Status(ff, item)
+			);
+		case 'users':
+			return list.map((item: any) =>
+				item instanceof User ? item : new User(ff, item)
+			);
+		case 'conversation':
+			return list.map((item: any) =>
+				item instanceof DirectMessage ? item : new DirectMessage(ff, item)
+			);
+		case 'conversation-list':
+			return list.map((item: any) => {
+				item.dm =
+					item.dm instanceof DirectMessage
+						? item.dm
+						: new DirectMessage(ff, item.dm);
+				return item;
+			});
+		case 'saved-search-list':
+			return list.map((item: any) =>
+				item instanceof Trend ? item : new Trend(ff, item)
+			);
+		case 'trend-list': {
+			list.trends = list.trends.map((item: any) =>
+				item instanceof Trend ? item : new Trend(ff, item)
+			);
+			return list;
 		}
-	}
 
-	return array;
+		default:
+			return list;
+	}
 };
 
 export const parseData = (ff: Fanfou, data: any, type: string) => {
@@ -98,6 +116,8 @@ export const parseData = (ff: Fanfou, data: any, type: string) => {
 		case 'users':
 		case 'conversation':
 		case 'conversation-list':
+		case 'saved-search-list':
+		case 'trend-list':
 			return parseList(ff, data, type);
 		case 'status':
 			return data instanceof Status ? data : new Status(ff, data);
@@ -105,6 +125,8 @@ export const parseData = (ff: Fanfou, data: any, type: string) => {
 			return data instanceof User ? data : new User(ff, data);
 		case 'dm':
 			return data instanceof DirectMessage ? data : new DirectMessage(ff, data);
+		case 'saved-search':
+			return data instanceof Trend ? data : new Trend(ff, data);
 		default:
 			return data;
 	}
@@ -118,7 +140,7 @@ export const removeBoldTag = (text: string) => {
 	return text.replace(/<b>/g, '').replace(/<\/b>/g, '');
 };
 
-export const getBoldTexts = (text: string): BoldText[] => {
+export const getBoldTexts = (text: string): StatusBoldText[] => {
 	const pattern = /<b>[\s\S\n]*?<\/b>/g;
 	let theText = text;
 	const match = text.match(pattern);
@@ -163,7 +185,7 @@ export const getBoldTexts = (text: string): BoldText[] => {
 	];
 };
 
-export const getEntities = (statusText: string): Entity[] => {
+export const getEntities = (statusText: string): StatusEntity[] => {
 	const pattern = /[@#]?<a href=".*?".*?>[\s\S\n]*?<\/a>#?/g;
 	const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S\n]*)<\/a>#/;
 	const atPattern = /@<a href="(?:http|https):\/\/[.a-z\d-]*fanfou.com\/(?<id>.*?)".*?>(?<at>.*?)<\/a>/;
@@ -179,7 +201,7 @@ export const getEntities = (statusText: string): Entity[] => {
 			if (index > 0) {
 				const text = theText.slice(0, index);
 				const originText = he.decode(removeBoldTag(theText.slice(0, index)));
-				const thisEntity: Entity = {
+				const thisEntity: StatusEntity = {
 					type: 'text',
 					text: originText
 				};
@@ -197,7 +219,7 @@ export const getEntities = (statusText: string): Entity[] => {
 				};
 				const text = `#${matchText.groups?.tag!}#`;
 				const originText = he.decode(removeBoldTag(text));
-				const thisEntity: Entity = {
+				const thisEntity: StatusEntity = {
 					type: 'tag',
 					text: originText,
 					query: decodeURIComponent(he.decode(matchText.groups?.link ?? ''))
@@ -214,7 +236,7 @@ export const getEntities = (statusText: string): Entity[] => {
 				const matchText = atPattern.exec(item) ?? {groups: {at: '', id: ''}};
 				const text = `@${matchText.groups?.at!}`;
 				const originText = he.decode(removeBoldTag(text));
-				const thisEntity: Entity = {
+				const thisEntity: StatusEntity = {
 					type: 'at',
 					text: originText,
 					name: he.decode(matchText.groups?.at ?? ''),
@@ -235,7 +257,7 @@ export const getEntities = (statusText: string): Entity[] => {
 				const link = matchText.groups?.link ?? '';
 				const text = matchText.groups?.text ?? '';
 				const originText = removeBoldTag(text);
-				const thisEntity: Entity = {
+				const thisEntity: StatusEntity = {
 					type: 'link',
 					text: originText,
 					link
@@ -253,7 +275,7 @@ export const getEntities = (statusText: string): Entity[] => {
 		if (theText.length > 0) {
 			const text = theText;
 			const originText = he.decode(removeBoldTag(text));
-			const thisEntity: Entity = {
+			const thisEntity: StatusEntity = {
 				type: 'text',
 				text: originText
 			};
@@ -269,7 +291,7 @@ export const getEntities = (statusText: string): Entity[] => {
 
 	const text = theText;
 	const originText = he.decode(removeBoldTag(theText));
-	const thisEntity: Entity = {
+	const thisEntity: StatusEntity = {
 		type: 'text',
 		text: originText
 	};
@@ -292,7 +314,7 @@ export const getSourceName = (source: string) => {
 	return matched?.groups?.['name'] ?? source;
 };
 
-export const getPlainText = (entities: Entity[]) => {
+export const getPlainText = (entities: StatusEntity[]) => {
 	let text = '';
 	for (const t of entities ?? []) {
 		text += t.text;

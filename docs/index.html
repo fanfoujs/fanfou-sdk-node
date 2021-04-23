@@ -1,0 +1,724 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>fanfou-sdk</title>
+	<meta name="description" content="Documentation for fanfou-sdk">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">fanfou-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>fanfou-sdk</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#fanfou-sdk-node" id="fanfou-sdk-node" style="color: inherit; text-decoration: none;">
+					<h1>fanfou-sdk-node</h1>
+				</a>
+				<p><a href="https://github.com/fanfoujs/fanfou-sdk-node/actions"><img src="https://github.com/fanfoujs/fanfou-sdk-node/workflows/Node/badge.svg" alt=""></a>
+					<a href="https://www.npmjs.com/package/fanfou-sdk"><img src="https://img.shields.io/npm/v/fanfou-sdk.svg" alt=""></a>
+					<a href="https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/fanfou-sdk.svg" alt=""></a>
+				<a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt=""></a></p>
+				<p>Fanfou SDK for Node.js</p>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm i fanfou-sdk</span>
+</code></pre>
+				<hr>
+				<a href="https://www.patreon.com/LitoMore">
+					<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+				</a>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Fanfou</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;fanfou-sdk&#039;</span><span style="color: #000000">;</span>
+</code></pre>
+				<p><strong>OAuth</strong></p>
+				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">oauthToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">oauthTokenSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span>
+<span style="color: #000000">  });</span>
+
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/home_timeline&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;html&#039;</span><span style="color: #000000">});</span>
+<span style="color: #000000">})();</span>
+</code></pre>
+				<p><strong>XAuth</strong></p>
+				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span>
+<span style="color: #000000">  });</span>
+
+<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">xauth</span><span style="color: #000000">();</span>
+
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/public_timeline&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">count:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">});</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">status</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/update&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hi Fanfou&#039;</span><span style="color: #000000">});</span>
+<span style="color: #000000">})();</span>
+</code></pre>
+				<p><strong>Options</strong></p>
+				<ul>
+					<li><code>consumerKey</code>: The consumer key</li>
+					<li><code>consumerSecret</code>: The consumer secret</li>
+					<li><code>oauthToken</code>: The OAuth token</li>
+					<li><code>oauthTokenSecret</code>: The OAuth token secret</li>
+					<li><code>username</code>: The Fanfou username</li>
+					<li><code>password</code>: The Fanfou password</li>
+					<li><code>protocol</code>: Set the prototol, default is <code>http:</code></li>
+					<li><code>apiDomain</code>: Set the API domain, default is <code>api.fanfou.com</code></li>
+					<li><code>oauthDomain</code>: Set the OAuth domain, default is <code>fanfou.com</code></li>
+					<li><code>hooks</code>: Hooks allow modifications with OAuth</li>
+				</ul>
+				<blockquote>
+					<p>For more Fanfou API docs, see the <a href="https://github.com/FanfouAPI/FanFouAPIDoc/wiki">Fanfou API doc</a>.</p>
+				</blockquote>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getRequestToken</span><span style="color: #000000">();</span>
+<span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getAccessToken</span><span style="color: #000000">(</span><span style="color: #001080">token</span><span style="color: #000000">);</span>
+<span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">xauth</span><span style="color: #000000">();</span>
+<span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #001080">uri</span><span style="color: #000000">, </span><span style="color: #001080">params</span><span style="color: #000000">);</span>
+<span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #001080">uri</span><span style="color: #000000">, </span><span style="color: #001080">params</span><span style="color: #000000">);</span>
+</code></pre>
+				<p><strong>Examples</strong></p>
+				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Get request token</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getRequestToken</span><span style="color: #000000">();</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Get access token</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getAccessToken</span><span style="color: #000000">(</span><span style="color: #001080">token</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Get timeline</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/home_timeline&#039;</span><span style="color: #000000">, {});</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Post status</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">status</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/update&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;post test&#039;</span><span style="color: #000000">});</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Upload photo</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/photos/upload&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">photo:</span><span style="color: #000000"> </span><span style="color: #001080">fs</span><span style="color: #000000">.</span><span style="color: #795E26">createReadStream</span><span style="color: #000000">(</span><span style="color: #001080">path</span><span style="color: #000000">), </span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unicorn&#039;</span><span style="color: #000000">});</span>
+<span style="color: #000000">})();</span>
+</code></pre>
+				<p><strong>Tips</strong></p>
+				<p>Use <code>hooks</code> for your reverse-proxy server</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">oauthToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">oauthTokenSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;api.example.com&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">oauthDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;example.com&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">hooks:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">baseString</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">str</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">str</span><span style="color: #000000">.</span><span style="color: #795E26">replace</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.com&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;fanfou.com&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#related" id="related" style="color: inherit; text-decoration: none;">
+					<h2>Related</h2>
+				</a>
+				<ul>
+					<li><a href="https://github.com/LitoMore/nofan">nofan</a> - CLI for Fanfou</li>
+					<li><a href="https://github.com/fanfoujs/xiaofan-wechat">xiaofan</a> - WeApp for Fanfou</li>
+					<li><a href="https://github.com/LitoMore/fanfou-streamer">fanfou-streamer</a> - Fanfou Streaming SDK for Node.js</li>
+					<li><a href="https://github.com/fanfoujs/fanfou-sdk-browser">fanfou-sdk-browser</a> - Fanfou SDK for browser</li>
+					<li><a href="https://github.com/LitoMore/fanfou-sdk-deno">fanfou-sdk-deno</a> - Fanfou SDK for Deno</li>
+					<li><a href="https://github.com/fanfoujs/fanfou-sdk-weapp">fanfou-sdk-weapp</a> - Fanfou SDK for WeApp</li>
+					<li><a href="https://github.com/LitoMore/fanfou-sdk-python">fanfou-sdk-python</a> - Fanfou SDK for Python</li>
+					<li><a href="https://github.com/LitoMore/alfred-fanfou">alfred-fanfou</a> - Alfred 3 workflow for Fanfou</li>
+					<li><a href="https://github.com/LitoMore/kap-fanfou">kap-fanfou</a> - Kap plugin that share on Fanfou</li>
+					<li><a href="https://github.com/LitoMore/cerebro-fanfou">cerebro-fanfou</a> - A cerebro plugin for Fanfou</li>
+					<li><a href="https://github.com/LitoMore/code-fanfou">code-fanfou</a> - A VS Code extension for Fanfou</li>
+					<li><a href="https://github.com/LitoMore/bitbar-fanfou">bitbar-fanfou</a> - A BitBar plugin for Fanfou</li>
+				</ul>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>MIT</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-reference">
+						<a href="modules.html#fanfou" class="tsd-kind-icon">Fanfou</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/directmessage.html" class="tsd-kind-icon">Direct<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/fanfouerror.html" class="tsd-kind-icon">Fanfou<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/photo.html" class="tsd-kind-icon">Photo</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/status.html" class="tsd-kind-icon">Status</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/trend.html" class="tsd-kind-icon">Trend</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/user.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/default.html" class="tsd-kind-icon">default</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#apiformat" class="tsd-kind-icon">APIFormat</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#apimode" class="tsd-kind-icon">APIMode</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#acceptfriendshipoptions" class="tsd-kind-icon">Accept<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkblockexistsoptions" class="tsd-kind-icon">Check<wbr>Block<wbr>Exists<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkfriendshipdetailoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Detail<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkfriendshipdetailresult" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Detail<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkfriendshipoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkfriendshiprequestsoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Requests<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createblockeduseroptions" class="tsd-kind-icon">Create<wbr>Blocked<wbr>User<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createdirectmessageoptions" class="tsd-kind-icon">Create<wbr>Direct<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createfavoriteoptions" class="tsd-kind-icon">Create<wbr>Favorite<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createfriendshipoptions" class="tsd-kind-icon">Create<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createsavedsearchoptions" class="tsd-kind-icon">Create<wbr>Saved<wbr>Search<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#createstatusoptions" class="tsd-kind-icon">Create<wbr>Status<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#denyfriendshipoptions" class="tsd-kind-icon">Deny<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#directmessagedestroyoptions" class="tsd-kind-icon">Direct<wbr>Message<wbr>Destroy<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#directmessagereplyoptions" class="tsd-kind-icon">Direct<wbr>Message<wbr>Reply<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dismissrecommendeduseroptions" class="tsd-kind-icon">Dismiss<wbr>Recommended<wbr>User<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropblockeduseroptions" class="tsd-kind-icon">Drop<wbr>Blocked<wbr>User<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropdirectmessageoptions" class="tsd-kind-icon">Drop<wbr>Direct<wbr>Message<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropfavoriteoptions" class="tsd-kind-icon">Drop<wbr>Favorite<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropfriendshipoptions" class="tsd-kind-icon">Drop<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropsavedsearchoptions" class="tsd-kind-icon">Drop<wbr>Saved<wbr>Search<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dropstatusoptions" class="tsd-kind-icon">Drop<wbr>Status<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#fanfouhooks" class="tsd-kind-icon">Fanfou<wbr>Hooks</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#fanfoutoken" class="tsd-kind-icon">Fanfou<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#friendshipresult" class="tsd-kind-icon">Friendship<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getblockedusersoptions" class="tsd-kind-icon">Get<wbr>Blocked<wbr>Users<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getcontexttimelineoptions" class="tsd-kind-icon">Get<wbr>Context<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getconversationoptions" class="tsd-kind-icon">Get<wbr>Conversation<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getconversationsoptions" class="tsd-kind-icon">Get<wbr>Conversations<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getconversationsresult" class="tsd-kind-icon">Get<wbr>Conversations<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getfavoritesoptions" class="tsd-kind-icon">Get<wbr>Favorites<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getfolloweridsoptions" class="tsd-kind-icon">Get<wbr>Follower<wbr>Ids<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getfollowersoptions" class="tsd-kind-icon">Get<wbr>Followers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getfollowingidsoptions" class="tsd-kind-icon">Get<wbr>Following<wbr>Ids<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getfollowingsoptions" class="tsd-kind-icon">Get<wbr>Followings<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#gethometimelineoptions" class="tsd-kind-icon">Get<wbr>Home<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getinboxoptions" class="tsd-kind-icon">Get<wbr>Inbox<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getmentionsoptions" class="tsd-kind-icon">Get<wbr>Mentions<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getnotificationresult" class="tsd-kind-icon">Get<wbr>Notification<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getpublictimelineoptions" class="tsd-kind-icon">Get<wbr>Public<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getratelimitstatusoptions" class="tsd-kind-icon">Get<wbr>Rate<wbr>Limit<wbr>Status<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getratelimitstatusresult" class="tsd-kind-icon">Get<wbr>Rate<wbr>Limit<wbr>Status<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getrecentfollowersoptions" class="tsd-kind-icon">Get<wbr>Recent<wbr>Followers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getrecentusersoptions" class="tsd-kind-icon">Get<wbr>Recent<wbr>Users<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getrecommendedusersoptions" class="tsd-kind-icon">Get<wbr>Recommended<wbr>Users<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getrepliesoptions" class="tsd-kind-icon">Get<wbr>Replies<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getsavedsearchoptions" class="tsd-kind-icon">Get<wbr>Saved<wbr>Search<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getsavedsearchesoptions" class="tsd-kind-icon">Get<wbr>Saved<wbr>Searches<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getsentoptions" class="tsd-kind-icon">Get<wbr>Sent<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getstatusoptions" class="tsd-kind-icon">Get<wbr>Status<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#gettaggedusersoptions" class="tsd-kind-icon">Get<wbr>Tagged<wbr>Users<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#gettrendsoptions" class="tsd-kind-icon">Get<wbr>Trends<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#gettrendsresult" class="tsd-kind-icon">Get<wbr>Trends<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getuseroptions" class="tsd-kind-icon">Get<wbr>User<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getuserphotosoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Photos<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getusertagsoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Tags<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#getusertimelineoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchpublictimelineoptions" class="tsd-kind-icon">Search<wbr>Public<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchusertimelineoptions" class="tsd-kind-icon">Search<wbr>User<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchusersoptions" class="tsd-kind-icon">Search<wbr>Users<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchusersresult" class="tsd-kind-icon">Search<wbr>Users<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusboldtext" class="tsd-kind-icon">Status<wbr>Bold<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statuscontextoptions" class="tsd-kind-icon">Status<wbr>Context<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusdestroyoptions" class="tsd-kind-icon">Status<wbr>Destroy<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusentity" class="tsd-kind-icon">Status<wbr>Entity</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusentityat" class="tsd-kind-icon">Status<wbr>Entity<wbr>At</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusentitylink" class="tsd-kind-icon">Status<wbr>Entity<wbr>Link</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusentitytag" class="tsd-kind-icon">Status<wbr>Entity<wbr>Tag</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusentitytext" class="tsd-kind-icon">Status<wbr>Entity<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusfavoriteoptions" class="tsd-kind-icon">Status<wbr>Favorite<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusreplyoptions" class="tsd-kind-icon">Status<wbr>Reply<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusrepostoptions" class="tsd-kind-icon">Status<wbr>Repost<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#statusunfavoriteoptions" class="tsd-kind-icon">Status<wbr>Unfavorite<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#trendfavorite" class="tsd-kind-icon">Trend<wbr>Favorite</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#trendshowoptions" class="tsd-kind-icon">Trend<wbr>Show<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#trendunfavoriteoptions" class="tsd-kind-icon">Trend<wbr>Unfavorite<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#updatenotifynumberoptions" class="tsd-kind-icon">Update<wbr>Notify<wbr>Number<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#updatenotifynumberresult" class="tsd-kind-icon">Update<wbr>Notify<wbr>Number<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#updateprofileimageoptions" class="tsd-kind-icon">Update<wbr>Profile<wbr>Image<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#updateprofileoptions" class="tsd-kind-icon">Update<wbr>Profile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#uploadphotooptions" class="tsd-kind-icon">Upload<wbr>Photo<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#useracceptfriendshipoptions" class="tsd-kind-icon">User<wbr>Accept<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userblockoptions" class="tsd-kind-icon">User<wbr>Block<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#usercheckblockoptions" class="tsd-kind-icon">User<wbr>Check<wbr>Block<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userdenyfriendshipoptions" class="tsd-kind-icon">User<wbr>Deny<wbr>Friendship<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userfollowoptions" class="tsd-kind-icon">User<wbr>Follow<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userfolloweridsoptions" class="tsd-kind-icon">User<wbr>Follower<wbr>Ids<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userfollowersoptions" class="tsd-kind-icon">User<wbr>Followers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userfollowingidsoptions" class="tsd-kind-icon">User<wbr>Following<wbr>Ids<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userfollowingsoptions" class="tsd-kind-icon">User<wbr>Followings<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userrecentfollowersoptions" class="tsd-kind-icon">User<wbr>Recent<wbr>Followers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#usersearchtimelineoptions" class="tsd-kind-icon">User<wbr>Search<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#usershowoptions" class="tsd-kind-icon">User<wbr>Show<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#usertagsoptions" class="tsd-kind-icon">User<wbr>Tags<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#usertimelineoptions" class="tsd-kind-icon">User<wbr>Timeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userunblockoptions" class="tsd-kind-icon">User<wbr>Unblock<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userunfollowoptions" class="tsd-kind-icon">User<wbr>Unfollow<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#verifycredentialsoptions" class="tsd-kind-icon">Verify<wbr>Credentials<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#acceptfriendship" class="tsd-kind-icon">accept<wbr>Friendship</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#checkblockexists" class="tsd-kind-icon">check<wbr>Block<wbr>Exists</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#checkfriendship" class="tsd-kind-icon">check<wbr>Friendship</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#checkfriendshipdetail" class="tsd-kind-icon">check<wbr>Friendship<wbr>Detail</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#checkfriendshiprequests" class="tsd-kind-icon">check<wbr>Friendship<wbr>Requests</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createblockeduser" class="tsd-kind-icon">create<wbr>Blocked<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createdirectmessage" class="tsd-kind-icon">create<wbr>Direct<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createfavorite" class="tsd-kind-icon">create<wbr>Favorite</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createfriendship" class="tsd-kind-icon">create<wbr>Friendship</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createsavedsearch" class="tsd-kind-icon">create<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createstatus" class="tsd-kind-icon">create<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#denyfriendship" class="tsd-kind-icon">deny<wbr>Friendship</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dismissrecommendeduser" class="tsd-kind-icon">dismiss<wbr>Recommended<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropblockeduser" class="tsd-kind-icon">drop<wbr>Blocked<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropdirectmessage" class="tsd-kind-icon">drop<wbr>Direct<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropfavorite" class="tsd-kind-icon">drop<wbr>Favorite</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropfriendship" class="tsd-kind-icon">drop<wbr>Friendship</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropsavedsearch" class="tsd-kind-icon">drop<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dropstatus" class="tsd-kind-icon">drop<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getblockedids" class="tsd-kind-icon">get<wbr>Blocked<wbr>Ids</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getblockedusers" class="tsd-kind-icon">get<wbr>Blocked<wbr>Users</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getcontexttimeline" class="tsd-kind-icon">get<wbr>Context<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getconversation" class="tsd-kind-icon">get<wbr>Conversation</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getconversations" class="tsd-kind-icon">get<wbr>Conversations</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getfavorites" class="tsd-kind-icon">get<wbr>Favorites</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getfollowerids" class="tsd-kind-icon">get<wbr>Follower<wbr>Ids</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getfollowers" class="tsd-kind-icon">get<wbr>Followers</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getfollowingids" class="tsd-kind-icon">get<wbr>Following<wbr>Ids</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getfollowings" class="tsd-kind-icon">get<wbr>Followings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#gethometimeline" class="tsd-kind-icon">get<wbr>Home<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getinbox" class="tsd-kind-icon">get<wbr>Inbox</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getmentions" class="tsd-kind-icon">get<wbr>Mentions</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getnotification" class="tsd-kind-icon">get<wbr>Notification</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getpublictimeline" class="tsd-kind-icon">get<wbr>Public<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getratelimitstatus" class="tsd-kind-icon">get<wbr>Rate<wbr>Limit<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getrecentfollowers" class="tsd-kind-icon">get<wbr>Recent<wbr>Followers</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getrecentusers" class="tsd-kind-icon">get<wbr>Recent<wbr>Users</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getrecommendedusers" class="tsd-kind-icon">get<wbr>Recommended<wbr>Users</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getreplies" class="tsd-kind-icon">get<wbr>Replies</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getsavedsearch" class="tsd-kind-icon">get<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getsavedsearches" class="tsd-kind-icon">get<wbr>Saved<wbr>Searches</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getsent" class="tsd-kind-icon">get<wbr>Sent</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getstatus" class="tsd-kind-icon">get<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#gettaggedusers" class="tsd-kind-icon">get<wbr>Tagged<wbr>Users</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#gettrends" class="tsd-kind-icon">get<wbr>Trends</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getuser" class="tsd-kind-icon">get<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getuserphotos" class="tsd-kind-icon">get<wbr>User<wbr>Photos</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getusertags" class="tsd-kind-icon">get<wbr>User<wbr>Tags</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#getusertimeline" class="tsd-kind-icon">get<wbr>User<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#searchpublictimeline" class="tsd-kind-icon">search<wbr>Public<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#searchusertimeline" class="tsd-kind-icon">search<wbr>User<wbr>Timeline</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#searchusers" class="tsd-kind-icon">search<wbr>Users</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#updatenotifynumber" class="tsd-kind-icon">update<wbr>Notify<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#updateprofile" class="tsd-kind-icon">update<wbr>Profile</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#updateprofileimage" class="tsd-kind-icon">update<wbr>Profile<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#uploadphoto" class="tsd-kind-icon">upload<wbr>Photo</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#verifycredentials" class="tsd-kind-icon">verify<wbr>Credentials</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

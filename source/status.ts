@@ -1,4 +1,4 @@
-import Fanfou from './index.js';
+import Fanfou from './fanfou.js';
 import * as api from './api.js';
 import User from './user.js';
 import Photo from './photo.js';
@@ -9,59 +9,73 @@ import {
 	getPlainText
 } from './utils.js';
 
-export type BoldText = {
+export type StatusBoldText = {
 	text: string;
 	isBold: boolean;
 };
 
-export type TextEntity = {
+export type StatusEntityText = {
 	type: 'text';
 	text: string;
-	boldTexts?: BoldText[];
+	boldTexts?: StatusBoldText[];
 };
 
-export type TagEntity = {
+export type StatusEntityTag = {
 	type: 'tag';
 	text: string;
 	query: string;
-	boldTexts?: BoldText[];
+	boldTexts?: StatusBoldText[];
 };
 
-export type AtEntity = {
+export type StatusEntityAt = {
 	type: 'at';
 	text: string;
 	name: string;
 	id: string;
-	boldTexts?: BoldText[];
+	boldTexts?: StatusBoldText[];
 };
 
-export type LinkEntity = {
+export type StatusEntityLink = {
 	type: 'link';
 	text: string;
 	link: string;
-	boldTexts?: BoldText[];
+	boldTexts?: StatusBoldText[];
 };
 
-export type Entity = TextEntity | TagEntity | AtEntity | LinkEntity;
+export type StatusEntity =
+	| StatusEntityText
+	| StatusEntityTag
+	| StatusEntityAt
+	| StatusEntityLink;
 
-type FavoriteOptions = {
+export type StatusReplyOptions = api.CreateStatusOptions;
+
+export type StatusRepostOptions = api.CreateStatusOptions;
+
+export type StatusFavoriteOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
-type DestroyOptions = {
+export type StatusUnfavoriteOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
+};
+
+export type StatusDestroyOptions = {
+	id?: string;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
-type ContextOptions = {
+export type StatusContextOptions = {
 	id?: string;
-	mode?: api.Mode;
-	format?: api.Format;
+	mode?: api.APIMode;
+	format?: api.APIFormat;
 	callback?: string;
 };
 
@@ -89,10 +103,10 @@ class Status {
 	plainText?: string;
 	user?: User;
 	photo?: Photo;
-	entities?: Entity[];
+	entities?: StatusEntity[];
 	private readonly ff: Fanfou;
 
-	constructor(ff: Fanfou, status: Status) {
+	constructor(ff: Fanfou, status: any) {
 		this.ff = ff;
 		this.createdAt = status.createdAt;
 		this.id = status.id;
@@ -174,32 +188,38 @@ class Status {
 		return this.isOrigin() && this.text.match(/转@/g);
 	}
 
-	reply = async (options: api.CreateStatusOptions) =>
+	reply = async (options: StatusReplyOptions) =>
 		api.createStatus(this.ff, {
 			inReplyToStatusId: this.id,
 			...options
 		});
 
-	repost = async (options?: api.CreateStatusOptions) =>
+	repost = async (options?: StatusRepostOptions) =>
 		api.createStatus(this.ff, {
 			repostStatusId: this.id,
 			status: options?.status ?? '',
 			...options
 		});
 
-	favorite = async (options?: FavoriteOptions) =>
+	favorite = async (options?: StatusFavoriteOptions) =>
 		api.createFavorite(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	destroy = async (options?: DestroyOptions) =>
+	unfavorite = async (options?: StatusUnfavoriteOptions) =>
+		api.dropFavorite(this.ff, {
+			id: this.id,
+			...options
+		});
+
+	destroy = async (options?: StatusDestroyOptions) =>
 		api.dropStatus(this.ff, {
 			id: this.id,
 			...options
 		});
 
-	context = async (options?: ContextOptions) =>
+	context = async (options?: StatusContextOptions) =>
 		api.getContextTimeline(this.ff, {
 			id: this.id,
 			...options

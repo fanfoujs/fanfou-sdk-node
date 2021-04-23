@@ -7,7 +7,7 @@ class Photo {
 	type?: string;
 	isGif?: boolean;
 
-	constructor(photo: Photo) {
+	constructor(photo: any) {
 		this.url = photo.url;
 		this.imageurl = photo.imageurl;
 		this.thumburl = photo.thumburl;
@@ -15,7 +15,7 @@ class Photo {
 		this.originurl = photo.largeurl.replace(/@.+\..+$/g, '');
 		// @ts-expect-error
 		this.type = /^.+\.(?<type>.+)$/
-			.exec(this.originurl)
+			.exec(this.originurl ?? '')
 			// eslint-disable-next-line @typescript-eslint/dot-notation
 			.groups?.['type'].toLowerCase();
 		this.isGif = this.type === 'gif';

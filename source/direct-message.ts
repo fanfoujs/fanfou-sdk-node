@@ -1,16 +1,16 @@
-import Fanfou from './index.js';
+import Fanfou from './fanfou.js';
 import * as api from './api.js';
 import User from './user.js';
 
-type ReplyOptions = {
+export type DirectMessageReplyOptions = {
 	text: string;
 	user?: string;
 	inReplyToId?: string;
-	mode?: api.Mode;
+	mode?: api.APIMode;
 	callback?: string;
 };
 
-type DestroyOptions = {
+export type DirectMessageDestroyOptions = {
 	id?: string;
 	callback?: string;
 };
@@ -28,7 +28,7 @@ class DirectMessage {
 	inReplyTo?: DirectMessage;
 	private readonly ff: Fanfou;
 
-	constructor(ff: Fanfou, dm: DirectMessage) {
+	constructor(ff: Fanfou, dm: any) {
 		this.ff = ff;
 		this.id = dm.id;
 		this.text = dm.text;
@@ -50,14 +50,14 @@ class DirectMessage {
 		}
 	}
 
-	reply = async (options: ReplyOptions) =>
+	reply = async (options: DirectMessageReplyOptions) =>
 		api.createDirectMessage(this.ff, {
 			user: this.senderId,
 			inReplyToId: this.id,
 			...options
 		});
 
-	destroy = async (options?: DestroyOptions) =>
+	destroy = async (options?: DirectMessageDestroyOptions) =>
 		api.dropDirectMessage(this.ff, {
 			id: this.id,
 			...options
