@@ -29,7 +29,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "del-cli dist docs && tsc && typedoc source/index.ts",
+    "build": "del-cli dist docs && tsc && typedoc --gitRevision main source/index.ts",
     "pretest": "npm run build",
     "test": "xo"
   },
