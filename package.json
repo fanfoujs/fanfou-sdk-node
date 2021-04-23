@@ -1,6 +1,6 @@
 {
   "name": "fanfou-sdk",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "description": "Fanfou SDK for Node.js",
   "type": "module",
   "exports": "./dist/index.js",
@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "del-cli dist docs && tsc && typedoc --gitRevision main source/index.ts",
+    "prepublish": "npm run build",
     "pretest": "npm run build",
     "test": "xo"
   },
