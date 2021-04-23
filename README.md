@@ -36,7 +36,7 @@ import Fanfou from 'fanfou-sdk';
     oauthTokenSecret: ''
   });
 
-  const timeline = await ff.get('/statuses/home_timeline', {format: 'html'});
+  const timeline = await ff.getHomeTimeline();
 })();
 ```
 
@@ -53,8 +53,8 @@ import Fanfou from 'fanfou-sdk';
 
   await ff.xauth();
 
-  const timeline = await ff.get('/statuses/public_timeline', {count: 10});
-  const status = await ff.post('/statuses/update', {status: 'Hi Fanfou'});
+  const timeline = await ff.getPublicTimeline({count: 10});
+  const status = await ff.createStatus({status: 'Hi Fanfou'});
 })();
 ```
 
@@ -75,13 +75,7 @@ import Fanfou from 'fanfou-sdk';
 
 ## API
 
-```javascript
-ff.getRequestToken();
-ff.getAccessToken(token);
-ff.xauth();
-ff.get(uri, params);
-ff.post(uri, params);
-```
+For full SDK API, please refer to the [documentation](https://fanfoujs.github.io/fanfou-sdk-node/modules.html).
 
 **Examples**
 
@@ -94,13 +88,26 @@ ff.post(uri, params);
   const token = await ff.getAccessToken(token);
 
   // Get timeline
-  const timeline = await ff.get('/statuses/home_timeline', {});
+  const timeline = await ff.getHomeTimeline();
 
   // Post status
-  const status = await ff.post('/statuses/update', {status: 'post test'});
+  const status = await ff.createStatus({status: 'post test'});
+
+  // Delete a status from its instance
+  await status.destroy();
 
   // Upload photo
-  const result = await ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'});
+  const result = await ff.uploadPhoto({photo: fs.createReadStream(path), status: 'unicorn'});
+
+  // Get user
+  const user = await ff.getUser({id: 'lito'});
+
+  // Follow a user from its instance
+  await user.follow();
+
+  // Request Fanfou API by passing the URI
+  const timeline = ff.get('/statuses/home_timeline', {count: 10});
+  const status = ff.post('/statuses/update', {status: 'Hi Fanfou'});
 })();
 ```
 
