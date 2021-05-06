@@ -27,7 +27,7 @@
     "xo": "^0.38.2"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12.17"
   },
   "scripts": {
     "build": "del-cli dist docs && tsc && typedoc --gitRevision main source/index.ts",
