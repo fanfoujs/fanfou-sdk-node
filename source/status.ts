@@ -1,83 +1,9 @@
-import Fanfou from './fanfou.js';
-import * as api from './api.js';
-import User from './user.js';
-import Photo from './photo.js';
 import {
 	getEntities,
 	getSourceUrl,
 	getSourceName,
 	getPlainText
 } from './utils.js';
-
-export type StatusBoldText = {
-	text: string;
-	isBold: boolean;
-};
-
-export type StatusEntityText = {
-	type: 'text';
-	text: string;
-	boldTexts?: StatusBoldText[];
-};
-
-export type StatusEntityTag = {
-	type: 'tag';
-	text: string;
-	query: string;
-	boldTexts?: StatusBoldText[];
-};
-
-export type StatusEntityAt = {
-	type: 'at';
-	text: string;
-	name: string;
-	id: string;
-	boldTexts?: StatusBoldText[];
-};
-
-export type StatusEntityLink = {
-	type: 'link';
-	text: string;
-	link: string;
-	boldTexts?: StatusBoldText[];
-};
-
-export type StatusEntity =
-	| StatusEntityText
-	| StatusEntityTag
-	| StatusEntityAt
-	| StatusEntityLink;
-
-export type StatusReplyOptions = api.CreateStatusOptions;
-
-export type StatusRepostOptions = api.CreateStatusOptions;
-
-export type StatusFavoriteOptions = {
-	id?: string;
-	mode?: api.APIMode;
-	format?: api.APIFormat;
-	callback?: string;
-};
-
-export type StatusUnfavoriteOptions = {
-	id?: string;
-	mode?: api.APIMode;
-	format?: api.APIFormat;
-};
-
-export type StatusDestroyOptions = {
-	id?: string;
-	mode?: api.APIMode;
-	format?: api.APIFormat;
-	callback?: string;
-};
-
-export type StatusContextOptions = {
-	id?: string;
-	mode?: api.APIMode;
-	format?: api.APIFormat;
-	callback?: string;
-};
 
 class Status {
 	createdAt: string;
@@ -104,10 +30,8 @@ class Status {
 	user?: User;
 	photo?: Photo;
 	entities?: StatusEntity[];
-	private readonly ff: Fanfou;
 
-	constructor(ff: Fanfou, status: any) {
-		this.ff = ff;
+	constructor(status: any) {
 		this.createdAt = status.createdAt;
 		this.id = status.id;
 		this.rawid = status.rawid;
@@ -152,12 +76,12 @@ class Status {
 			this.repostStatus =
 				status.repostStatus instanceof Status
 					? status.repostStatus
-					: new Status(ff, status.repostStatus);
+					: new Status(status.repostStatus);
 		}
 
 		if (status.user) {
 			this.user =
-				status.user instanceof User ? status.user : new User(ff, status.user);
+				status.user instanceof User ? status.user : new User(status.user);
 		}
 
 		if (status.photo) {
@@ -187,43 +111,6 @@ class Status {
 	isOriginRepost() {
 		return this.isOrigin() && this.text.match(/转@/g);
 	}
-
-	reply = async (options: StatusReplyOptions) =>
-		api.createStatus(this.ff, {
-			inReplyToStatusId: this.id,
-			...options
-		});
-
-	repost = async (options?: StatusRepostOptions) =>
-		api.createStatus(this.ff, {
-			repostStatusId: this.id,
-			status: options?.status ?? '',
-			...options
-		});
-
-	favorite = async (options?: StatusFavoriteOptions) =>
-		api.createFavorite(this.ff, {
-			id: this.id,
-			...options
-		});
-
-	unfavorite = async (options?: StatusUnfavoriteOptions) =>
-		api.dropFavorite(this.ff, {
-			id: this.id,
-			...options
-		});
-
-	destroy = async (options?: StatusDestroyOptions) =>
-		api.dropStatus(this.ff, {
-			id: this.id,
-			...options
-		});
-
-	context = async (options?: StatusContextOptions) =>
-		api.getContextTimeline(this.ff, {
-			id: this.id,
-			...options
-		});
 
 	private getType() {
 		if (this.isReply()) {

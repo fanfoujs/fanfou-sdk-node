@@ -1,9 +1,5 @@
 import he from 'he';
-import Fanfou from './fanfou.js';
-import Status, {StatusBoldText, StatusEntity} from './status.js';
-import User from './user.js';
-import Trend from './trend.js';
-import DirectMessage from './direct-message.js';
+import Status, {StatusBoldText, StatusEntity} from './types.js';
 
 export const uriType = (uri: string) => {
 	const uriList = {
@@ -72,35 +68,35 @@ export const uriType = (uri: string) => {
 	return type;
 };
 
-export const parseList = (ff: Fanfou, list: any, type: string) => {
+export const parseList = (list: any, type: string) => {
 	switch (type) {
 		case 'timeline':
 			return list.map((item: any) =>
-				item instanceof Status ? item : new Status(ff, item)
+				item instanceof Status ? item : new Status(item)
 			);
 		case 'users':
 			return list.map((item: any) =>
-				item instanceof User ? item : new User(ff, item)
+				item instanceof User ? item : new User(item)
 			);
 		case 'conversation':
 			return list.map((item: any) =>
-				item instanceof DirectMessage ? item : new DirectMessage(ff, item)
+				item instanceof DirectMessage ? item : new DirectMessage(item)
 			);
 		case 'conversation-list':
 			return list.map((item: any) => {
 				item.dm =
 					item.dm instanceof DirectMessage
 						? item.dm
-						: new DirectMessage(ff, item.dm);
+						: new DirectMessage(item.dm);
 				return item;
 			});
 		case 'saved-search-list':
 			return list.map((item: any) =>
-				item instanceof Trend ? item : new Trend(ff, item)
+				item instanceof Trend ? item : new Trend(item)
 			);
 		case 'trend-list': {
 			list.trends = list.trends.map((item: any) =>
-				item instanceof Trend ? item : new Trend(ff, item)
+				item instanceof Trend ? item : new Trend(item)
 			);
 			return list;
 		}
@@ -110,7 +106,7 @@ export const parseList = (ff: Fanfou, list: any, type: string) => {
 	}
 };
 
-export const parseData = (ff: Fanfou, data: any, type: string) => {
+export const parseData = (data: any, type: string) => {
 	switch (type) {
 		case 'timeline':
 		case 'users':
@@ -118,15 +114,15 @@ export const parseData = (ff: Fanfou, data: any, type: string) => {
 		case 'conversation-list':
 		case 'saved-search-list':
 		case 'trend-list':
-			return parseList(ff, data, type);
+			return parseList(data, type);
 		case 'status':
-			return data instanceof Status ? data : new Status(ff, data);
+			return data instanceof Status ? data : new Status(data);
 		case 'user':
-			return data instanceof User ? data : new User(ff, data);
+			return data instanceof User ? data : new User(data);
 		case 'dm':
-			return data instanceof DirectMessage ? data : new DirectMessage(ff, data);
+			return data instanceof DirectMessage ? data : new DirectMessage(data);
 		case 'saved-search':
-			return data instanceof Trend ? data : new Trend(ff, data);
+			return data instanceof Trend ? data : new Trend(data);
 		default:
 			return data;
 	}
