@@ -1,7 +1,6 @@
+/* eslint @typescript-eslint/no-unsafe-return: off */
 import Fanfou from './fanfou.js';
-import Status from './status.js';
-import User from './user.js';
-import DirectMessage from './direct-message.js';
+import {Status, User, Trend, DirectMessage} from './types.js';
 
 export type APIMode = 'default' | 'lite';
 export type APIFormat = 'html';
@@ -18,7 +17,7 @@ export type SearchPublicTimelineOptions = {
 
 export const searchPublicTimeline = async (
 	ff: Fanfou,
-	options: SearchPublicTimelineOptions
+	options: SearchPublicTimelineOptions,
 ): Promise<Status[]> => ff.get('/search/public_timeline', options);
 
 export type SearchUsersOptions = {
@@ -37,7 +36,7 @@ export type SearchUsersResult = {
 
 export const searchUsers = async (
 	ff: Fanfou,
-	options: SearchUsersOptions
+	options: SearchUsersOptions,
 ): Promise<SearchUsersResult> => ff.get('/search/users', options);
 
 export type SearchUserTimelineOptions = {
@@ -53,7 +52,7 @@ export type SearchUserTimelineOptions = {
 
 export const searchUserTimeline = async (
 	ff: Fanfou,
-	options: SearchUserTimelineOptions
+	options: SearchUserTimelineOptions,
 ): Promise<Status[]> => ff.get('/search/user_timeline', options);
 
 export const getBlockedIds = async (ff: Fanfou): Promise<string[]> =>
@@ -67,7 +66,7 @@ export type GetBlockedUsersOptions = {
 
 export const getBlockedUsers = async (
 	ff: Fanfou,
-	options?: GetBlockedUsersOptions
+	options?: GetBlockedUsersOptions,
 ): Promise<User[]> => ff.get('/blocks/blocking', options);
 
 export type CreateBlockedUserOptions = {
@@ -79,7 +78,7 @@ export type CreateBlockedUserOptions = {
 
 export const createBlockedUser = async (
 	ff: Fanfou,
-	options: CreateBlockedUserOptions
+	options: CreateBlockedUserOptions,
 ): Promise<User> => ff.post('/blocks/create', options);
 
 export type CheckBlockExistsOptions = {
@@ -89,7 +88,7 @@ export type CheckBlockExistsOptions = {
 
 export const checkBlockExists = async (
 	ff: Fanfou,
-	options: CheckBlockExistsOptions
+	options: CheckBlockExistsOptions,
 ): Promise<User> => ff.get('/blocks/exists', options);
 
 export type DropBlockedUserOptions = {
@@ -99,7 +98,7 @@ export type DropBlockedUserOptions = {
 
 export const dropBlockedUser = async (
 	ff: Fanfou,
-	options: DropBlockedUserOptions
+	options: DropBlockedUserOptions,
 ): Promise<User> => ff.post('/blocks/destroy', options);
 
 export type GetTaggedUsersOptions = {
@@ -113,7 +112,7 @@ export type GetTaggedUsersOptions = {
 
 export const getTaggedUsers = async (
 	ff: Fanfou,
-	options?: GetTaggedUsersOptions
+	options?: GetTaggedUsersOptions,
 ): Promise<User[]> => ff.post('/users/tagged', options);
 
 export type GetUserOptions = {
@@ -125,7 +124,7 @@ export type GetUserOptions = {
 
 export const getUser = async (
 	ff: Fanfou,
-	options?: GetUserOptions
+	options?: GetUserOptions,
 ): Promise<User> => ff.get('/users/show', options);
 
 export type GetUserTagsOptions = {
@@ -135,7 +134,7 @@ export type GetUserTagsOptions = {
 
 export const getUserTags = async (
 	ff: Fanfou,
-	options?: GetUserTagsOptions
+	options?: GetUserTagsOptions,
 ): Promise<string[]> => ff.get('/users/tag_list', options);
 
 export type GetRecentFollowersOptions = {
@@ -149,7 +148,7 @@ export type GetRecentFollowersOptions = {
 
 export const getRecentFollowers = async (
 	ff: Fanfou,
-	options?: GetRecentFollowersOptions
+	options?: GetRecentFollowersOptions,
 ): Promise<User[]> => ff.get('/users/followers', options);
 
 export type GetRecommendedUsersOptions = {
@@ -162,7 +161,7 @@ export type GetRecommendedUsersOptions = {
 
 export const getRecommendedUsers = async (
 	ff: Fanfou,
-	options?: GetRecommendedUsersOptions
+	options?: GetRecommendedUsersOptions,
 ): Promise<User[]> => ff.get('/users/recommendation', options);
 
 export type DismissRecommendedUserOptions = {
@@ -174,7 +173,7 @@ export type DismissRecommendedUserOptions = {
 
 export const dismissRecommendedUser = async (
 	ff: Fanfou,
-	options: DismissRecommendedUserOptions
+	options: DismissRecommendedUserOptions,
 ): Promise<User> => ff.post('/users/cancel_recommendation', options);
 
 export type GetRecentUsersOptions = {
@@ -188,7 +187,7 @@ export type GetRecentUsersOptions = {
 
 export const getRecentUsers = async (
 	ff: Fanfou,
-	options?: GetRecentUsersOptions
+	options?: GetRecentUsersOptions,
 ): Promise<User[]> => ff.get('/users/friends', options);
 
 export type VerifyCredentialsOptions = {
@@ -199,7 +198,7 @@ export type VerifyCredentialsOptions = {
 
 export const verifyCredentials = async (
 	ff: Fanfou,
-	options?: VerifyCredentialsOptions
+	options?: VerifyCredentialsOptions,
 ): Promise<User> => ff.get('/account/verify_credentials', options);
 
 export type UpdateProfileImageOptions = {
@@ -211,7 +210,7 @@ export type UpdateProfileImageOptions = {
 
 export const updateProfileImage = async (
 	ff: Fanfou,
-	options: UpdateProfileImageOptions
+	options: UpdateProfileImageOptions,
 ): Promise<User> => ff.post('/account/update_profile_image', options);
 
 export type GetRateLimitStatusOptions = {
@@ -227,7 +226,7 @@ export type GetRateLimitStatusResult = {
 
 export const getRateLimitStatus = async (
 	ff: Fanfou,
-	options?: GetRateLimitStatusOptions
+	options?: GetRateLimitStatusOptions,
 ): Promise<GetRateLimitStatusResult> =>
 	ff.get('/account/rate_limit_status', options);
 
@@ -243,7 +242,7 @@ export type UpdateProfileOptions = {
 
 export const updateProfile = async (
 	ff: Fanfou,
-	options?: UpdateProfileOptions
+	options?: UpdateProfileOptions,
 ): Promise<User> => ff.post('/account/update_profile', options);
 
 export type GetNotificationResult = {
@@ -253,7 +252,7 @@ export type GetNotificationResult = {
 };
 
 export const getNotification = async (
-	ff: Fanfou
+	ff: Fanfou,
 ): Promise<GetNotificationResult> => ff.get('/account/notification');
 
 export type UpdateNotifyNumberOptions = {
@@ -267,7 +266,7 @@ export type UpdateNotifyNumberResult = {
 
 export const updateNotifyNumber = async (
 	ff: Fanfou,
-	options?: UpdateNotifyNumberOptions
+	options?: UpdateNotifyNumberOptions,
 ): Promise<UpdateNotifyNumberResult> =>
 	ff.post('/account/update_notify_num', options);
 
@@ -278,7 +277,7 @@ export type CreateSavedSearchOptions = {
 
 export const createSavedSearch = async (
 	ff: Fanfou,
-	options?: CreateSavedSearchOptions
+	options?: CreateSavedSearchOptions,
 ): Promise<Trend> => ff.post('/saved_searches/create', options);
 
 export type DropSavedSearchOptions = {
@@ -288,7 +287,7 @@ export type DropSavedSearchOptions = {
 
 export const dropSavedSearch = async (
 	ff: Fanfou,
-	options: DropSavedSearchOptions
+	options: DropSavedSearchOptions,
 ): Promise<Trend> => ff.post('/saved_searches/destroy', options);
 
 export type GetSavedSearchOptions = {
@@ -298,7 +297,7 @@ export type GetSavedSearchOptions = {
 
 export const getSavedSearch = async (
 	ff: Fanfou,
-	options?: GetSavedSearchOptions
+	options?: GetSavedSearchOptions,
 ): Promise<Trend> => ff.get('/saved_searches/show', options);
 
 export type GetSavedSearchesOptions = {
@@ -307,7 +306,7 @@ export type GetSavedSearchesOptions = {
 
 export const getSavedSearches = async (
 	ff: Fanfou,
-	options?: GetSavedSearchesOptions
+	options?: GetSavedSearchesOptions,
 ): Promise<Trend[]> => ff.get('/saved_searches/list', options);
 
 export type GetUserPhotosOptions = {
@@ -323,7 +322,7 @@ export type GetUserPhotosOptions = {
 
 export const getUserPhotos = async (
 	ff: Fanfou,
-	options?: GetUserPhotosOptions
+	options?: GetUserPhotosOptions,
 ): Promise<Status> => ff.get('/photos/user_timeline', options);
 
 export type UploadPhotoOptions = {
@@ -338,18 +337,11 @@ export type UploadPhotoOptions = {
 
 export const uploadPhoto = async (
 	ff: Fanfou,
-	options: UploadPhotoOptions
+	options: UploadPhotoOptions,
 ): Promise<Status> => ff.post('/photos/upload', options);
 
 export type GetTrendsOptions = {
 	callback?: string;
-};
-
-export type Trend = {
-	id: number;
-	query: string;
-	name: string;
-	createdAt: string;
 };
 
 export type GetTrendsResult = {
@@ -359,7 +351,7 @@ export type GetTrendsResult = {
 
 export const getTrends = async (
 	ff: Fanfou,
-	options?: GetTrendsOptions
+	options?: GetTrendsOptions,
 ): Promise<GetTrendsResult> => ff.get('/trends/list', options);
 
 export type GetFollowerIdsOptions = {
@@ -371,7 +363,7 @@ export type GetFollowerIdsOptions = {
 
 export const getFollowerIds = async (
 	ff: Fanfou,
-	options?: GetFollowerIdsOptions
+	options?: GetFollowerIdsOptions,
 ): Promise<string[]> => ff.get('/follower/ids', options);
 
 export type DropFavoriteOptions = {
@@ -382,7 +374,7 @@ export type DropFavoriteOptions = {
 
 export const dropFavorite = async (
 	ff: Fanfou,
-	options: DropFavoriteOptions
+	options: DropFavoriteOptions,
 ): Promise<Status> => {
 	const {id, ...restOptions} = options;
 	return ff.post(`/favorites/destroy/${id}`, restOptions);
@@ -399,7 +391,7 @@ export type GetFavoritesOptions = {
 
 export const getFavorites = async (
 	ff: Fanfou,
-	options: GetFavoritesOptions = {}
+	options: GetFavoritesOptions = {},
 ): Promise<Status[]> => {
 	const {id = '', ...restOptions} = options;
 	return ff.get(`/favorites/${id}`, restOptions);
@@ -414,7 +406,7 @@ export type CreateFavoriteOptions = {
 
 export const createFavorite = async (
 	ff: Fanfou,
-	options: CreateFavoriteOptions
+	options: CreateFavoriteOptions,
 ): Promise<Status> => {
 	const {id, ...restOptions} = options;
 	return ff.post(`/favorites/create/${id}`, restOptions);
@@ -427,7 +419,7 @@ export type CreateFriendshipOptions = {
 
 export const createFriendship = async (
 	ff: Fanfou,
-	options: CreateFriendshipOptions
+	options: CreateFriendshipOptions,
 ): Promise<User> => ff.post('/friendships/create', options);
 
 export type DropFriendshipOptions = {
@@ -439,7 +431,7 @@ export type DropFriendshipOptions = {
 
 export const dropFriendship = async (
 	ff: Fanfou,
-	options: DropFriendshipOptions
+	options: DropFriendshipOptions,
 ): Promise<User> => ff.post('/friendships/destroy', options);
 
 export type CheckFriendshipRequestsOptions = {
@@ -452,7 +444,7 @@ export type CheckFriendshipRequestsOptions = {
 
 export const checkFriendshipRequests = async (
 	ff: Fanfou,
-	options: CheckFriendshipRequestsOptions
+	options: CheckFriendshipRequestsOptions,
 ): Promise<User[]> => ff.get('/friendships/requests', options);
 
 export type DenyFriendshipOptions = {
@@ -464,7 +456,7 @@ export type DenyFriendshipOptions = {
 
 export const denyFriendship = async (
 	ff: Fanfou,
-	options: DenyFriendshipOptions
+	options: DenyFriendshipOptions,
 ): Promise<User> => ff.post('/friendships/deny', options);
 
 export type CheckFriendshipOptions = {
@@ -474,7 +466,7 @@ export type CheckFriendshipOptions = {
 
 export const checkFriendship = async (
 	ff: Fanfou,
-	options: CheckFriendshipOptions
+	options: CheckFriendshipOptions,
 ): Promise<boolean> => {
 	const result = await ff.get('/friendships/exists', options);
 	return result === 'true';
@@ -489,7 +481,7 @@ export type AcceptFriendshipOptions = {
 
 export const acceptFriendship = async (
 	ff: Fanfou,
-	options: AcceptFriendshipOptions
+	options: AcceptFriendshipOptions,
 ): Promise<User> => ff.post('/friendships/accept', options);
 
 export type CheckFriendshipDetailOptions = {
@@ -526,15 +518,15 @@ const parseRelationship = (friendship: FriendshipResult): FriendshipResult => {
 
 export const checkFriendshipDetail = async (
 	ff: Fanfou,
-	options: CheckFriendshipDetailOptions
+	options: CheckFriendshipDetailOptions,
 ): Promise<CheckFriendshipDetailResult> => {
 	const result = await ff.get('/friendships/show', options);
 	const {source, target} = result.relationship;
 	const parsedResult = {
 		relationship: {
 			source: parseRelationship(source),
-			target: parseRelationship(target)
-		}
+			target: parseRelationship(target),
+		},
 	};
 	return parsedResult;
 };
@@ -548,7 +540,7 @@ export type GetFollowingIdsOptions = {
 
 export const getFollowingIds = async (
 	ff: Fanfou,
-	options?: GetFollowingIdsOptions
+	options?: GetFollowingIdsOptions,
 ): Promise<string[]> => ff.get('/friends/ids', options);
 
 export type DropStatusOptions = {
@@ -560,7 +552,7 @@ export type DropStatusOptions = {
 
 export const dropStatus = async (
 	ff: Fanfou,
-	options: DropStatusOptions
+	options: DropStatusOptions,
 ): Promise<User> => ff.post('/statuses/destroy', options);
 
 export type GetHomeTimelineOptions = {
@@ -576,7 +568,7 @@ export type GetHomeTimelineOptions = {
 
 export const getHomeTimeline = async (
 	ff: Fanfou,
-	options?: GetHomeTimelineOptions
+	options?: GetHomeTimelineOptions,
 ): Promise<Status[]> => ff.get('/statuses/home_timeline', options);
 
 export type GetPublicTimelineOptions = {
@@ -590,7 +582,7 @@ export type GetPublicTimelineOptions = {
 
 export const getPublicTimeline = async (
 	ff: Fanfou,
-	options?: GetPublicTimelineOptions
+	options?: GetPublicTimelineOptions,
 ): Promise<Status[]> => ff.get('/statuses/public_timeline', options);
 
 export type GetRepliesOptions = {
@@ -605,7 +597,7 @@ export type GetRepliesOptions = {
 
 export const getReplies = async (
 	ff: Fanfou,
-	options?: GetRepliesOptions
+	options?: GetRepliesOptions,
 ): Promise<Status[]> => ff.get('/statuses/replies', options);
 
 export type GetFollowersOptions = {
@@ -619,7 +611,7 @@ export type GetFollowersOptions = {
 
 export const getFollowers = async (
 	ff: Fanfou,
-	options?: GetFollowersOptions
+	options?: GetFollowersOptions,
 ): Promise<User[]> => ff.get('/statuses/followers', options);
 
 export type CreateStatusOptions = {
@@ -635,7 +627,7 @@ export type CreateStatusOptions = {
 
 export const createStatus = async (
 	ff: Fanfou,
-	options: CreateStatusOptions
+	options: CreateStatusOptions,
 ): Promise<Status> => ff.post('/statuses/update', options);
 
 export type GetUserTimelineOptions = {
@@ -651,7 +643,7 @@ export type GetUserTimelineOptions = {
 
 export const getUserTimeline = async (
 	ff: Fanfou,
-	options?: GetUserTimelineOptions
+	options?: GetUserTimelineOptions,
 ): Promise<Status[]> => ff.get('/statuses/user_timeline', options);
 
 export type GetFollowingsOptions = {
@@ -664,7 +656,7 @@ export type GetFollowingsOptions = {
 
 export const getFollowings = async (
 	ff: Fanfou,
-	options?: GetFollowingsOptions
+	options?: GetFollowingsOptions,
 ): Promise<User[]> => ff.get('/statuses/friends', options);
 
 export type GetContextTimelineOptions = {
@@ -676,7 +668,7 @@ export type GetContextTimelineOptions = {
 
 export const getContextTimeline = async (
 	ff: Fanfou,
-	options: GetContextTimelineOptions
+	options: GetContextTimelineOptions,
 ): Promise<Status[]> => ff.get('/statuses/context_timeline', options);
 
 export type GetMentionsOptions = {
@@ -690,7 +682,7 @@ export type GetMentionsOptions = {
 
 export const getMentions = async (
 	ff: Fanfou,
-	options: GetMentionsOptions
+	options: GetMentionsOptions,
 ): Promise<Status[]> => ff.get('/statuses/mentions', options);
 
 export type GetStatusOptions = {
@@ -702,7 +694,7 @@ export type GetStatusOptions = {
 
 export const getStatus = async (
 	ff: Fanfou,
-	options: GetStatusOptions
+	options: GetStatusOptions,
 ): Promise<Status> => ff.get('/statuses/show', options);
 
 export type DropDirectMessageOptions = {
@@ -712,7 +704,7 @@ export type DropDirectMessageOptions = {
 
 export const dropDirectMessage = async (
 	ff: Fanfou,
-	options: DropDirectMessageOptions
+	options: DropDirectMessageOptions,
 ): Promise<DirectMessage> => ff.post('/direct_messages/destroy', options);
 
 export type GetConversationOptions = {
@@ -727,7 +719,7 @@ export type GetConversationOptions = {
 
 export const getConversation = async (
 	ff: Fanfou,
-	options: GetConversationOptions
+	options: GetConversationOptions,
 ): Promise<DirectMessage[]> => ff.get('/direct_messages/conversation', options);
 
 export type CreateDirectMessageOptions = {
@@ -740,7 +732,7 @@ export type CreateDirectMessageOptions = {
 
 export const createDirectMessage = async (
 	ff: Fanfou,
-	options: CreateDirectMessageOptions
+	options: CreateDirectMessageOptions,
 ): Promise<DirectMessage> => ff.post('/direct_messages/new', options);
 
 export type GetConversationsOptions = {
@@ -759,7 +751,7 @@ export type GetConversationsResult = {
 
 export const getConversations = async (
 	ff: Fanfou,
-	options?: GetConversationsOptions
+	options?: GetConversationsOptions,
 ): Promise<GetConversationsOptions> =>
 	ff.get('/direct_messages/conversation_list', options);
 
@@ -774,7 +766,7 @@ export type GetInboxOptions = {
 
 export const getInbox = async (
 	ff: Fanfou,
-	options?: GetInboxOptions
+	options?: GetInboxOptions,
 ): Promise<DirectMessage[]> => ff.get('/direct_messages/inbox', options);
 
 export type GetSentOptions = {
@@ -788,5 +780,5 @@ export type GetSentOptions = {
 
 export const getSent = async (
 	ff: Fanfou,
-	options?: GetSentOptions
+	options?: GetSentOptions,
 ): Promise<DirectMessage[]> => ff.get('/direct_messages/sent', options);

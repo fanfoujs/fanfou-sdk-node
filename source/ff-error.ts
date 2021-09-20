@@ -3,47 +3,38 @@ import {HTTPError} from 'got';
 class FanfouError extends Error {
 	err: Error | HTTPError;
 
-	constructor(error: Error | HTTPError) {
+	constructor(error: Error | HTTPError | unknown) {
 		super();
 		this.name = 'FanfouError';
-		this.err = error;
+		this.err =
+			error instanceof Error || error instanceof HTTPError
+				? error
+				: new Error('Unknown error');
+
 		if (error instanceof HTTPError) {
-			// @ts-expect-error
-			const [contentType] = error.response.headers['content-type'].split(';');
+			const contentTypes = error.response.headers['content-type'];
+			const [contentType] = contentTypes ? contentTypes.split(';') : [];
 			switch (contentType) {
 				case 'application/json': {
-					// @ts-expect-error
-					this.message = JSON.parse(error.response.body).error;
+					this.message = JSON.parse(error.response.body as string).error;
 					break;
 				}
 
 				case 'text/html': {
-					// @ts-expect-error
-					const titleMatch = error.response.body.match(
-						/<title>(?<msg>.+)<\/title>/
+					const titleMatch = /<title>(?<msg>.+)<\/title>/.exec(
+						error.response.body as string,
 					);
-					if (titleMatch) {
-						const {msg} = titleMatch.groups;
-						this.message = msg;
-					} else {
-						this.message = `${error.response.statusCode} error`;
-					}
-
+					this.message =
+						titleMatch?.groups?.['msg'] ?? `${error.response.statusCode} error`;
 					break;
 				}
 
 				case 'application/xml': {
-					// @ts-expect-error
-					const errorMatch = error.response.body.match(
-						/<error>(?<msg>.+)<\/error>/
+					const errorMatch = /<error>(?<msg>.+)<\/error>/.exec(
+						error.response.body as string,
 					);
-					if (errorMatch) {
-						const {msg} = errorMatch.groups;
-						this.message = msg;
-					} else {
-						this.message = `${error.response.statusCode} error`;
-					}
-
+					this.message =
+						errorMatch?.groups?.['msg'] ?? `${error.response.statusCode} error`;
 					break;
 				}
 
@@ -53,7 +44,7 @@ class FanfouError extends Error {
 				}
 			}
 		} else {
-			this.message = error.message ? error.message : 'Unknown error';
+			this.message = this.err.message ? this.err.message : 'Unknown error';
 		}
 	}
 }

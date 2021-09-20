@@ -1,15 +1,15 @@
+/* eslint @typescript-eslint/no-unsafe-call: off, @typescript-eslint/no-unsafe-return: off */
 import got from 'got';
-// @ts-expect-error
+// @ts-expect-error: No types
 import hmacsha1 from 'hmacsha1';
 import OAuth from 'oauth-1.0a';
 import queryString from 'query-string';
 import camelcaseKeys from 'camelcase-keys';
-// @ts-expect-error
+// @ts-expect-error: No types
 import decamelizedKeys from 'decamelize-keys';
 import FormData from 'form-data';
 import * as api from './api.js';
 import FanfouError from './ff-error.js';
-import {uriType, parseData} from './utils.js';
 
 export type FanfouToken = {
 	oauthToken: string;
@@ -72,27 +72,24 @@ class Fanfou {
 				}
 
 				return hmacsha1(key, baseString);
-			}
+			},
 		});
 	}
 
 	async getRequestToken() {
 		const url = `${this.oauthEndPoint ?? ''}/oauth/request_token`;
 		const {Authorization} = this.o.toHeader(
-			this.o.authorize({url, method: 'GET'})
+			this.o.authorize({url, method: 'GET'}),
 		);
 		try {
 			const response = await got.get(url, {
-				headers: {Authorization}
+				headers: {Authorization},
 			});
 			const {body} = response;
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
-			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
 		} catch (error) {
 			throw new FanfouError(error);
 		}
@@ -103,21 +100,18 @@ class Fanfou {
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize(
 				{url, method: 'GET'},
-				{key: token.oauthToken, secret: token.oauthTokenSecret}
-			)
+				{key: token.oauthToken, secret: token.oauthTokenSecret},
+			),
 		);
 		try {
 			const response = await got.get(url, {
-				headers: {Authorization}
+				headers: {Authorization},
 			});
 			const {body} = response;
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
-			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
 		} catch (error) {
 			throw new FanfouError(error);
 		}
@@ -128,27 +122,24 @@ class Fanfou {
 		const parameters = {
 			x_auth_mode: 'client_auth',
 			x_auth_password: this.password,
-			x_auth_username: this.username
+			x_auth_username: this.username,
 		};
 		const {Authorization} = this.o.toHeader(
-			this.o.authorize({url, method: 'POST'})
+			this.o.authorize({url, method: 'POST'}),
 		);
 		try {
 			const response = await got.post(url, {
 				headers: {
 					Authorization,
-					'Content-Type': 'application/x-www-form-urlencoded'
+					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-				body: queryString.stringify(parameters)
+				body: queryString.stringify(parameters),
 			});
 			const {body} = response;
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/dot-notation
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
-			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
 		} catch (error) {
 			throw new FanfouError(error);
 		}
@@ -160,19 +151,16 @@ class Fanfou {
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const {Authorization} = this.o.toHeader(
-			this.o.authorize({url, method: 'GET'}, token)
+			this.o.authorize({url, method: 'GET'}, token),
 		);
 		try {
 			const {body} = await got.get(url, {
 				headers: {
 					Authorization,
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
 			});
-			const response = camelcaseKeys(JSON.parse(body), {deep: true});
-			const result = parseData(this, response, uriType(uri));
-			return result;
-			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
+			return camelcaseKeys(JSON.parse(body), {deep: true});
 		} catch (error) {
 			throw new FanfouError(error);
 		}
@@ -184,18 +172,18 @@ class Fanfou {
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const isUpload = [
 			'/photos/upload',
-			'/account/update_profile_image'
+			'/account/update_profile_image',
 		].includes(uri);
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize(
 				{url, method: 'POST', data: isUpload ? null : parameters},
-				token
-			)
+				token,
+			),
 		);
 		let form = null;
 		const headers = {
 			Authorization,
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/x-www-form-urlencoded',
 		};
 		if (isUpload) {
 			form = new FormData();
@@ -203,19 +191,16 @@ class Fanfou {
 				form.append(key, parameters[key]);
 			}
 
-			// @ts-expect-error
+			// @ts-expect-error: Drop `Content-Type`
 			delete headers['Content-Type'];
 		}
 
 		try {
 			const {body} = await got.post(url, {
 				headers,
-				body: isUpload ? form ?? undefined : queryString.stringify(parameters)
+				body: isUpload ? form ?? undefined : queryString.stringify(parameters),
 			});
-			const response = camelcaseKeys(JSON.parse(body), {deep: true});
-			const result = parseData(this, response, uriType(uri));
-			return result;
-			// eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
+			return camelcaseKeys(JSON.parse(body), {deep: true});
 		} catch (error) {
 			throw new FanfouError(error);
 		}
@@ -234,7 +219,7 @@ class Fanfou {
 		api.checkFriendshipDetail(this, options);
 
 	checkFriendshipRequests = async (
-		options: api.CheckFriendshipRequestsOptions
+		options: api.CheckFriendshipRequestsOptions,
 	) => api.checkFriendshipRequests(this, options);
 
 	createBlockedUser = async (options: api.CreateBlockedUserOptions) =>
