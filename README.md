@@ -28,34 +28,30 @@ import Fanfou from 'fanfou-sdk';
 **OAuth**
 
 ```javascript
-(async () => {
-  const ff = new Fanfou({
-    consumerKey: '',
-    consumerSecret: '',
-    oauthToken: '',
-    oauthTokenSecret: ''
-  });
+const ff = new Fanfou({
+  consumerKey: '',
+  consumerSecret: '',
+  oauthToken: '',
+  oauthTokenSecret: ''
+});
 
-  const timeline = await ff.getHomeTimeline();
-})();
+const timeline = await ff.getHomeTimeline();
 ```
 
 **XAuth**
 
 ```javascript
-(async () => {
-  const ff = new Fanfou({
-    consumerKey: '',
-    consumerSecret: '',
-    username: '',
-    password: ''
-  });
+const ff = new Fanfou({
+  consumerKey: '',
+  consumerSecret: '',
+  username: '',
+  password: ''
+});
 
-  await ff.xauth();
+await ff.xauth();
 
-  const timeline = await ff.getPublicTimeline({count: 10});
-  const status = await ff.createStatus({status: 'Hi Fanfou'});
-})();
+const timeline = await ff.getPublicTimeline({count: 10});
+const status = await ff.createStatus({status: 'Hi Fanfou'});
 ```
 
 **Options**
@@ -93,17 +89,11 @@ For full SDK API, please refer to the [documentation](https://fanfoujs.github.io
   // Post status
   const status = await ff.createStatus({status: 'post test'});
 
-  // Delete a status from its instance
-  await status.destroy();
-
   // Upload photo
   const result = await ff.uploadPhoto({photo: fs.createReadStream(path), status: 'unicorn'});
 
   // Get user
   const user = await ff.getUser({id: 'lito'});
-
-  // Follow a user from its instance
-  await user.follow();
 
   // Request Fanfou API by passing the URI
   const timeline = ff.get('/statuses/home_timeline', {count: 10});
