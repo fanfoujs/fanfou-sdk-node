@@ -11,6 +11,7 @@ class FanfouError extends Error {
 				? error
 				: new Error('Unknown error');
 
+		/* c8 ignore start */
 		if (error instanceof HTTPError) {
 			const contentTypes = error.response.headers['content-type'];
 			const [contentType] = contentTypes ? contentTypes.split(';') : [];
@@ -46,6 +47,7 @@ class FanfouError extends Error {
 		} else {
 			this.message = this.err.message ? this.err.message : 'Unknown error';
 		}
+		/* c8 ignore stop */
 	}
 }
 

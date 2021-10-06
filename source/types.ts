@@ -45,17 +45,17 @@ export type Status = {
 	source: string;
 	truncated: boolean;
 	favorited: boolean;
-	inReplyToStatusId?: string;
-	inReplyToUserId?: string;
-	inReplyToScreenName?: string;
-	inReplyToLastmsgId?: string;
-	isSelf?: boolean;
-	location?: string;
-	repostStatus?: Status;
+	isSelf: boolean;
+	location: string;
+	inReplyToStatusId: string;
+	inReplyToUserId: string;
+	inReplyToScreenName: string;
+	inReplyToLastmsgId: string;
 	repostStatusId?: string;
+	repostStatus?: Status;
 	repostUserId?: string;
 	repostScreenName?: string;
-	user?: User;
+	user: User;
 	photo?: Photo;
 };
 

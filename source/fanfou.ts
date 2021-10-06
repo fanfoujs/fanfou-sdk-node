@@ -1,11 +1,9 @@
 /* eslint @typescript-eslint/no-unsafe-call: off, @typescript-eslint/no-unsafe-return: off */
 import got from 'got';
-// @ts-expect-error: No types
 import hmacsha1 from 'hmacsha1';
 import OAuth from 'oauth-1.0a';
 import queryString from 'query-string';
 import camelcaseKeys from 'camelcase-keys';
-// @ts-expect-error: No types
 import decamelizedKeys from 'decamelize-keys';
 import FormData from 'form-data';
 import * as api from './api.js';
@@ -43,9 +41,9 @@ class Fanfou {
 	protocol: string;
 	apiDomain: string;
 	oauthDomain: string;
-	apiEndPoint: string;
-	oauthEndPoint: string;
 	hooks: FanfouHooks;
+	private readonly apiEndPoint: string;
+	private readonly oauthEndPoint: string;
 	private readonly o: OAuth;
 
 	constructor(options: FanfouOptions = {}) {
@@ -65,6 +63,7 @@ class Fanfou {
 			consumer: {key: this.consumerKey, secret: this.consumerSecret},
 			signature_method: 'HMAC-SHA1',
 			parameter_seperator: ',',
+			/* c8 ignore start  */
 			hash_function: (baseString, key) => {
 				const {baseString: baseStringHook} = this.hooks;
 				if (baseStringHook) {
@@ -73,11 +72,12 @@ class Fanfou {
 
 				return hmacsha1(key, baseString);
 			},
+			/* c8 ignore stop  */
 		});
 	}
 
 	async getRequestToken() {
-		const url = `${this.oauthEndPoint ?? ''}/oauth/request_token`;
+		const url = `${this.oauthEndPoint}/oauth/request_token`;
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize({url, method: 'GET'}),
 		);
@@ -90,9 +90,11 @@ class Fanfou {
 			this.oauthToken = result['oauth_token'] as string;
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
+			/* c8 ignore start */
 		} catch (error) {
 			throw new FanfouError(error);
 		}
+		/* c8 ignore stop */
 	}
 
 	async getAccessToken(token: FanfouToken) {
@@ -112,9 +114,11 @@ class Fanfou {
 			this.oauthToken = result['oauth_token'] as string;
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
+			/* c8 ignore start */
 		} catch (error) {
 			throw new FanfouError(error);
 		}
+		/* c8 ignore stop */
 	}
 
 	async xauth() {
@@ -140,12 +144,14 @@ class Fanfou {
 			this.oauthToken = result['oauth_token'] as string;
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
+			/* c8 ignore start */
 		} catch (error) {
 			throw new FanfouError(error);
 		}
+		/* c8 ignore stop */
 	}
 
-	async get(uri: string, parameters?: any) {
+	async get(uri: string, parameters: any = {}) {
 		parameters = decamelizedKeys(parameters, '_');
 		const query = queryString.stringify(parameters);
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
@@ -161,12 +167,14 @@ class Fanfou {
 				},
 			});
 			return camelcaseKeys(JSON.parse(body), {deep: true});
+			/* c8 ignore start */
 		} catch (error) {
 			throw new FanfouError(error);
 		}
+		/* c8 ignore stop */
 	}
 
-	async post(uri: string, parameters?: any) {
+	async post(uri: string, parameters: any = {}) {
 		parameters = decamelizedKeys(parameters, '_');
 		const url = `${this.apiEndPoint}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
@@ -180,7 +188,7 @@ class Fanfou {
 				token,
 			),
 		);
-		let form = null;
+		let form: FormData;
 		const headers = {
 			Authorization,
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -198,14 +206,18 @@ class Fanfou {
 		try {
 			const {body} = await got.post(url, {
 				headers,
-				body: isUpload ? form ?? undefined : queryString.stringify(parameters),
+				// @ts-expect-error: Can be `undefined`
+				body: isUpload ? form : queryString.stringify(parameters),
 			});
 			return camelcaseKeys(JSON.parse(body), {deep: true});
+			/* c8 ignore start */
 		} catch (error) {
 			throw new FanfouError(error);
 		}
+		/* c8 ignore stop */
 	}
 
+	/* c8 ignore start */
 	acceptFriendship = async (options: api.AcceptFriendshipOptions) =>
 		api.acceptFriendship(this, options);
 
@@ -373,6 +385,7 @@ class Fanfou {
 
 	verifyCredentials = async (options: api.VerifyCredentialsOptions) =>
 		api.verifyCredentials(this, options);
+	/* c8 ignore stop */
 }
 
 export default Fanfou;

@@ -1,0 +1,42 @@
+import {Status, User} from '../../source/index.js';
+
+export const baseUser: User = {
+	id: 'la_vie_boheme',
+	name: 'Enthropocene',
+	screenName: 'Enthropocene',
+	uniqueId: '~cGWiOGec084',
+	location: '海外',
+	gender: '',
+	birthday: '',
+	description: 'there’s nothing you are not',
+	profileImageUrl: 'https://does.not.exist/file.jpg?123',
+	profileImageUrlLarge: 'https://does.not.exist/file.jpg?123',
+	url: '',
+	protected: true,
+	followersCount: 175,
+	friendsCount: 301,
+	favouritesCount: 14,
+	statusesCount: 16_450,
+	photoCount: 2033,
+	following: true,
+	notifications: true,
+	createdAt: 'Tue Oct 01 00:00:00 +0000 2077',
+	utcOffset: 28_800,
+};
+
+export const baseStatus: Status = {
+	createdAt: 'Tue Oct 01 00:00:00 +0000 2077',
+	id: 'baseStatusId',
+	rawid: 1,
+	text: 'Base status text.',
+	source: '<a href="https://does.not.exist" target="_blank">API</a>',
+	truncated: false,
+	favorited: false,
+	isSelf: false,
+	inReplyToStatusId: '',
+	inReplyToUserId: '',
+	inReplyToScreenName: '',
+	inReplyToLastmsgId: '',
+	location: '',
+	user: baseUser,
+};

@@ -5,6 +5,7 @@ import {Status, User, Trend, DirectMessage} from './types.js';
 export type APIMode = 'default' | 'lite';
 export type APIFormat = 'html';
 
+/* c8 ignore start */
 export type SearchPublicTimelineOptions = {
 	q: string;
 	sinceId?: string;
@@ -782,3 +783,4 @@ export const getSent = async (
 	ff: Fanfou,
 	options?: GetSentOptions,
 ): Promise<DirectMessage[]> => ff.get('/direct_messages/sent', options);
+/* c8 ignore stop */

@@ -1,8 +1,17 @@
 {
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
-		"esModuleInterop": true,
-		"outDir": "dist"
+		"outDir": "distribution",
+		"paths": {
+			"decamelize-keys": [
+				"./source/declaration.d.ts"
+			]
+		}
 	},
-	"include": ["source"]
+	"include": [
+		"source"
+	],
+	"files": [
+		"source/declaration.d.ts"
+	]
 }

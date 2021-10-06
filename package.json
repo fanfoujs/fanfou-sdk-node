@@ -3,10 +3,10 @@
   "version": "5.0.0-beta.4",
   "description": "Fanfou SDK for Node.js",
   "type": "module",
-  "exports": "./dist/index.js",
-  "types": "dist",
+  "exports": "./distdistribution/source/index.js",
+  "types": "distdistribution/source",
   "files": [
-    "dist"
+    "distdistribution/source"
   ],
   "dependencies": {
     "camelcase-keys": "^6.2.2",
@@ -20,20 +20,27 @@
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^1.0.2",
+    "@types/express": "^4.17.13",
     "@types/he": "^1.1.1",
+    "@types/test-listen": "^1.1.0",
+    "ava": "^3.15.0",
+    "c8": "^7.9.0",
     "del-cli": "^3.0.1",
+    "express": "^4.17.1",
     "gh-pages": "^3.1.0",
+    "test-listen": "^1.1.0",
+    "ts-node": "^10.2.1",
     "typedoc": "^0.20.36",
     "typescript": "^4.2.4",
-    "xo": "^0.44.0"
+    "xo": "^0.45.0"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
-    "build": "del-cli dist && tsc",
+    "build": "del-cli distribution && tsc",
     "pretest": "npm run build",
-    "test": "xo",
+    "test": "xo && c8 ava",
     "typedoc": "npm run build && del-cli docs && typedoc --gitRevision main source/index.ts",
     "deploy:doc": "gh-pages -d docs"
   },
@@ -57,10 +64,33 @@
       "unicorn/no-process-exit": "off",
       "@typescript-eslint/no-implicit-any-catch": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off"
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "typeLike",
+          "format": [
+            "PascalCase"
+          ]
+        }
+      ]
     },
     "ignore": [
       "docs"
+    ]
+  },
+  "ava": {
+    "files": [
+      "test/*"
+    ],
+    "extensions": {
+      "ts": "module"
+    },
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
     ]
   }
 }

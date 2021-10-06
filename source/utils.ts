@@ -5,7 +5,7 @@ export const isReply = (status: Status) =>
 	status.inReplyToStatusId !== '' || status.inReplyToUserId !== '';
 
 export const isRepost = (status: Status) =>
-	status.repostStatusId && status.repostStatusId !== '';
+	Boolean(status.repostStatusId && status.repostStatusId !== '');
 
 export const isOrigin = (status: Status) =>
 	!(isReply(status) || isRepost(status));
@@ -22,11 +22,7 @@ export const getType = (status: Status) => {
 		return 'repost';
 	}
 
-	if (isOrigin(status)) {
-		return 'origin';
-	}
-
-	return 'unknown';
+	return 'origin';
 };
 
 export const hasBold = (text: string) => /<b>[\s\S\n]*?<\/b>/g.test(text);
@@ -52,6 +48,7 @@ export const getBoldTexts = (text: string): StatusBoldText[] => {
 
 			const match = /<b>(?<t>[\s\S\n]*?)<\/b>/.exec(item);
 			textArray.push({
+				/* c8 ignore start */
 				text: he.decode(match?.groups?.['t'] ?? ''),
 				isBold: true,
 			});
@@ -85,6 +82,13 @@ export const getEntities = (statusText: string): StatusEntity[] => {
 	const match = statusText.match(pattern);
 	const entities = [];
 	let theText = statusText;
+
+	const extractBoldText = (entity: StatusEntity, text: string) => {
+		if (hasBold(text)) {
+			entity.boldTexts = getBoldTexts(text);
+		}
+	};
+
 	if (match) {
 		for (const item of match) {
 			const index = theText.indexOf(item);
@@ -92,74 +96,68 @@ export const getEntities = (statusText: string): StatusEntity[] => {
 			// Text
 			if (index > 0) {
 				const text = theText.slice(0, index);
-				const originText = he.decode(removeBoldTag(theText.slice(0, index)));
 				const thisEntity: StatusEntity = {
 					type: 'text',
-					text: originText,
+					text: he.decode(removeBoldTag(theText.slice(0, index))),
 				};
-				if (hasBold(text)) {
-					thisEntity.boldTexts = getBoldTexts(text);
-				}
 
+				extractBoldText(thisEntity, text);
 				entities.push(thisEntity);
 			}
 
 			// Tag
 			if (item.startsWith('#') && tagPattern.test(item)) {
 				const matchText = tagPattern.exec(item);
+				/* c8 ignore start */
 				const text = matchText?.groups?.['tag']
 					? `#${matchText.groups['tag']}#`
 					: '';
-				const originText = he.decode(removeBoldTag(text));
 				const thisEntity: StatusEntity = {
 					type: 'tag',
-					text: originText,
+					text: he.decode(removeBoldTag(text)),
 					query: decodeURIComponent(
 						he.decode(matchText?.groups?.['link'] ?? ''),
 					),
 				};
-				if (hasBold(text)) {
-					thisEntity.boldTexts = getBoldTexts(text);
-				}
+				/* c8 ignore stop */
 
+				extractBoldText(thisEntity, text);
 				entities.push(thisEntity);
 			}
 
 			// At
 			if (item.startsWith('@') && atPattern.test(item)) {
 				const matchText = atPattern.exec(item);
+				/* c8 ignore start */
 				const text = matchText?.groups?.['at']
 					? `@${matchText.groups['at']}`
 					: '';
-				const originText = he.decode(removeBoldTag(text));
 				const thisEntity: StatusEntity = {
 					type: 'at',
-					text: originText,
+					text: he.decode(removeBoldTag(text)),
 					name: he.decode(matchText?.groups?.['at'] ?? ''),
 					id: matchText?.groups?.['id'] ?? '',
 				};
-				if (hasBold(text)) {
-					thisEntity.boldTexts = getBoldTexts(text);
-				}
+				/* c8 ignore stop */
 
+				extractBoldText(thisEntity, text);
 				entities.push(thisEntity);
 			}
 
 			// Link
 			if (item.startsWith('<') && linkPattern.test(item)) {
 				const matchText = linkPattern.exec(item);
+				/* c8 ignore start */
 				const link = matchText?.groups?.['link'] ?? '';
 				const text = matchText?.groups?.['text'] ?? '';
-				const originText = removeBoldTag(text);
 				const thisEntity: StatusEntity = {
 					type: 'link',
-					text: originText,
+					text: removeBoldTag(text),
 					link,
 				};
-				if (hasBold(text)) {
-					thisEntity.boldTexts = getBoldTexts(text);
-				}
+				/* c8 ignore stop */
 
+				extractBoldText(thisEntity, text);
 				entities.push(thisEntity);
 			}
 
@@ -173,10 +171,8 @@ export const getEntities = (statusText: string): StatusEntity[] => {
 				type: 'text',
 				text: originText,
 			};
-			if (hasBold(text)) {
-				thisEntity.boldTexts = getBoldTexts(text);
-			}
 
+			extractBoldText(thisEntity, text);
 			entities.push(thisEntity);
 		}
 
@@ -189,26 +185,27 @@ export const getEntities = (statusText: string): StatusEntity[] => {
 		type: 'text',
 		text: originText,
 	};
-	if (hasBold(text)) {
-		thisEntity.boldTexts = getBoldTexts(text);
-	}
+
+	extractBoldText(thisEntity, text);
 
 	return [thisEntity];
 };
 
 export const getSourceUrl = (source: string) => {
 	const matched = /<a href="(?<link>.*)" target="_blank">.+<\/a>/.exec(source);
+	/* c8 ignore next */
 	return matched?.groups?.['link'] ?? '';
 };
 
 export const getSourceName = (source: string) => {
 	const matched = /<a href=".*" target="_blank">(?<name>.+)<\/a>/.exec(source);
+	/* c8 ignore next */
 	return matched?.groups?.['name'] ?? source;
 };
 
 export const getPlainText = (entities: StatusEntity[]) => {
 	let text = '';
-	for (const t of entities ?? []) {
+	for (const t of entities) {
 		text += t.text;
 	}
 
