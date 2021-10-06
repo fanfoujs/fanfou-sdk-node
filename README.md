@@ -23,10 +23,10 @@ import Fanfou from 'fanfou-sdk';
 
 ```ts
 const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  oauthToken: '',
-  oauthTokenSecret: ''
+	consumerKey: '',
+	consumerSecret: '',
+	oauthToken: '',
+	oauthTokenSecret: ''
 });
 
 const timeline = await ff.getHomeTimeline();
@@ -36,10 +36,10 @@ const timeline = await ff.getHomeTimeline();
 
 ```ts
 const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  username: '',
-  password: ''
+	consumerKey: '',
+	consumerSecret: '',
+	username: '',
+	password: ''
 });
 
 await ff.xauth();
@@ -99,17 +99,17 @@ Use `hooks` for your reverse-proxy server
 
 ```ts
 const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  oauthToken: '',
-  oauthTokenSecret: '',
-  apiDomain: 'api.example.com',
-  oauthDomain: 'example.com',
-  hooks: {
-    baseString: str => {
-      return str.replace('example.com', 'fanfou.com');
-    }
-  }
+	consumerKey: '',
+	consumerSecret: '',
+	oauthToken: '',
+	oauthTokenSecret: '',
+	apiDomain: 'api.example.com',
+	oauthDomain: 'example.com',
+	hooks: {
+		baseString: str => {
+			return str.replace('example.com', 'fanfou.com');
+		}
+	}
 });
 ```
 
