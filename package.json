@@ -1,6 +1,6 @@
 {
   "name": "fanfou-sdk",
-  "version": "5.0.0-beta.5",
+  "version": "5.0.0-beta.6",
   "description": "Fanfou SDK for Node.js",
   "type": "module",
   "exports": "./distribution/source/index.js",
