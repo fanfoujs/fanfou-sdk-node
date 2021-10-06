@@ -3,10 +3,10 @@
   "version": "5.0.0-beta.5",
   "description": "Fanfou SDK for Node.js",
   "type": "module",
-  "exports": "./distdistribution/source/index.js",
-  "types": "distdistribution/source",
+  "exports": "./distribution/source/index.js",
+  "types": "distribution/source",
   "files": [
-    "distdistribution/source"
+    "distribution/source"
   ],
   "dependencies": {
     "camelcase-keys": "^6.2.2",
