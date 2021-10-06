@@ -9,19 +9,19 @@ Fanfou SDK for Node.js
 
 ## Install
 
-```bash
-$ npm i fanfou-sdk
+```sh
+npm i fanfou-sdk
 ```
 
 ## Usage
 
-```javascript
+```ts
 import Fanfou from 'fanfou-sdk';
 ```
 
 **OAuth**
 
-```javascript
+```ts
 const ff = new Fanfou({
   consumerKey: '',
   consumerSecret: '',
@@ -34,7 +34,7 @@ const timeline = await ff.getHomeTimeline();
 
 **XAuth**
 
-```javascript
+```ts
 const ff = new Fanfou({
   consumerKey: '',
   consumerSecret: '',
@@ -69,37 +69,35 @@ For full SDK API, please refer to the [documentation](https://fanfoujs.github.io
 
 **Examples**
 
-```javascript
-(async () => {
-  // Get request token
-  const token = await ff.getRequestToken();
+```ts
+// Get request token
+const token = await ff.getRequestToken();
 
-  // Get access token
-  const token = await ff.getAccessToken(token);
+// Get access token
+const token = await ff.getAccessToken(token);
 
-  // Get timeline
-  const timeline = await ff.getHomeTimeline();
+// Get timeline
+const timeline = await ff.getHomeTimeline();
 
-  // Post status
-  const status = await ff.createStatus({status: 'post test'});
+// Post status
+const status = await ff.createStatus({status: 'post test'});
 
-  // Upload photo
-  const result = await ff.uploadPhoto({photo: fs.createReadStream(path), status: 'unicorn'});
+// Upload photo
+const result = await ff.uploadPhoto({photo: fs.createReadStream(path), status: 'unicorn'});
 
-  // Get user
-  const user = await ff.getUser({id: 'lito'});
+// Get user
+const user = await ff.getUser({id: 'lito'});
 
-  // Request Fanfou API by passing the URI
-  const timeline = ff.get('/statuses/home_timeline', {count: 10});
-  const status = ff.post('/statuses/update', {status: 'Hi Fanfou'});
-})();
+// Request Fanfou API by passing the URI
+const timeline = await ff.get('/statuses/home_timeline', {count: 10});
+const status = await ff.post('/statuses/update', {status: 'Hi Fanfou'});
 ```
 
 **Tips**
 
 Use `hooks` for your reverse-proxy server
 
-```javascript
+```ts
 const ff = new Fanfou({
   consumerKey: '',
   consumerSecret: '',
