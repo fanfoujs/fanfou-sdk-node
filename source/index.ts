@@ -1,6 +1,4 @@
-import Fanfou from './fanfou.js';
-
-export default Fanfou;
+export {default} from './fanfou.js';
 export * from './fanfou.js';
 export * from './api.js';
 export * from './utils.js';
