@@ -14,7 +14,7 @@ test('handle Error', (t) => {
 		{instanceOf: FanfouError},
 	);
 
-	t.is(error.message, 'isError');
+	t.is(error?.message, 'isError');
 });
 
 test('handle HTTPError', async (t) => {
@@ -31,7 +31,7 @@ test('handle HTTPError', async (t) => {
 		{instanceOf: FanfouError},
 	);
 
-	t.is(error.message, 'No URL protocol specified');
+	t.true(error?.message.startsWith('Invalid URL'));
 });
 
 test('handle unknown error', (t) => {
@@ -46,5 +46,5 @@ test('handle unknown error', (t) => {
 		{instanceOf: FanfouError},
 	);
 
-	t.is(error.message, 'Unknown error');
+	t.is(error?.message, 'Unknown error');
 });

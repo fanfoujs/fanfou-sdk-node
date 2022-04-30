@@ -1,11 +1,11 @@
 import http, {Server} from 'node:http';
-import anyTest, {TestInterface} from 'ava';
+import anyTest, {TestFn} from 'ava';
 import listen from 'test-listen';
 import Fanfou from '../source/index.js';
 import app from './fixtures/server.js';
 import {baseStatus} from './fixtures/mocks.js';
 
-const test = anyTest as TestInterface<{
+const test = anyTest as TestFn<{
 	server: Server;
 	ff: Fanfou;
 }>;
