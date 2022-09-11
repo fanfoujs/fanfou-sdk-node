@@ -1,683 +1,267 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>fanfou-sdk</title>
-	<meta name="description" content="Documentation for fanfou-sdk">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">fanfou-sdk</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>fanfou-sdk</h1>
-		</div>
-	</div>
-</header>
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>fanfou-sdk</title><meta name="description" content="Documentation for fanfou-sdk"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">fanfou-sdk</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#fanfou-sdk-node" id="fanfou-sdk-node" style="color: inherit; text-decoration: none;">
-					<h1>fanfou-sdk-node</h1>
-				</a>
-				<p><a href="https://github.com/fanfoujs/fanfou-sdk-node/actions"><img src="https://github.com/fanfoujs/fanfou-sdk-node/workflows/Node/badge.svg" alt=""></a>
-					<a href="https://www.npmjs.com/package/fanfou-sdk"><img src="https://img.shields.io/npm/v/fanfou-sdk.svg" alt=""></a>
-					<a href="https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/fanfou-sdk.svg" alt=""></a>
-				<a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt=""></a></p>
-				<p>Fanfou SDK for Node.js</p>
-				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h2>Install</h2>
-				</a>
-				<pre><code class="language-bash"><span style="color: #000000">$ npm i fanfou-sdk</span>
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>fanfou-sdk</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#fanfou-sdk-node" id="fanfou-sdk-node" style="color: inherit; text-decoration: none;">
+  <h1>fanfou-sdk-node</h1>
+</a>
+<p><a href="https://github.com/fanfoujs/fanfou-sdk-node/actions"><img src="https://github.com/fanfoujs/fanfou-sdk-node/workflows/Node/badge.svg" alt=""></a>
+<a href="https://www.npmjs.com/package/fanfou-sdk"><img src="https://img.shields.io/npm/v/fanfou-sdk.svg" alt=""></a>
+<a href="https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/fanfou-sdk.svg" alt=""></a>
+<a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt=""></a></p>
+<p>Fanfou SDK for Node.js</p>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h2>Install</h2>
+</a>
+<pre><code class="language-sh"><span class="hl-0">npm i fanfou-sdk</span>
 </code></pre>
-				<hr>
-				<a href="https://www.patreon.com/LitoMore">
-					<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-				</a>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Fanfou</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;fanfou-sdk&#039;</span><span style="color: #000000">;</span>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> </span><span class="hl-2">Fanfou</span><span class="hl-0"> </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;fanfou-sdk&#39;</span><span class="hl-0">;</span>
 </code></pre>
-				<p><strong>OAuth</strong></p>
-				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">oauthToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">oauthTokenSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span>
-<span style="color: #000000">  });</span>
-
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getHomeTimeline</span><span style="color: #000000">();</span>
-<span style="color: #000000">})();</span>
+<p><strong>OAuth</strong></p>
+<pre><code class="language-ts"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">ff</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">Fanfou</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-2">consumerKey:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">consumerSecret:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">oauthToken:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">oauthTokenSecret:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timeline</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getHomeTimeline</span><span class="hl-0">();</span>
 </code></pre>
-				<p><strong>XAuth</strong></p>
-				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span>
-<span style="color: #000000">  });</span>
-
-<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">xauth</span><span style="color: #000000">();</span>
-
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getPublicTimeline</span><span style="color: #000000">({</span><span style="color: #001080">count:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">});</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">status</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">createStatus</span><span style="color: #000000">({</span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hi Fanfou&#039;</span><span style="color: #000000">});</span>
-<span style="color: #000000">})();</span>
+<p><strong>XAuth</strong></p>
+<pre><code class="language-ts"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">ff</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">Fanfou</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-2">consumerKey:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">consumerSecret:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">username:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">password:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">xauth</span><span class="hl-0">();</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timeline</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getPublicTimeline</span><span class="hl-0">({</span><span class="hl-2">count:</span><span class="hl-0"> </span><span class="hl-7">10</span><span class="hl-0">});</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">status</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">createStatus</span><span class="hl-0">({</span><span class="hl-2">status:</span><span class="hl-0"> </span><span class="hl-3">&#39;Hi Fanfou&#39;</span><span class="hl-0">});</span>
 </code></pre>
-				<p><strong>Options</strong></p>
-				<ul>
-					<li><code>consumerKey</code>: The consumer key</li>
-					<li><code>consumerSecret</code>: The consumer secret</li>
-					<li><code>oauthToken</code>: The OAuth token</li>
-					<li><code>oauthTokenSecret</code>: The OAuth token secret</li>
-					<li><code>username</code>: The Fanfou username</li>
-					<li><code>password</code>: The Fanfou password</li>
-					<li><code>protocol</code>: Set the prototol, default is <code>http:</code></li>
-					<li><code>apiDomain</code>: Set the API domain, default is <code>api.fanfou.com</code></li>
-					<li><code>oauthDomain</code>: Set the OAuth domain, default is <code>fanfou.com</code></li>
-					<li><code>hooks</code>: Hooks allow modifications with OAuth</li>
-				</ul>
-				<blockquote>
-					<p>For more Fanfou API docs, see the <a href="https://github.com/FanfouAPI/FanFouAPIDoc/wiki">Fanfou API doc</a>.</p>
-				</blockquote>
-				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-					<h2>API</h2>
-				</a>
-				<p>For full SDK API, please refer to the <a href="https://fanfoujs.github.io/fanfou-sdk-node/modules.html">documentation</a>.</p>
-				<p><strong>Examples</strong></p>
-				<pre><code class="language-javascript"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #008000">// Get request token</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getRequestToken</span><span style="color: #000000">();</span>
+<p><strong>Options</strong></p>
+<ul>
+<li><code>consumerKey</code>: The consumer key</li>
+<li><code>consumerSecret</code>: The consumer secret</li>
+<li><code>oauthToken</code>: The OAuth token</li>
+<li><code>oauthTokenSecret</code>: The OAuth token secret</li>
+<li><code>username</code>: The Fanfou username</li>
+<li><code>password</code>: The Fanfou password</li>
+<li><code>protocol</code>: Set the prototol, default is <code>http:</code></li>
+<li><code>apiDomain</code>: Set the API domain, default is <code>api.fanfou.com</code></li>
+<li><code>oauthDomain</code>: Set the OAuth domain, default is <code>fanfou.com</code></li>
+<li><code>hooks</code>: Hooks allow modifications with OAuth</li>
+</ul>
+<blockquote>
+<p>For more Fanfou API docs, see the <a href="https://github.com/FanfouAPI/FanFouAPIDoc/wiki">Fanfou API doc</a>.</p>
+</blockquote>
 
-<span style="color: #000000">  </span><span style="color: #008000">// Get access token</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getAccessToken</span><span style="color: #000000">(</span><span style="color: #001080">token</span><span style="color: #000000">);</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Get timeline</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getHomeTimeline</span><span style="color: #000000">();</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Post status</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">status</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">createStatus</span><span style="color: #000000">({</span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;post test&#039;</span><span style="color: #000000">});</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Delete a status from its instance</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">status</span><span style="color: #000000">.</span><span style="color: #795E26">destroy</span><span style="color: #000000">();</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Upload photo</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">uploadPhoto</span><span style="color: #000000">({</span><span style="color: #001080">photo:</span><span style="color: #000000"> </span><span style="color: #001080">fs</span><span style="color: #000000">.</span><span style="color: #795E26">createReadStream</span><span style="color: #000000">(</span><span style="color: #001080">path</span><span style="color: #000000">), </span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unicorn&#039;</span><span style="color: #000000">});</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Get user</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">user</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">getUser</span><span style="color: #000000">({</span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;lito&#039;</span><span style="color: #000000">});</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Follow a user from its instance</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #795E26">follow</span><span style="color: #000000">();</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Request Fanfou API by passing the URI</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timeline</span><span style="color: #000000"> = </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/home_timeline&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">count:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">});</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">status</span><span style="color: #000000"> = </span><span style="color: #001080">ff</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;/statuses/update&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hi Fanfou&#039;</span><span style="color: #000000">});</span>
-<span style="color: #000000">})();</span>
+<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+  <h2>API</h2>
+</a>
+<p>For full SDK API, please refer to the <a href="https://fanfoujs.github.io/fanfou-sdk-node/modules.html">documentation</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-ts"><span class="hl-8">// Get request token</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">token</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getRequestToken</span><span class="hl-0">();</span><br/><br/><span class="hl-8">// Get access token</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">token</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getAccessToken</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">);</span><br/><br/><span class="hl-8">// Get timeline</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timeline</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getHomeTimeline</span><span class="hl-0">();</span><br/><br/><span class="hl-8">// Post status</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">status</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">createStatus</span><span class="hl-0">({</span><span class="hl-2">status:</span><span class="hl-0"> </span><span class="hl-3">&#39;post test&#39;</span><span class="hl-0">});</span><br/><br/><span class="hl-8">// Upload photo</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">result</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">uploadPhoto</span><span class="hl-0">({</span><span class="hl-2">photo:</span><span class="hl-0"> </span><span class="hl-2">fs</span><span class="hl-0">.</span><span class="hl-6">createReadStream</span><span class="hl-0">(</span><span class="hl-2">path</span><span class="hl-0">), </span><span class="hl-2">status:</span><span class="hl-0"> </span><span class="hl-3">&#39;unicorn&#39;</span><span class="hl-0">});</span><br/><br/><span class="hl-8">// Get user</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">user</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">getUser</span><span class="hl-0">({</span><span class="hl-2">id:</span><span class="hl-0"> </span><span class="hl-3">&#39;lito&#39;</span><span class="hl-0">});</span><br/><br/><span class="hl-8">// Request Fanfou API by passing the URI</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timeline</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">get</span><span class="hl-0">(</span><span class="hl-3">&#39;/statuses/home_timeline&#39;</span><span class="hl-0">, {</span><span class="hl-2">count:</span><span class="hl-0"> </span><span class="hl-7">10</span><span class="hl-0">});</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">status</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">ff</span><span class="hl-0">.</span><span class="hl-6">post</span><span class="hl-0">(</span><span class="hl-3">&#39;/statuses/update&#39;</span><span class="hl-0">, {</span><span class="hl-2">status:</span><span class="hl-0"> </span><span class="hl-3">&#39;Hi Fanfou&#39;</span><span class="hl-0">});</span>
 </code></pre>
-				<p><strong>Tips</strong></p>
-				<p>Use <code>hooks</code> for your reverse-proxy server</p>
-				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ff</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Fanfou</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">consumerKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">consumerSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">oauthToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">oauthTokenSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">apiDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;api.example.com&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">oauthDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;example.com&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">hooks:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #795E26">baseString</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">str</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">str</span><span style="color: #000000">.</span><span style="color: #795E26">replace</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.com&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;fanfou.com&#039;</span><span style="color: #000000">);</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">});</span>
+<p><strong>Tips</strong></p>
+<p>Use <code>hooks</code> for your reverse-proxy server</p>
+<pre><code class="language-ts"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">ff</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">Fanfou</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-2">consumerKey:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">consumerSecret:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">oauthToken:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">oauthTokenSecret:</span><span class="hl-0"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">apiDomain:</span><span class="hl-0"> </span><span class="hl-3">&#39;api.example.com&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">oauthDomain:</span><span class="hl-0"> </span><span class="hl-3">&#39;example.com&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">hooks:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-6">baseString</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-2">str</span><span class="hl-0"> </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-1">return</span><span class="hl-0"> </span><span class="hl-2">str</span><span class="hl-0">.</span><span class="hl-6">replace</span><span class="hl-0">(</span><span class="hl-3">&#39;example.com&#39;</span><span class="hl-0">, </span><span class="hl-3">&#39;fanfou.com&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">        }</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">});</span>
 </code></pre>
-				<a href="#related" id="related" style="color: inherit; text-decoration: none;">
-					<h2>Related</h2>
-				</a>
-				<ul>
-					<li><a href="https://github.com/LitoMore/nofan">nofan</a> - CLI for Fanfou</li>
-					<li><a href="https://github.com/fanfoujs/xiaofan-wechat">xiaofan</a> - WeApp for Fanfou</li>
-					<li><a href="https://github.com/LitoMore/fanfou-streamer">fanfou-streamer</a> - Fanfou Streaming SDK for Node.js</li>
-					<li><a href="https://github.com/fanfoujs/fanfou-sdk-browser">fanfou-sdk-browser</a> - Fanfou SDK for browser</li>
-					<li><a href="https://github.com/LitoMore/fanfou-sdk-deno">fanfou-sdk-deno</a> - Fanfou SDK for Deno</li>
-					<li><a href="https://github.com/fanfoujs/fanfou-sdk-weapp">fanfou-sdk-weapp</a> - Fanfou SDK for WeApp</li>
-					<li><a href="https://github.com/LitoMore/fanfou-sdk-python">fanfou-sdk-python</a> - Fanfou SDK for Python</li>
-					<li><a href="https://github.com/LitoMore/alfred-fanfou">alfred-fanfou</a> - Alfred 3 workflow for Fanfou</li>
-					<li><a href="https://github.com/LitoMore/kap-fanfou">kap-fanfou</a> - Kap plugin that share on Fanfou</li>
-					<li><a href="https://github.com/LitoMore/cerebro-fanfou">cerebro-fanfou</a> - A cerebro plugin for Fanfou</li>
-					<li><a href="https://github.com/LitoMore/code-fanfou">code-fanfou</a> - A VS Code extension for Fanfou</li>
-					<li><a href="https://github.com/LitoMore/bitbar-fanfou">bitbar-fanfou</a> - A BitBar plugin for Fanfou</li>
-				</ul>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>MIT</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/fanfouerror.html" class="tsd-kind-icon">Fanfou<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/default.html" class="tsd-kind-icon">default</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#apiformat" class="tsd-kind-icon">APIFormat</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#apimode" class="tsd-kind-icon">APIMode</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#acceptfriendshipoptions" class="tsd-kind-icon">Accept<wbr>Friendship<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#checkblockexistsoptions" class="tsd-kind-icon">Check<wbr>Block<wbr>Exists<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#checkfriendshipdetailoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Detail<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#checkfriendshipdetailresult" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Detail<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#checkfriendshipoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#checkfriendshiprequestsoptions" class="tsd-kind-icon">Check<wbr>Friendship<wbr>Requests<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createblockeduseroptions" class="tsd-kind-icon">Create<wbr>Blocked<wbr>User<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createdirectmessageoptions" class="tsd-kind-icon">Create<wbr>Direct<wbr>Message<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createfavoriteoptions" class="tsd-kind-icon">Create<wbr>Favorite<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createfriendshipoptions" class="tsd-kind-icon">Create<wbr>Friendship<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createsavedsearchoptions" class="tsd-kind-icon">Create<wbr>Saved<wbr>Search<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#createstatusoptions" class="tsd-kind-icon">Create<wbr>Status<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#denyfriendshipoptions" class="tsd-kind-icon">Deny<wbr>Friendship<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#directmessage" class="tsd-kind-icon">Direct<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dismissrecommendeduseroptions" class="tsd-kind-icon">Dismiss<wbr>Recommended<wbr>User<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropblockeduseroptions" class="tsd-kind-icon">Drop<wbr>Blocked<wbr>User<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropdirectmessageoptions" class="tsd-kind-icon">Drop<wbr>Direct<wbr>Message<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropfavoriteoptions" class="tsd-kind-icon">Drop<wbr>Favorite<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropfriendshipoptions" class="tsd-kind-icon">Drop<wbr>Friendship<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropsavedsearchoptions" class="tsd-kind-icon">Drop<wbr>Saved<wbr>Search<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#dropstatusoptions" class="tsd-kind-icon">Drop<wbr>Status<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#fanfouhooks" class="tsd-kind-icon">Fanfou<wbr>Hooks</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#fanfoutoken" class="tsd-kind-icon">Fanfou<wbr>Token</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#friendshipresult" class="tsd-kind-icon">Friendship<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getblockedusersoptions" class="tsd-kind-icon">Get<wbr>Blocked<wbr>Users<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getcontexttimelineoptions" class="tsd-kind-icon">Get<wbr>Context<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getconversationoptions" class="tsd-kind-icon">Get<wbr>Conversation<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getconversationsoptions" class="tsd-kind-icon">Get<wbr>Conversations<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getconversationsresult" class="tsd-kind-icon">Get<wbr>Conversations<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getfavoritesoptions" class="tsd-kind-icon">Get<wbr>Favorites<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getfolloweridsoptions" class="tsd-kind-icon">Get<wbr>Follower<wbr>Ids<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getfollowersoptions" class="tsd-kind-icon">Get<wbr>Followers<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getfollowingidsoptions" class="tsd-kind-icon">Get<wbr>Following<wbr>Ids<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getfollowingsoptions" class="tsd-kind-icon">Get<wbr>Followings<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#gethometimelineoptions" class="tsd-kind-icon">Get<wbr>Home<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getinboxoptions" class="tsd-kind-icon">Get<wbr>Inbox<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getmentionsoptions" class="tsd-kind-icon">Get<wbr>Mentions<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getnotificationresult" class="tsd-kind-icon">Get<wbr>Notification<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getpublictimelineoptions" class="tsd-kind-icon">Get<wbr>Public<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getratelimitstatusoptions" class="tsd-kind-icon">Get<wbr>Rate<wbr>Limit<wbr>Status<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getratelimitstatusresult" class="tsd-kind-icon">Get<wbr>Rate<wbr>Limit<wbr>Status<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getrecentfollowersoptions" class="tsd-kind-icon">Get<wbr>Recent<wbr>Followers<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getrecentusersoptions" class="tsd-kind-icon">Get<wbr>Recent<wbr>Users<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getrecommendedusersoptions" class="tsd-kind-icon">Get<wbr>Recommended<wbr>Users<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getrepliesoptions" class="tsd-kind-icon">Get<wbr>Replies<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getsavedsearchoptions" class="tsd-kind-icon">Get<wbr>Saved<wbr>Search<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getsavedsearchesoptions" class="tsd-kind-icon">Get<wbr>Saved<wbr>Searches<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getsentoptions" class="tsd-kind-icon">Get<wbr>Sent<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getstatusoptions" class="tsd-kind-icon">Get<wbr>Status<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#gettaggedusersoptions" class="tsd-kind-icon">Get<wbr>Tagged<wbr>Users<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#gettrendsoptions" class="tsd-kind-icon">Get<wbr>Trends<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#gettrendsresult" class="tsd-kind-icon">Get<wbr>Trends<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getuseroptions" class="tsd-kind-icon">Get<wbr>User<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getuserphotosoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Photos<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getusertagsoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Tags<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#getusertimelineoptions" class="tsd-kind-icon">Get<wbr>User<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#photo" class="tsd-kind-icon">Photo</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#searchpublictimelineoptions" class="tsd-kind-icon">Search<wbr>Public<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#searchusertimelineoptions" class="tsd-kind-icon">Search<wbr>User<wbr>Timeline<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#searchusersoptions" class="tsd-kind-icon">Search<wbr>Users<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#searchusersresult" class="tsd-kind-icon">Search<wbr>Users<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#status" class="tsd-kind-icon">Status</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusboldtext" class="tsd-kind-icon">Status<wbr>Bold<wbr>Text</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusentity" class="tsd-kind-icon">Status<wbr>Entity</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusentityat" class="tsd-kind-icon">Status<wbr>Entity<wbr>At</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusentitylink" class="tsd-kind-icon">Status<wbr>Entity<wbr>Link</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusentitytag" class="tsd-kind-icon">Status<wbr>Entity<wbr>Tag</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#statusentitytext" class="tsd-kind-icon">Status<wbr>Entity<wbr>Text</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#trend" class="tsd-kind-icon">Trend</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#updatenotifynumberoptions" class="tsd-kind-icon">Update<wbr>Notify<wbr>Number<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#updatenotifynumberresult" class="tsd-kind-icon">Update<wbr>Notify<wbr>Number<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#updateprofileimageoptions" class="tsd-kind-icon">Update<wbr>Profile<wbr>Image<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#updateprofileoptions" class="tsd-kind-icon">Update<wbr>Profile<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#uploadphotooptions" class="tsd-kind-icon">Upload<wbr>Photo<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#user" class="tsd-kind-icon">User</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#verifycredentialsoptions" class="tsd-kind-icon">Verify<wbr>Credentials<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#acceptfriendship" class="tsd-kind-icon">accept<wbr>Friendship</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#checkblockexists" class="tsd-kind-icon">check<wbr>Block<wbr>Exists</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#checkfriendship" class="tsd-kind-icon">check<wbr>Friendship</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#checkfriendshipdetail" class="tsd-kind-icon">check<wbr>Friendship<wbr>Detail</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#checkfriendshiprequests" class="tsd-kind-icon">check<wbr>Friendship<wbr>Requests</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createblockeduser" class="tsd-kind-icon">create<wbr>Blocked<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createdirectmessage" class="tsd-kind-icon">create<wbr>Direct<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createfavorite" class="tsd-kind-icon">create<wbr>Favorite</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createfriendship" class="tsd-kind-icon">create<wbr>Friendship</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createsavedsearch" class="tsd-kind-icon">create<wbr>Saved<wbr>Search</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createstatus" class="tsd-kind-icon">create<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#denyfriendship" class="tsd-kind-icon">deny<wbr>Friendship</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dismissrecommendeduser" class="tsd-kind-icon">dismiss<wbr>Recommended<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropblockeduser" class="tsd-kind-icon">drop<wbr>Blocked<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropdirectmessage" class="tsd-kind-icon">drop<wbr>Direct<wbr>Message</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropfavorite" class="tsd-kind-icon">drop<wbr>Favorite</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropfriendship" class="tsd-kind-icon">drop<wbr>Friendship</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropsavedsearch" class="tsd-kind-icon">drop<wbr>Saved<wbr>Search</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#dropstatus" class="tsd-kind-icon">drop<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getblockedids" class="tsd-kind-icon">get<wbr>Blocked<wbr>Ids</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getblockedusers" class="tsd-kind-icon">get<wbr>Blocked<wbr>Users</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getboldtexts" class="tsd-kind-icon">get<wbr>Bold<wbr>Texts</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getcontexttimeline" class="tsd-kind-icon">get<wbr>Context<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getconversation" class="tsd-kind-icon">get<wbr>Conversation</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getconversations" class="tsd-kind-icon">get<wbr>Conversations</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getentities" class="tsd-kind-icon">get<wbr>Entities</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getfavorites" class="tsd-kind-icon">get<wbr>Favorites</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getfollowerids" class="tsd-kind-icon">get<wbr>Follower<wbr>Ids</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getfollowers" class="tsd-kind-icon">get<wbr>Followers</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getfollowingids" class="tsd-kind-icon">get<wbr>Following<wbr>Ids</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getfollowings" class="tsd-kind-icon">get<wbr>Followings</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#gethometimeline" class="tsd-kind-icon">get<wbr>Home<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getinbox" class="tsd-kind-icon">get<wbr>Inbox</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getmentions" class="tsd-kind-icon">get<wbr>Mentions</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getnotification" class="tsd-kind-icon">get<wbr>Notification</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getplaintext" class="tsd-kind-icon">get<wbr>Plain<wbr>Text</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getpublictimeline" class="tsd-kind-icon">get<wbr>Public<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getratelimitstatus" class="tsd-kind-icon">get<wbr>Rate<wbr>Limit<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getrecentfollowers" class="tsd-kind-icon">get<wbr>Recent<wbr>Followers</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getrecentusers" class="tsd-kind-icon">get<wbr>Recent<wbr>Users</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getrecommendedusers" class="tsd-kind-icon">get<wbr>Recommended<wbr>Users</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getreplies" class="tsd-kind-icon">get<wbr>Replies</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsavedsearch" class="tsd-kind-icon">get<wbr>Saved<wbr>Search</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsavedsearches" class="tsd-kind-icon">get<wbr>Saved<wbr>Searches</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsent" class="tsd-kind-icon">get<wbr>Sent</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsourcename" class="tsd-kind-icon">get<wbr>Source<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsourceurl" class="tsd-kind-icon">get<wbr>Source<wbr>Url</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getstatus" class="tsd-kind-icon">get<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#gettaggedusers" class="tsd-kind-icon">get<wbr>Tagged<wbr>Users</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#gettrends" class="tsd-kind-icon">get<wbr>Trends</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#gettype" class="tsd-kind-icon">get<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getuser" class="tsd-kind-icon">get<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getuserphotos" class="tsd-kind-icon">get<wbr>User<wbr>Photos</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getusertags" class="tsd-kind-icon">get<wbr>User<wbr>Tags</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getusertimeline" class="tsd-kind-icon">get<wbr>User<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#hasbold" class="tsd-kind-icon">has<wbr>Bold</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#isorigin" class="tsd-kind-icon">is<wbr>Origin</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#isoriginrepost" class="tsd-kind-icon">is<wbr>Origin<wbr>Repost</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#isreply" class="tsd-kind-icon">is<wbr>Reply</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#isrepost" class="tsd-kind-icon">is<wbr>Repost</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#removeboldtag" class="tsd-kind-icon">remove<wbr>Bold<wbr>Tag</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#searchpublictimeline" class="tsd-kind-icon">search<wbr>Public<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#searchusertimeline" class="tsd-kind-icon">search<wbr>User<wbr>Timeline</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#searchusers" class="tsd-kind-icon">search<wbr>Users</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#updatenotifynumber" class="tsd-kind-icon">update<wbr>Notify<wbr>Number</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#updateprofile" class="tsd-kind-icon">update<wbr>Profile</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#updateprofileimage" class="tsd-kind-icon">update<wbr>Profile<wbr>Image</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#uploadphoto" class="tsd-kind-icon">upload<wbr>Photo</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#verifycredentials" class="tsd-kind-icon">verify<wbr>Credentials</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+
+<a href="#related" id="related" style="color: inherit; text-decoration: none;">
+  <h2>Related</h2>
+</a>
+<ul>
+<li><a href="https://github.com/LitoMore/nofan">nofan</a> - CLI for Fanfou</li>
+<li><a href="https://github.com/fanfoujs/xiaofan-wechat">xiaofan</a> - WeApp for Fanfou</li>
+<li><a href="https://github.com/LitoMore/fanfou-streamer">fanfou-streamer</a> - Fanfou Streaming SDK for Node.js</li>
+<li><a href="https://github.com/fanfoujs/fanfou-sdk-browser">fanfou-sdk-browser</a> - Fanfou SDK for browser</li>
+<li><a href="https://github.com/LitoMore/fanfou-sdk-deno">fanfou-sdk-deno</a> - Fanfou SDK for Deno</li>
+<li><a href="https://github.com/fanfoujs/fanfou-sdk-weapp">fanfou-sdk-weapp</a> - Fanfou SDK for WeApp</li>
+<li><a href="https://github.com/LitoMore/fanfou-sdk-python">fanfou-sdk-python</a> - Fanfou SDK for Python</li>
+<li><a href="https://github.com/LitoMore/alfred-fanfou">alfred-fanfou</a> - Alfred 3 workflow for Fanfou</li>
+<li><a href="https://github.com/LitoMore/kap-fanfou">kap-fanfou</a> - Kap plugin that share on Fanfou</li>
+<li><a href="https://github.com/LitoMore/cerebro-fanfou">cerebro-fanfou</a> - A cerebro plugin for Fanfou</li>
+<li><a href="https://github.com/LitoMore/code-fanfou">code-fanfou</a> - A VS Code extension for Fanfou</li>
+<li><a href="https://github.com/LitoMore/bitbar-fanfou">bitbar-fanfou</a> - A BitBar plugin for Fanfou</li>
+</ul>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>MIT</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">fanfou-<wbr/>sdk</a>
+<ul></ul></li></ul></div></details></nav>
+<nav class="tsd-navigation secondary menu-sticky">
+<ul>
+<li class="tsd-kind-class"><a href="classes/FanfouError.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg>Fanfou<wbr/>Error</a></li>
+<li class="tsd-kind-class"><a href="classes/default.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg>default</a></li>
+<li class="tsd-kind-type-alias"><a href="types/APIFormat.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4194304-path"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)" id="icon-4194304-text"></path></svg>APIFormat</a></li>
+<li class="tsd-kind-type-alias"><a href="types/APIMode.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>APIMode</a></li>
+<li class="tsd-kind-type-alias"><a href="types/AcceptFriendshipOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Accept<wbr/>Friendship<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CheckBlockExistsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Check<wbr/>Block<wbr/>Exists<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CheckFriendshipDetailOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Check<wbr/>Friendship<wbr/>Detail<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CheckFriendshipDetailResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Check<wbr/>Friendship<wbr/>Detail<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CheckFriendshipOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Check<wbr/>Friendship<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CheckFriendshipRequestsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Check<wbr/>Friendship<wbr/>Requests<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateBlockedUserOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Blocked<wbr/>User<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateDirectMessageOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Direct<wbr/>Message<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateFavoriteOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Favorite<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateFriendshipOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Friendship<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateSavedSearchOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Saved<wbr/>Search<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/CreateStatusOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Create<wbr/>Status<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DenyFriendshipOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Deny<wbr/>Friendship<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DirectMessage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Direct<wbr/>Message</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DismissRecommendedUserOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Dismiss<wbr/>Recommended<wbr/>User<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropBlockedUserOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Blocked<wbr/>User<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropDirectMessageOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Direct<wbr/>Message<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropFavoriteOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Favorite<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropFriendshipOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Friendship<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropSavedSearchOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Saved<wbr/>Search<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/DropStatusOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Drop<wbr/>Status<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/FanfouHooks.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Fanfou<wbr/>Hooks</a></li>
+<li class="tsd-kind-type-alias"><a href="types/FanfouOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Fanfou<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/FanfouToken.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Fanfou<wbr/>Token</a></li>
+<li class="tsd-kind-type-alias"><a href="types/FriendshipResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Friendship<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetBlockedUsersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Blocked<wbr/>Users<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetContextTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Context<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetConversationOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Conversation<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetConversationsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Conversations<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetConversationsResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Conversations<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetFavoritesOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Favorites<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetFollowerIdsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Follower<wbr/>Ids<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetFollowersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Followers<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetFollowingIdsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Following<wbr/>Ids<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetFollowingsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Followings<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetHomeTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Home<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetInboxOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Inbox<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetMentionsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Mentions<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetNotificationResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Notification<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetPublicTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Public<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRateLimitStatusOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Rate<wbr/>Limit<wbr/>Status<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRateLimitStatusResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Rate<wbr/>Limit<wbr/>Status<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRecentFollowersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Recent<wbr/>Followers<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRecentUsersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Recent<wbr/>Users<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRecommendedUsersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Recommended<wbr/>Users<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetRepliesOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Replies<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetSavedSearchOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Saved<wbr/>Search<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetSavedSearchesOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Saved<wbr/>Searches<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetSentOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Sent<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetStatusOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Status<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetTaggedUsersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Tagged<wbr/>Users<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetTrendsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Trends<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetTrendsResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>Trends<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetUserOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>User<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetUserPhotosOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>User<wbr/>Photos<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetUserTagsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>User<wbr/>Tags<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/GetUserTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Get<wbr/>User<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/Photo.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Photo</a></li>
+<li class="tsd-kind-type-alias"><a href="types/SearchPublicTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Search<wbr/>Public<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/SearchUserTimelineOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Search<wbr/>User<wbr/>Timeline<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/SearchUsersOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Search<wbr/>Users<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/SearchUsersResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Search<wbr/>Users<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/Status.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusBoldText.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Bold<wbr/>Text</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusEntity.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Entity</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusEntityAt.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Entity<wbr/>At</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusEntityLink.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Entity<wbr/>Link</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusEntityTag.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Entity<wbr/>Tag</a></li>
+<li class="tsd-kind-type-alias"><a href="types/StatusEntityText.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Status<wbr/>Entity<wbr/>Text</a></li>
+<li class="tsd-kind-type-alias"><a href="types/Trend.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Trend</a></li>
+<li class="tsd-kind-type-alias"><a href="types/UpdateNotifyNumberOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Update<wbr/>Notify<wbr/>Number<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/UpdateNotifyNumberResult.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Update<wbr/>Notify<wbr/>Number<wbr/>Result</a></li>
+<li class="tsd-kind-type-alias"><a href="types/UpdateProfileImageOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Update<wbr/>Profile<wbr/>Image<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/UpdateProfileOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Update<wbr/>Profile<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/UploadPhotoOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Upload<wbr/>Photo<wbr/>Options</a></li>
+<li class="tsd-kind-type-alias"><a href="types/User.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>User</a></li>
+<li class="tsd-kind-type-alias"><a href="types/VerifyCredentialsOptions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>Verify<wbr/>Credentials<wbr/>Options</a></li>
+<li class="tsd-kind-function"><a href="functions/acceptFriendship.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-64-path"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)" id="icon-64-text"></path></svg>accept<wbr/>Friendship</a></li>
+<li class="tsd-kind-function"><a href="functions/checkBlockExists.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Block<wbr/>Exists</a></li>
+<li class="tsd-kind-function"><a href="functions/checkFriendship.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Friendship</a></li>
+<li class="tsd-kind-function"><a href="functions/checkFriendshipDetail.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Friendship<wbr/>Detail</a></li>
+<li class="tsd-kind-function"><a href="functions/checkFriendshipRequests.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Friendship<wbr/>Requests</a></li>
+<li class="tsd-kind-function"><a href="functions/createBlockedUser.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Blocked<wbr/>User</a></li>
+<li class="tsd-kind-function"><a href="functions/createDirectMessage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Direct<wbr/>Message</a></li>
+<li class="tsd-kind-function"><a href="functions/createFavorite.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Favorite</a></li>
+<li class="tsd-kind-function"><a href="functions/createFriendship.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Friendship</a></li>
+<li class="tsd-kind-function"><a href="functions/createSavedSearch.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Saved<wbr/>Search</a></li>
+<li class="tsd-kind-function"><a href="functions/createStatus.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Status</a></li>
+<li class="tsd-kind-function"><a href="functions/denyFriendship.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>deny<wbr/>Friendship</a></li>
+<li class="tsd-kind-function"><a href="functions/dismissRecommendedUser.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>dismiss<wbr/>Recommended<wbr/>User</a></li>
+<li class="tsd-kind-function"><a href="functions/dropBlockedUser.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Blocked<wbr/>User</a></li>
+<li class="tsd-kind-function"><a href="functions/dropDirectMessage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Direct<wbr/>Message</a></li>
+<li class="tsd-kind-function"><a href="functions/dropFavorite.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Favorite</a></li>
+<li class="tsd-kind-function"><a href="functions/dropFriendship.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Friendship</a></li>
+<li class="tsd-kind-function"><a href="functions/dropSavedSearch.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Saved<wbr/>Search</a></li>
+<li class="tsd-kind-function"><a href="functions/dropStatus.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>drop<wbr/>Status</a></li>
+<li class="tsd-kind-function"><a href="functions/getBlockedIds.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Blocked<wbr/>Ids</a></li>
+<li class="tsd-kind-function"><a href="functions/getBlockedUsers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Blocked<wbr/>Users</a></li>
+<li class="tsd-kind-function"><a href="functions/getBoldTexts.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Bold<wbr/>Texts</a></li>
+<li class="tsd-kind-function"><a href="functions/getContextTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Context<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/getConversation.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Conversation</a></li>
+<li class="tsd-kind-function"><a href="functions/getConversations.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Conversations</a></li>
+<li class="tsd-kind-function"><a href="functions/getEntities.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Entities</a></li>
+<li class="tsd-kind-function"><a href="functions/getFavorites.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Favorites</a></li>
+<li class="tsd-kind-function"><a href="functions/getFollowerIds.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Follower<wbr/>Ids</a></li>
+<li class="tsd-kind-function"><a href="functions/getFollowers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Followers</a></li>
+<li class="tsd-kind-function"><a href="functions/getFollowingIds.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Following<wbr/>Ids</a></li>
+<li class="tsd-kind-function"><a href="functions/getFollowings.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Followings</a></li>
+<li class="tsd-kind-function"><a href="functions/getHomeTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Home<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/getInbox.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Inbox</a></li>
+<li class="tsd-kind-function"><a href="functions/getMentions.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Mentions</a></li>
+<li class="tsd-kind-function"><a href="functions/getNotification.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Notification</a></li>
+<li class="tsd-kind-function"><a href="functions/getPlainText.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Plain<wbr/>Text</a></li>
+<li class="tsd-kind-function"><a href="functions/getPublicTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Public<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/getRateLimitStatus.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Rate<wbr/>Limit<wbr/>Status</a></li>
+<li class="tsd-kind-function"><a href="functions/getRecentFollowers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Recent<wbr/>Followers</a></li>
+<li class="tsd-kind-function"><a href="functions/getRecentUsers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Recent<wbr/>Users</a></li>
+<li class="tsd-kind-function"><a href="functions/getRecommendedUsers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Recommended<wbr/>Users</a></li>
+<li class="tsd-kind-function"><a href="functions/getReplies.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Replies</a></li>
+<li class="tsd-kind-function"><a href="functions/getSavedSearch.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Saved<wbr/>Search</a></li>
+<li class="tsd-kind-function"><a href="functions/getSavedSearches.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Saved<wbr/>Searches</a></li>
+<li class="tsd-kind-function"><a href="functions/getSent.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Sent</a></li>
+<li class="tsd-kind-function"><a href="functions/getSourceName.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Source<wbr/>Name</a></li>
+<li class="tsd-kind-function"><a href="functions/getSourceUrl.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Source<wbr/>Url</a></li>
+<li class="tsd-kind-function"><a href="functions/getStatus.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Status</a></li>
+<li class="tsd-kind-function"><a href="functions/getTaggedUsers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Tagged<wbr/>Users</a></li>
+<li class="tsd-kind-function"><a href="functions/getTrends.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Trends</a></li>
+<li class="tsd-kind-function"><a href="functions/getType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Type</a></li>
+<li class="tsd-kind-function"><a href="functions/getUser.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>User</a></li>
+<li class="tsd-kind-function"><a href="functions/getUserPhotos.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>User<wbr/>Photos</a></li>
+<li class="tsd-kind-function"><a href="functions/getUserTags.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>User<wbr/>Tags</a></li>
+<li class="tsd-kind-function"><a href="functions/getUserTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>User<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/hasBold.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>has<wbr/>Bold</a></li>
+<li class="tsd-kind-function"><a href="functions/isOrigin.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>is<wbr/>Origin</a></li>
+<li class="tsd-kind-function"><a href="functions/isOriginRepost.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>is<wbr/>Origin<wbr/>Repost</a></li>
+<li class="tsd-kind-function"><a href="functions/isReply.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>is<wbr/>Reply</a></li>
+<li class="tsd-kind-function"><a href="functions/isRepost.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>is<wbr/>Repost</a></li>
+<li class="tsd-kind-function"><a href="functions/removeBoldTag.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove<wbr/>Bold<wbr/>Tag</a></li>
+<li class="tsd-kind-function"><a href="functions/searchPublicTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>search<wbr/>Public<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/searchUserTimeline.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>search<wbr/>User<wbr/>Timeline</a></li>
+<li class="tsd-kind-function"><a href="functions/searchUsers.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>search<wbr/>Users</a></li>
+<li class="tsd-kind-function"><a href="functions/updateNotifyNumber.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Notify<wbr/>Number</a></li>
+<li class="tsd-kind-function"><a href="functions/updateProfile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Profile</a></li>
+<li class="tsd-kind-function"><a href="functions/updateProfileImage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Profile<wbr/>Image</a></li>
+<li class="tsd-kind-function"><a href="functions/uploadPhoto.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>upload<wbr/>Photo</a></li>
+<li class="tsd-kind-function"><a href="functions/verifyCredentials.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>verify<wbr/>Credentials</a></li></ul></nav></div></div>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>
