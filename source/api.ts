@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-unsafe-return: off */
+import {Buffer} from 'node:buffer';
 import Fanfou from './fanfou.js';
 import {Status, User, Trend, DirectMessage} from './types.js';
 
@@ -203,7 +204,7 @@ export const verifyCredentials = async (
 ): Promise<User> => ff.get('/account/verify_credentials', options);
 
 export type UpdateProfileImageOptions = {
-	image: ReadableStream;
+	image: ReadableStream | Buffer;
 	mode?: APIMode;
 	format?: APIFormat;
 	callback?: string;
@@ -327,7 +328,7 @@ export const getUserPhotos = async (
 ): Promise<Status> => ff.get('/photos/user_timeline', options);
 
 export type UploadPhotoOptions = {
-	photo: ReadableStream;
+	photo: ReadableStream | Buffer;
 	status?: string;
 	source?: string;
 	location?: string;

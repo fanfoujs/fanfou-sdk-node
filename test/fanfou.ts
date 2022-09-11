@@ -123,7 +123,7 @@ test.serial('upload', async (t) => {
 	const {ff} = t.context;
 
 	const status = await ff.post('/photos/upload', {
-		photo: 'it shoud be a ReadableStream',
+		photo: 'it shoud be a Readable or Buffer',
 		status: 'statusText',
 	});
 	t.deepEqual(status, baseStatus);
