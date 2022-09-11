@@ -18,7 +18,7 @@ export type FanfouHooks = {
 	baseString?: (s: string) => string;
 };
 
-type FanfouOptions = {
+export type FanfouOptions = {
 	consumerKey?: string;
 	consumerSecret?: string;
 	oauthToken?: string;
