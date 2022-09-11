@@ -1,5 +1,6 @@
 import test from 'ava';
-import got, {HTTPError} from 'got';
+import type {HTTPError} from 'got';
+import got from 'got';
 import {FanfouError} from '../source/index.js';
 
 test('handle Error', (t) => {

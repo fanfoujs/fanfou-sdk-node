@@ -1,5 +1,5 @@
 import he from 'he';
-import {Status, StatusBoldText, StatusEntity} from './types.js';
+import type {Status, StatusBoldText, StatusEntity} from './types.js';
 
 export const isReply = (status: Status) =>
 	status.inReplyToStatusId !== '' || status.inReplyToUserId !== '';

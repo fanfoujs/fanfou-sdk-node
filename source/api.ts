@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/no-unsafe-return: off */
-import {Buffer} from 'node:buffer';
-import Fanfou from './fanfou.js';
-import {Status, User, Trend, DirectMessage} from './types.js';
+import type {Buffer} from 'node:buffer';
+import type Fanfou from './fanfou.js';
+import type {Status, User, Trend, DirectMessage} from './types.js';
 
 export type APIMode = 'default' | 'lite';
 export type APIFormat = 'html';

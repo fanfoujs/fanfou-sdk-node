@@ -1,4 +1,4 @@
-import {Status, User} from '../../source/index.js';
+import type {Status, User} from '../../source/index.js';
 
 export const baseUser: User = {
 	id: 'la_vie_boheme',

@@ -3,7 +3,7 @@ import {HTTPError} from 'got';
 class FanfouError extends Error {
 	err: Error | HTTPError;
 
-	constructor(error: Error | HTTPError | unknown) {
+	constructor(error: unknown) {
 		super();
 		this.name = 'FanfouError';
 		this.err =
