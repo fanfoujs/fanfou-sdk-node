@@ -526,8 +526,8 @@ export const checkFriendshipDetail = async (
 	const {source, target} = result.relationship;
 	const parsedResult = {
 		relationship: {
-			source: parseRelationship(source),
-			target: parseRelationship(target),
+			source: parseRelationship(source as FriendshipResult),
+			target: parseRelationship(target as FriendshipResult),
 		},
 	};
 	return parsedResult;

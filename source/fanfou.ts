@@ -151,7 +151,7 @@ class Fanfou {
 		/* c8 ignore stop */
 	}
 
-	async get(uri: string, parameters: any = {}) {
+	async get(uri: string, parameters: Record<string, any> = {}) {
 		parameters = decamelizedKeys(parameters, '_');
 		const query = queryString.stringify(parameters);
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
@@ -174,7 +174,7 @@ class Fanfou {
 		/* c8 ignore stop */
 	}
 
-	async post(uri: string, parameters: any = {}) {
+	async post(uri: string, parameters: Record<string, any> = {}) {
 		parameters = decamelizedKeys(parameters, '_');
 		const url = `${this.apiEndPoint}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};

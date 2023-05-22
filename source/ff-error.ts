@@ -45,7 +45,7 @@ class FanfouError extends Error {
 				}
 			}
 		} else {
-			this.message = this.err.message ? this.err.message : 'Unknown error';
+			this.message = this.err.message ?? 'Unknown error';
 		}
 		/* c8 ignore stop */
 	}

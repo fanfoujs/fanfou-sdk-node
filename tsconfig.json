@@ -9,7 +9,8 @@
 		}
 	},
 	"include": [
-		"source"
+		"source",
+		"test"
 	],
 	"files": [
 		"source/declaration.d.ts"
