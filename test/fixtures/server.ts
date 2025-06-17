@@ -1,6 +1,6 @@
 /* eslint @typescript-eslint/no-unsafe-call: off */
-import express from 'express';
 import decamelizeKeys from 'decamelize-keys';
+import express from 'express';
 import {baseStatus} from './mocks.js';
 
 const server = () => {
@@ -31,19 +31,19 @@ const server = () => {
 	});
 
 	app.get('/statuses/show.json', (_request, response) => {
-		response.send(decamelizeKeys(baseStatus, '_'));
+		response.send(decamelizeKeys(baseStatus));
 	});
 
 	app.get('/statuses/home_timeline.json', (_request, response) => {
-		response.send([decamelizeKeys(baseStatus, '_')]);
+		response.send([decamelizeKeys(baseStatus)]);
 	});
 
 	app.post('/statuses/update.json', (_request, response) => {
-		response.send(decamelizeKeys(baseStatus, '_'));
+		response.send(decamelizeKeys(baseStatus));
 	});
 
 	app.post('/photos/upload.json', (_request, response) => {
-		response.send(decamelizeKeys(baseStatus, '_'));
+		response.send(decamelizeKeys(baseStatus));
 	});
 
 	return app;

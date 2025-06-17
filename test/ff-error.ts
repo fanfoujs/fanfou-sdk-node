@@ -1,16 +1,15 @@
 import test from 'ava';
-import type {HTTPError} from 'got';
-import got from 'got';
+import got, {type HTTPError} from 'got';
 import {FanfouError} from '../source/index.js';
 
 test('handle Error', (t) => {
-	const fn = () => {
+	const function_ = () => {
 		throw new FanfouError(new Error('isError'));
 	};
 
 	const error = t.throws(
 		() => {
-			fn();
+			function_();
 		},
 		{instanceOf: FanfouError},
 	);
@@ -21,13 +20,13 @@ test('handle Error', (t) => {
 test('handle HTTPError', async (t) => {
 	const httpError = await t.throwsAsync<HTTPError>(got(''));
 
-	const fn = () => {
+	const function_ = () => {
 		throw new FanfouError(httpError);
 	};
 
 	const error = t.throws(
 		() => {
-			fn();
+			function_();
 		},
 		{instanceOf: FanfouError},
 	);
@@ -36,13 +35,13 @@ test('handle HTTPError', async (t) => {
 });
 
 test('handle unknown error', (t) => {
-	const fn = () => {
+	const function_ = () => {
 		throw new FanfouError('');
 	};
 
 	const error = t.throws(
 		() => {
-			fn();
+			function_();
 		},
 		{instanceOf: FanfouError},
 	);

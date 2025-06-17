@@ -27,8 +27,7 @@ export const getType = (status: Status) => {
 
 export const hasBold = (text: string) => /<b>[\s\S\n]*?<\/b>/g.test(text);
 
-export const removeBoldTag = (text: string) =>
-	text.replace(/<b>/g, '').replace(/<\/b>/g, '');
+export const removeBoldTag = (text: string) => text.replaceAll(/<\/?b>/g, '');
 
 export const getBoldTexts = (text: string): StatusBoldText[] => {
 	const pattern = /<b>[\s\S\n]*?<\/b>/g;
@@ -73,6 +72,7 @@ export const getBoldTexts = (text: string): StatusBoldText[] => {
 	];
 };
 
+// eslint-disable-next-line complexity
 export const getEntities = (statusText: string): StatusEntity[] => {
 	const pattern = /[@#]?<a href=".*?".*?>[\s\S\n]*?<\/a>#?/g;
 	const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S\n]*)<\/a>#/;

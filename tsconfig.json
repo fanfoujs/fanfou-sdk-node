@@ -1,13 +1,5 @@
 {
 	"extends": "@sindresorhus/tsconfig",
-	"compilerOptions": {
-		"outDir": "distribution",
-		"paths": {
-			"decamelize-keys": [
-				"./source/declaration.d.ts"
-			]
-		}
-	},
 	"include": [
 		"source",
 		"test"

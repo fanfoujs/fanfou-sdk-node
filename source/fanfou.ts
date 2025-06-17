@@ -1,11 +1,10 @@
-/* eslint @typescript-eslint/no-unsafe-call: off, @typescript-eslint/no-unsafe-return: off */
+import camelcaseKeys from 'camelcase-keys';
+import decamelizedKeys from 'decamelize-keys';
+import FormData from 'form-data';
 import got from 'got';
 import hmacsha1 from 'hmacsha1';
 import OAuth from 'oauth-1.0a';
 import queryString from 'query-string';
-import camelcaseKeys from 'camelcase-keys';
-import decamelizedKeys from 'decamelize-keys';
-import FormData from 'form-data';
 import * as api from './api.js';
 import FanfouError from './ff-error.js';
 
@@ -61,9 +60,12 @@ class Fanfou {
 		this.oauthEndPoint = `${this.protocol}//${this.oauthDomain}`;
 		this.o = new OAuth({
 			consumer: {key: this.consumerKey, secret: this.consumerSecret},
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			signature_method: 'HMAC-SHA1',
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			parameter_seperator: ',',
 			/* c8 ignore start  */
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			hash_function: (baseString, key) => {
 				const {baseString: baseStringHook} = this.hooks;
 				if (baseStringHook) {
@@ -78,11 +80,13 @@ class Fanfou {
 
 	async getRequestToken() {
 		const url = `${this.oauthEndPoint}/oauth/request_token`;
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize({url, method: 'GET'}),
 		);
 		try {
 			const response = await got.get(url, {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
 				headers: {Authorization},
 			});
 			const {body} = response;
@@ -99,6 +103,7 @@ class Fanfou {
 
 	async getAccessToken(token: FanfouToken) {
 		const url = `${this.oauthEndPoint}/oauth/access_token`;
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize(
 				{url, method: 'GET'},
@@ -107,6 +112,7 @@ class Fanfou {
 		);
 		try {
 			const response = await got.get(url, {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
 				headers: {Authorization},
 			});
 			const {body} = response;
@@ -124,16 +130,21 @@ class Fanfou {
 	async xauth() {
 		const url = `${this.oauthEndPoint}/oauth/access_token`;
 		const parameters = {
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			x_auth_mode: 'client_auth',
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			x_auth_password: this.password,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			x_auth_username: this.username,
 		};
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize({url, method: 'POST'}),
 		);
 		try {
 			const response = await got.post(url, {
 				headers: {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
 					Authorization,
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
@@ -151,21 +162,24 @@ class Fanfou {
 		/* c8 ignore stop */
 	}
 
-	async get(uri: string, parameters: Record<string, any> = {}) {
-		parameters = decamelizedKeys(parameters, '_');
+	async get<T>(uri: string, parameters: Record<string, any> = {}): Promise<T> {
+		parameters = decamelizedKeys(parameters);
 		const query = queryString.stringify(parameters);
 		const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ''}`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize({url, method: 'GET'}, token),
 		);
 		try {
 			const {body} = await got.get(url, {
 				headers: {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
 					Authorization,
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			});
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {
@@ -174,14 +188,15 @@ class Fanfou {
 		/* c8 ignore stop */
 	}
 
-	async post(uri: string, parameters: Record<string, any> = {}) {
-		parameters = decamelizedKeys(parameters, '_');
+	async post<T>(uri: string, parameters: Record<string, any> = {}): Promise<T> {
+		parameters = decamelizedKeys(parameters);
 		const url = `${this.apiEndPoint}${uri}.json`;
 		const token = {key: this.oauthToken, secret: this.oauthTokenSecret};
 		const isUpload = [
 			'/photos/upload',
 			'/account/update_profile_image',
 		].includes(uri);
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const {Authorization} = this.o.toHeader(
 			this.o.authorize(
 				{url, method: 'POST', data: isUpload ? null : parameters},
@@ -190,6 +205,7 @@ class Fanfou {
 		);
 		let form: FormData;
 		const headers = {
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			Authorization,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		};
@@ -209,6 +225,7 @@ class Fanfou {
 				// @ts-expect-error: Can be `undefined`
 				body: isUpload ? form : queryString.stringify(parameters),
 			});
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {

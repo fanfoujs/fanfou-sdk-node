@@ -1,9 +1,10 @@
 /* eslint @typescript-eslint/no-unsafe-return: off */
-import type {Buffer} from 'node:buffer';
 import type Fanfou from './fanfou.js';
-import type {Status, User, Trend, DirectMessage} from './types.js';
+import type {DirectMessage, Status, Trend, User} from './types.js';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export type APIMode = 'default' | 'lite';
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export type APIFormat = 'html';
 
 /* c8 ignore start */
@@ -204,7 +205,7 @@ export const verifyCredentials = async (
 ): Promise<User> => ff.get('/account/verify_credentials', options);
 
 export type UpdateProfileImageOptions = {
-	image: ReadableStream | Buffer;
+	image: ReadableStream | Uint8Array;
 	mode?: APIMode;
 	format?: APIFormat;
 	callback?: string;
@@ -328,7 +329,7 @@ export const getUserPhotos = async (
 ): Promise<Status> => ff.get('/photos/user_timeline', options);
 
 export type UploadPhotoOptions = {
-	photo: ReadableStream | Buffer;
+	photo: ReadableStream | Uint8Array;
 	status?: string;
 	source?: string;
 	location?: string;
@@ -470,7 +471,7 @@ export const checkFriendship = async (
 	ff: Fanfou,
 	options: CheckFriendshipOptions,
 ): Promise<boolean> => {
-	const result = await ff.get('/friendships/exists', options);
+	const result = await ff.get<string>('/friendships/exists', options);
 	return result === 'true';
 };
 
@@ -522,12 +523,15 @@ export const checkFriendshipDetail = async (
 	ff: Fanfou,
 	options: CheckFriendshipDetailOptions,
 ): Promise<CheckFriendshipDetailResult> => {
-	const result = await ff.get('/friendships/show', options);
+	const result = await ff.get<CheckFriendshipDetailResult>(
+		'/friendships/show',
+		options,
+	);
 	const {source, target} = result.relationship;
 	const parsedResult = {
 		relationship: {
-			source: parseRelationship(source as FriendshipResult),
-			target: parseRelationship(target as FriendshipResult),
+			source: parseRelationship(source),
+			target: parseRelationship(target),
 		},
 	};
 	return parsedResult;

@@ -15,8 +15,10 @@ class FanfouError extends Error {
 		if (error instanceof HTTPError) {
 			const contentTypes = error.response.headers['content-type'];
 			const [contentType] = contentTypes ? contentTypes.split(';') : [];
+			// eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
 			switch (contentType) {
 				case 'application/json': {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					this.message = JSON.parse(error.response.body as string).error;
 					break;
 				}

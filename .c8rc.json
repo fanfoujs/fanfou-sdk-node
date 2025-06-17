@@ -1,0 +1,4 @@
+{
+	"include": ["distribution/source/**/*.js"],
+	"exclude": ["distribution/source/api.js"]
+}
