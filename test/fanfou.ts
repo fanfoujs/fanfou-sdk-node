@@ -1,6 +1,7 @@
 import http, {type Server} from 'node:http';
 import anyTest, {type TestFn} from 'ava';
 import listen from 'test-listen';
+import * as api from '../source/api.js';
 import Fanfou from '../source/index.js';
 import {baseStatus} from './fixtures/mocks.js';
 import app from './fixtures/server.js';
@@ -66,6 +67,14 @@ test('create instance with options', (t) => {
 	t.is(ff.apiDomain, 'apiDomain');
 	t.is(ff.oauthDomain, 'oauthDomain');
 	t.is(ff.hooks.baseString?.(''), '');
+});
+
+test('all apis should be available in the instance', (t) => {
+	const apiMethods = Object.keys(api);
+	const ff = new Fanfou();
+	for (const method of apiMethods) {
+		t.true(method in ff);
+	}
 });
 
 test.serial('initialize', async (t) => {
