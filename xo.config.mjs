@@ -2,7 +2,6 @@ const xoConfig = [
 	{
 		prettier: true,
 		rules: {
-			camelcase: 'off',
 			'sort-imports': [
 				'error',
 				{
