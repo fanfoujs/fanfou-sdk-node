@@ -13,9 +13,6 @@ const xoConfig = [
 					allowSeparatedGroups: false,
 				},
 			],
-			'import-x/no-extraneous-dependencies': 'off',
-			'import-x/no-named-as-default': 'off',
-			'import-x/extensions': 'off',
 			'import-x/order': [
 				'error',
 				{
@@ -28,7 +25,6 @@ const xoConfig = [
 					'newlines-between': 'never',
 				},
 			],
-			'unicorn/no-process-exit': 'off',
 		},
 	},
 ];
