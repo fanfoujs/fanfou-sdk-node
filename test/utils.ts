@@ -8,7 +8,7 @@ test('isReply', (t) => {
 	t.true(utils.isReply({...baseStatus, inReplyToUserId: 'statusId'}));
 });
 
-test('isRepost ', (t) => {
+test('isRepost', (t) => {
 	t.false(utils.isRepost(baseStatus));
 	t.false(utils.isRepost({...baseStatus, repostStatusId: ''}));
 	t.true(utils.isRepost({...baseStatus, repostStatusId: 'statusId'}));

@@ -1,8 +1,8 @@
 import camelcaseKeys from 'camelcase-keys';
 import decamelizedKeys from 'decamelize-keys';
 import FormData from 'form-data';
-import got from 'got';
 import hmacsha1 from 'hmacsha1';
+import ky from 'ky';
 import OAuth from 'oauth-1.0a';
 import queryString from 'query-string';
 import * as api from './api.js';
@@ -85,18 +85,21 @@ class Fanfou {
 			this.o.authorize({url, method: 'GET'}),
 		);
 		try {
-			const response = await got.get(url, {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				headers: {Authorization},
-			});
-			const {body} = response;
+			const body = await ky
+				.get(url, {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					headers: {Authorization},
+				})
+				.text();
 			const result = queryString.parse(body);
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthToken = result['oauth_token'] as string;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			throw new FanfouError(error);
+			throw await FanfouError.from(error);
 		}
 		/* c8 ignore stop */
 	}
@@ -111,18 +114,21 @@ class Fanfou {
 			),
 		);
 		try {
-			const response = await got.get(url, {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				headers: {Authorization},
-			});
-			const {body} = response;
+			const body = await ky
+				.get(url, {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					headers: {Authorization},
+				})
+				.text();
 			const result = queryString.parse(body);
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthToken = result['oauth_token'] as string;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			throw new FanfouError(error);
+			throw await FanfouError.from(error);
 		}
 		/* c8 ignore stop */
 	}
@@ -142,22 +148,25 @@ class Fanfou {
 			this.o.authorize({url, method: 'POST'}),
 		);
 		try {
-			const response = await got.post(url, {
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					Authorization,
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-				body: queryString.stringify(parameters),
-			});
-			const {body} = response;
+			const body = await ky
+				.post(url, {
+					headers: {
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						Authorization,
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: queryString.stringify(parameters),
+				})
+				.text();
 			const result = queryString.parse(body);
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthToken = result['oauth_token'] as string;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			throw new FanfouError(error);
+			throw await FanfouError.from(error);
 		}
 		/* c8 ignore stop */
 	}
@@ -172,18 +181,20 @@ class Fanfou {
 			this.o.authorize({url, method: 'GET'}, token),
 		);
 		try {
-			const {body} = await got.get(url, {
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					Authorization,
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-			});
+			const body = await ky
+				.get(url, {
+					headers: {
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						Authorization,
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				})
+				.text();
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {
-			throw new FanfouError(error);
+			throw await FanfouError.from(error);
 		}
 		/* c8 ignore stop */
 	}
@@ -220,16 +231,18 @@ class Fanfou {
 		}
 
 		try {
-			const {body} = await got.post(url, {
-				headers,
-				// @ts-expect-error: Can be `undefined`
-				body: isUpload ? form : queryString.stringify(parameters),
-			});
+			const body = await ky
+				.post(url, {
+					headers,
+					// @ts-expect-error: Can be `undefined`
+					body: isUpload ? form : queryString.stringify(parameters),
+				})
+				.text();
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {
-			throw new FanfouError(error);
+			throw await FanfouError.from(error);
 		}
 		/* c8 ignore stop */
 	}

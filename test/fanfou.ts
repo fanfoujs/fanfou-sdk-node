@@ -6,6 +6,7 @@ import Fanfou from '../source/index.js';
 import {baseStatus} from './fixtures/mocks.js';
 import app from './fixtures/server.js';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const test = anyTest as TestFn<{
 	server: Server;
 	ff: Fanfou;
@@ -77,7 +78,7 @@ test('all apis should be available in the instance', (t) => {
 	}
 });
 
-test.serial('initialize', async (t) => {
+test.serial('initialize', (t) => {
 	const {ff} = t.context;
 
 	t.is(ff.oauthToken, '');

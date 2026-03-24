@@ -396,7 +396,7 @@ export const getFavorites = async (
 	ff: Fanfou,
 	options: GetFavoritesOptions = {},
 ): Promise<Status[]> => {
-	const {id = '', ...restOptions} = options;
+	const {id, ...restOptions} = options;
 	return ff.get(`/favorites/${id}`, restOptions);
 };
 
