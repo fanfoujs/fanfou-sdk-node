@@ -5,7 +5,7 @@
 [![](https://img.shields.io/npm/l/fanfou-sdk.svg)](https://github.com/fanfoujs/fanfou-sdk-node/blob/master/LICENSE)
 [![](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
-Fanfou SDK for Node.js
+Fanfou SDK for JavaScript
 
 ## Install
 
