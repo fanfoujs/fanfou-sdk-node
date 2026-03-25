@@ -25,6 +25,7 @@ test.after.always((t) => {
 
 test('handle Error', (t) => {
 	const function_ = () => {
+		// eslint-disable-next-line @typescript-eslint/only-throw-error
 		throw new FanfouError(new Error('isError'));
 	};
 
@@ -38,26 +39,25 @@ test('handle Error', (t) => {
 	t.is(error?.message, 'isError');
 });
 
-test('handle Error via from()', async (t) => {
-	const fanfouError = await FanfouError.from(new Error('fromError'));
-
-	t.true(fanfouError instanceof FanfouError);
-	t.is(fanfouError.message, 'fromError');
-});
-
 test('handle HTTPError', async (t) => {
 	const httpError = await t.throwsAsync<HTTPError>(
 		ky.get(`${t.context.prefixUrl}/nonexistent`),
 	);
 
-	const fanfouError = await FanfouError.from(httpError);
+	const fanfouError = t.throws(
+		() => {
+			// eslint-disable-next-line @typescript-eslint/only-throw-error
+			throw new FanfouError(httpError);
+		},
+		{instanceOf: FanfouError},
+	);
 
-	t.true(fanfouError instanceof FanfouError);
-	t.truthy(fanfouError.message);
+	t.truthy(fanfouError?.message);
 });
 
 test('handle unknown error', (t) => {
 	const function_ = () => {
+		// eslint-disable-next-line @typescript-eslint/only-throw-error
 		throw new FanfouError('');
 	};
 
