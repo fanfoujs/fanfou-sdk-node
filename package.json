@@ -25,6 +25,7 @@
 		"@types/he": "^1.2.3",
 		"@types/node": "^25.5.0",
 		"@types/test-listen": "^1.1.2",
+		"@typescript/native-preview": "^7.0.0-dev.20260331.1",
 		"ava": "^7.0.0",
 		"c8": "^11.0.0",
 		"del-cli": "^7.0.0",
@@ -33,7 +34,6 @@
 		"test-listen": "^1.1.0",
 		"ts-node": "^10.9.2",
 		"typedoc": "^0.28.18",
-		"typescript": "^6.0.2",
 		"xo": "^2.0.2"
 	},
 	"engines": {
