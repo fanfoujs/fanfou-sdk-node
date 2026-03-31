@@ -40,7 +40,7 @@
 		"node": ">=20"
 	},
 	"scripts": {
-		"build": "del-cli distribution && tsc",
+		"build": "del-cli distribution && tsgo",
 		"pretest": "npm run build",
 		"test": "xo && c8 ava",
 		"typedoc": "npm run build && del-cli docs && typedoc --gitRevision main source/index.ts",
