@@ -13,7 +13,10 @@ const test = anyTest as TestFn<{
 }>;
 
 test.before(async (t) => {
-	const server = http.createServer(app());
+	const requestListener = app();
+	const server = http.createServer((request, response) => {
+		void requestListener(request, response);
+	});
 	const prefixUrl = await listen(server);
 	const domain = prefixUrl.replace('http://', '');
 

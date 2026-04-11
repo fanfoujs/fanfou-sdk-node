@@ -99,7 +99,6 @@ class Fanfou {
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(error);
 		}
 		/* c8 ignore stop */
@@ -129,7 +128,6 @@ class Fanfou {
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(error);
 		}
 		/* c8 ignore stop */
@@ -168,7 +166,6 @@ class Fanfou {
 			return this;
 			/* c8 ignore start */
 		} catch (error) {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(error);
 		}
 		/* c8 ignore stop */
@@ -197,7 +194,6 @@ class Fanfou {
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(error);
 		}
 		/* c8 ignore stop */
@@ -246,7 +242,6 @@ class Fanfou {
 			return camelcaseKeys(JSON.parse(body), {deep: true});
 			/* c8 ignore start */
 		} catch (error) {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(error);
 		}
 		/* c8 ignore stop */

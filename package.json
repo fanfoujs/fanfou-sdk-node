@@ -14,7 +14,7 @@
 		"form-data": "^4.0.5",
 		"he": "^1.2.0",
 		"hmacsha1": "^1.0.0",
-		"ky": "^1.14.3",
+		"ky": "^2.0.0",
 		"oauth-1.0a": "^2.2.6",
 		"query-string": "^9.3.1"
 	},
@@ -23,9 +23,9 @@
 		"@sindresorhus/tsconfig": "^8.1.0",
 		"@types/express": "^5.0.6",
 		"@types/he": "^1.2.3",
-		"@types/node": "^25.5.0",
+		"@types/node": "^25.6.0",
 		"@types/test-listen": "^1.1.2",
-		"@typescript/native-preview": "^7.0.0-dev.20260331.1",
+		"@typescript/native-preview": "^7.0.0-dev.20260411.1",
 		"ava": "^7.0.0",
 		"c8": "^11.0.0",
 		"del-cli": "^7.0.0",
@@ -37,7 +37,7 @@
 		"xo": "^2.0.2"
 	},
 	"engines": {
-		"node": ">=20"
+		"node": ">=22"
 	},
 	"scripts": {
 		"build": "del-cli distribution && tsgo",

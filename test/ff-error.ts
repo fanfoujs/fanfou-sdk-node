@@ -12,7 +12,10 @@ const test = anyTest as TestFn<{
 }>;
 
 test.before(async (t) => {
-	const server = http.createServer(app());
+	const requestListener = app();
+	const server = http.createServer((request, response) => {
+		void requestListener(request, response);
+	});
 	const prefixUrl = await listen(server);
 
 	t.context.server = server;
@@ -25,7 +28,6 @@ test.after.always((t) => {
 
 test('handle Error', (t) => {
 	const function_ = () => {
-		// eslint-disable-next-line @typescript-eslint/only-throw-error
 		throw new FanfouError(new Error('isError'));
 	};
 
@@ -46,7 +48,6 @@ test('handle HTTPError', async (t) => {
 
 	const fanfouError = t.throws(
 		() => {
-			// eslint-disable-next-line @typescript-eslint/only-throw-error
 			throw new FanfouError(httpError);
 		},
 		{instanceOf: FanfouError},
@@ -57,7 +58,6 @@ test('handle HTTPError', async (t) => {
 
 test('handle unknown error', (t) => {
 	const function_ = () => {
-		// eslint-disable-next-line @typescript-eslint/only-throw-error
 		throw new FanfouError('');
 	};
 
