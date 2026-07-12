@@ -4,3 +4,4 @@ coverage
 docs
 .vscode
 yarn.lock
+fanfou-sdk-*.tgz
