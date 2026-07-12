@@ -11,36 +11,37 @@
 	"dependencies": {
 		"camelcase-keys": "^10.0.2",
 		"decamelize-keys": "^2.0.1",
-		"form-data": "^4.0.5",
+		"form-data": "^4.0.6",
 		"he": "^1.2.0",
 		"hmacsha1": "^1.0.0",
-		"ky": "^2.0.0",
+		"ky": "^2.0.2",
 		"oauth-1.0a": "^2.2.6",
-		"query-string": "^9.3.1"
+		"query-string": "^9.4.1"
 	},
 	"devDependencies": {
-		"@ava/typescript": "^6.0.0",
+		"@ava/typescript": "^7.0.0",
 		"@sindresorhus/tsconfig": "^8.1.0",
 		"@types/express": "^5.0.6",
 		"@types/he": "^1.2.3",
-		"@types/node": "^25.6.0",
+		"@types/node": "^26.1.1",
 		"@types/test-listen": "^1.1.2",
-		"@typescript/native-preview": "^7.0.0-dev.20260411.1",
-		"ava": "^7.0.0",
+		"ava": "^8.0.1",
 		"c8": "^11.0.0",
 		"del-cli": "^7.0.0",
 		"express": "^5.2.1",
 		"gh-pages": "^6.3.0",
 		"test-listen": "^1.1.0",
 		"ts-node": "^10.9.2",
-		"typedoc": "^0.28.18",
-		"xo": "^2.0.2"
+		"typedoc": "^0.28.20",
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"typescript-7": "npm:typescript@^7.0.1-rc",
+		"xo": "^4.0.0"
 	},
 	"engines": {
 		"node": ">=22"
 	},
 	"scripts": {
-		"build": "del-cli distribution && tsgo",
+		"build": "del-cli distribution && tsc",
 		"pretest": "npm run build",
 		"test": "xo && c8 ava",
 		"typedoc": "npm run build && del-cli docs && typedoc --gitRevision main source/index.ts",

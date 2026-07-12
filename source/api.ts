@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-unsafe-return: off */
 import type Fanfou from './fanfou.js';
 import type {DirectMessage, Status, Trend, User} from './types.js';
 

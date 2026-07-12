@@ -5,7 +5,6 @@ import listen from 'test-listen';
 import {FanfouError} from '../source/index.js';
 import app from './fixtures/server.js';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const test = anyTest as TestFn<{
 	server: Server;
 	prefixUrl: string;

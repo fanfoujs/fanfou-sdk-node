@@ -26,7 +26,7 @@ const ff = new Fanfou({
 	consumerKey: '',
 	consumerSecret: '',
 	oauthToken: '',
-	oauthTokenSecret: ''
+	oauthTokenSecret: '',
 });
 
 const timeline = await ff.getHomeTimeline();
@@ -39,7 +39,7 @@ const ff = new Fanfou({
 	consumerKey: '',
 	consumerSecret: '',
 	username: '',
-	password: ''
+	password: '',
 });
 
 await ff.xauth();
@@ -83,7 +83,10 @@ const timeline = await ff.getHomeTimeline();
 const status = await ff.createStatus({status: 'post test'});
 
 // Upload photo
-const result = await ff.uploadPhoto({photo: fs.createReadStream(path), status: 'unicorn'});
+const result = await ff.uploadPhoto({
+	photo: fs.createReadStream(path),
+	status: 'unicorn',
+});
 
 // Get user
 const user = await ff.getUser({id: 'lito'});
@@ -106,10 +109,10 @@ const ff = new Fanfou({
 	apiDomain: 'api.example.com',
 	oauthDomain: 'example.com',
 	hooks: {
-		baseString: str => {
+		baseString: (str) => {
 			return str.replace('example.com', 'fanfou.com');
-		}
-	}
+		},
+	},
 });
 ```
 

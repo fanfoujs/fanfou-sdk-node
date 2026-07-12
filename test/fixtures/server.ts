@@ -1,9 +1,8 @@
-/* eslint @typescript-eslint/no-unsafe-call: off */
 import decamelizeKeys from 'decamelize-keys';
 import express from 'express';
 import {baseStatus} from './mocks.js';
 
-const server = () => {
+export default function server() {
 	const app = express();
 
 	app.get('/oauth/request_token', (request, response) => {
@@ -47,6 +46,4 @@ const server = () => {
 	});
 
 	return app;
-};
-
-export default server;
+}

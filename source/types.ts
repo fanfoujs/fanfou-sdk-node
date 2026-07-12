@@ -32,10 +32,7 @@ export type StatusEntityLink = {
 };
 
 export type StatusEntity =
-	| StatusEntityText
-	| StatusEntityTag
-	| StatusEntityAt
-	| StatusEntityLink;
+	StatusEntityText | StatusEntityTag | StatusEntityAt | StatusEntityLink;
 
 export type Status = {
 	createdAt: string;

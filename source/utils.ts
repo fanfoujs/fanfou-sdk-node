@@ -11,7 +11,7 @@ export const isOrigin = (status: Status) =>
 	!(isReply(status) || isRepost(status));
 
 export const isOriginRepost = (status: Status) =>
-	isOrigin(status) && /转@/gv.test(status.text);
+	isOrigin(status) && status.text.includes('转@');
 
 export const getType = (status: Status) => {
 	if (isReply(status)) {
@@ -25,17 +25,17 @@ export const getType = (status: Status) => {
 	return 'origin';
 };
 
-export const hasBold = (text: string) => /<b>[\s\S\n]*?<\/b>/gv.test(text);
+export const hasBold = (text: string) => /<b>[\s\S]*?<\/b>/v.test(text);
 
 export const removeBoldTag = (text: string) => text.replaceAll(/<\/?b>/gv, '');
 
 export const getBoldTexts = (text: string): StatusBoldText[] => {
-	const pattern = /<b>[\s\S\n]*?<\/b>/gv;
+	const bPattern = /<b>[\s\S]*?<\/b>/gv;
 	let theText = text;
-	const match = text.match(pattern);
+	const bMatch = text.match(bPattern);
 	const textArray = [];
-	if (match) {
-		for (const item of match) {
+	if (bMatch) {
+		for (const item of bMatch) {
 			const index = theText.indexOf(item);
 			if (index > 0) {
 				const t = theText.slice(0, index);
@@ -45,10 +45,10 @@ export const getBoldTexts = (text: string): StatusBoldText[] => {
 				});
 			}
 
-			const match = /<b>(?<t>[\s\S\n]*?)<\/b>/v.exec(item);
+			const tMatch = /<b>(?<t>[\s\S]*?)<\/b>/v.exec(item);
 			textArray.push({
 				/* c8 ignore start */
-				text: he.decode(match?.groups?.['t'] ?? ''),
+				text: he.decode(tMatch?.groups?.['t'] ?? ''),
 				isBold: true,
 			});
 			theText = theText.slice(index + item.length);
@@ -74,11 +74,11 @@ export const getBoldTexts = (text: string): StatusBoldText[] => {
 
 // eslint-disable-next-line complexity
 export const getEntities = (statusText: string): StatusEntity[] => {
-	const pattern = /[@#]?<a href=".*?".*?>[\s\S\n]*?<\/a>#?/gv;
-	const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S\n]*)<\/a>#/v;
+	const pattern = /[#@]?<a href="[^"]*"[^>]*>[\s\S]*?<\/a>#?/gv;
+	const tagPattern = /#<a href="\/q\/(?<link>.*?)".?>(?<tag>[\s\S]*)<\/a>#/v;
 	const atPattern =
-		/@<a href="(?:http|https):\/\/[.a-z\d\-]*fanfou.com\/(?<id>.*?)".*?>(?<at>.*?)<\/a>/v;
-	const linkPattern = /<a href="(?<link>.*?)".*?>(?<text>.*?)<\/a>/v;
+		/@<a href="(?:http|https):\/\/[\d\-.a-z]*fanfou.com\/(?<id>[^"]*)"[^>]*>(?<at>.*?)<\/a>/v;
+	const linkPattern = /<a href="(?<link>[^"]*)"[^>]*>(?<text>.*?)<\/a>/v;
 	const match = statusText.match(pattern);
 	const entities = [];
 	let theText = statusText;

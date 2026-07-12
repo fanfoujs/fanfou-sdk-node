@@ -2,6 +2,7 @@ const xoConfig = [
 	{
 		prettier: true,
 		rules: {
+			'@typescript-eslint/strict-boolean-expressions': 'off',
 			'sort-imports': [
 				'error',
 				{

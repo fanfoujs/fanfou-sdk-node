@@ -31,6 +31,9 @@ export type FanfouOptions = {
 };
 
 class Fanfou {
+	private readonly apiEndPoint: string;
+	private readonly oauthEndPoint: string;
+	private readonly o: OAuth;
 	consumerKey: string;
 	consumerSecret: string;
 	oauthToken: string;
@@ -41,9 +44,6 @@ class Fanfou {
 	apiDomain: string;
 	oauthDomain: string;
 	hooks: FanfouHooks;
-	private readonly apiEndPoint: string;
-	private readonly oauthEndPoint: string;
-	private readonly o: OAuth;
 
 	constructor(options: FanfouOptions = {}) {
 		this.consumerKey = options.consumerKey ?? '';
@@ -92,9 +92,9 @@ class Fanfou {
 				})
 				.text();
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
@@ -121,9 +121,9 @@ class Fanfou {
 				})
 				.text();
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
@@ -159,9 +159,9 @@ class Fanfou {
 				})
 				.text();
 			const result = queryString.parse(body);
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthToken = result['oauth_token'] as string;
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+
 			this.oauthTokenSecret = result['oauth_token_secret'] as string;
 			return this;
 			/* c8 ignore start */
@@ -222,8 +222,8 @@ class Fanfou {
 		};
 		if (isUpload) {
 			form = new FormData();
-			for (const key of Object.keys(parameters)) {
-				form.append(key, parameters[key]);
+			for (const [key, value] of Object.entries(parameters)) {
+				form.append(key, value);
 			}
 
 			// @ts-expect-error: Drop `Content-Type`
@@ -247,6 +247,7 @@ class Fanfou {
 		/* c8 ignore stop */
 	}
 
+	/* eslint-disable unicorn/consistent-class-member-order -- Put all API methods together. */
 	/* c8 ignore start */
 	acceptFriendship = async (options: api.AcceptFriendshipOptions) =>
 		api.acceptFriendship(this, options);
@@ -416,6 +417,7 @@ class Fanfou {
 	verifyCredentials = async (options: api.VerifyCredentialsOptions) =>
 		api.verifyCredentials(this, options);
 	/* c8 ignore stop */
+	/* eslint-enable unicorn/consistent-class-member-order */
 }
 
 export default Fanfou;

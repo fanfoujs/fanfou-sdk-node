@@ -6,7 +6,6 @@ import Fanfou from '../source/index.js';
 import {baseStatus} from './fixtures/mocks.js';
 import app from './fixtures/server.js';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const test = anyTest as TestFn<{
 	server: Server;
 	ff: Fanfou;
@@ -77,7 +76,7 @@ test('all apis should be available in the instance', (t) => {
 	const apiMethods = Object.keys(api);
 	const ff = new Fanfou();
 	for (const method of apiMethods) {
-		t.true(method in ff);
+		t.true(Object.hasOwn(ff, method));
 	}
 });
 
