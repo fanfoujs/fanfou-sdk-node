@@ -30,6 +30,31 @@ export type FanfouOptions = {
 	hooks?: FanfouHooks;
 };
 
+type BindFanfou<Function> = Function extends (
+	ff: Fanfou,
+	...arguments_: infer Arguments
+) => infer Result
+	? (...arguments_: Arguments) => Result
+	: never;
+
+type BoundApi = {
+	[Key in keyof typeof api]: BindFanfou<(typeof api)[Key]>;
+};
+
+function bindApi(ff: Fanfou): BoundApi {
+	return Object.fromEntries(
+		Object.entries(api).map(([name, handler]) => [
+			name,
+			(...arguments_: unknown[]) =>
+				(handler as (ff: Fanfou, ...arguments_: unknown[]) => unknown)(
+					ff,
+					...arguments_,
+				),
+		]),
+	) as BoundApi;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging -- API methods are assigned in the constructor.
 class Fanfou {
 	private readonly apiEndPoint: string;
 	private readonly oauthEndPoint: string;
@@ -76,6 +101,7 @@ class Fanfou {
 			},
 			/* c8 ignore stop  */
 		});
+		Object.assign(this, bindApi(this));
 	}
 
 	async getRequestToken() {
@@ -246,178 +272,9 @@ class Fanfou {
 		}
 		/* c8 ignore stop */
 	}
-
-	/* eslint-disable unicorn/consistent-class-member-order -- Put all API methods together. */
-	/* c8 ignore start */
-	acceptFriendship = async (options: api.AcceptFriendshipOptions) =>
-		api.acceptFriendship(this, options);
-
-	checkBlockExists = async (options: api.CheckBlockExistsOptions) =>
-		api.checkBlockExists(this, options);
-
-	checkFriendship = async (options: api.CheckFriendshipOptions) =>
-		api.checkFriendship(this, options);
-
-	checkFriendshipDetail = async (options: api.CheckFriendshipDetailOptions) =>
-		api.checkFriendshipDetail(this, options);
-
-	checkFriendshipRequests = async (
-		options: api.CheckFriendshipRequestsOptions,
-	) => api.checkFriendshipRequests(this, options);
-
-	createBlockedUser = async (options: api.CreateBlockedUserOptions) =>
-		api.createBlockedUser(this, options);
-
-	createDirectMessage = async (options: api.CreateDirectMessageOptions) =>
-		api.createDirectMessage(this, options);
-
-	createFavorite = async (options: api.CreateFavoriteOptions) =>
-		api.createFavorite(this, options);
-
-	createFriendship = async (options: api.CreateFriendshipOptions) =>
-		api.createFriendship(this, options);
-
-	createSavedSearch = async (options: api.CreateSavedSearchOptions) =>
-		api.createSavedSearch(this, options);
-
-	createStatus = async (options: api.CreateStatusOptions) =>
-		api.createStatus(this, options);
-
-	denyFriendship = async (options: api.DenyFriendshipOptions) =>
-		api.denyFriendship(this, options);
-
-	dismissRecommendedUser = async (options: api.DismissRecommendedUserOptions) =>
-		api.dismissRecommendedUser(this, options);
-
-	dropBlockedUser = async (options: api.DropBlockedUserOptions) =>
-		api.dropBlockedUser(this, options);
-
-	dropDirectMessage = async (options: api.DropDirectMessageOptions) =>
-		api.dropDirectMessage(this, options);
-
-	dropFavorite = async (options: api.DropFavoriteOptions) =>
-		api.dropFavorite(this, options);
-
-	dropFriendship = async (options: api.DropFriendshipOptions) =>
-		api.dropFriendship(this, options);
-
-	dropSavedSearch = async (options: api.DropSavedSearchOptions) =>
-		api.dropSavedSearch(this, options);
-
-	dropStatus = async (options: api.DropStatusOptions) =>
-		api.dropStatus(this, options);
-
-	getBlockedIds = async () => api.getBlockedIds(this);
-
-	getBlockedUsers = async (options?: api.GetBlockedUsersOptions) =>
-		api.getBlockedUsers(this, options);
-
-	getContextTimeline = async (options: api.GetContextTimelineOptions) =>
-		api.getContextTimeline(this, options);
-
-	getConversation = async (options: api.GetConversationOptions) =>
-		api.getConversation(this, options);
-
-	getConversations = async (options?: api.GetConversationsOptions) =>
-		api.getConversations(this, options);
-
-	getFavorites = async (options?: api.GetFavoritesOptions) =>
-		api.getFavorites(this, options);
-
-	getFollowerIds = async (options?: api.GetFollowerIdsOptions) =>
-		api.getFollowerIds(this, options);
-
-	getFollowers = async (options?: api.GetFollowersOptions) =>
-		api.getFollowers(this, options);
-
-	getFollowingIds = async (options?: api.GetFollowingIdsOptions) =>
-		api.getFollowingIds(this, options);
-
-	getFollowings = async (options?: api.GetFollowingsOptions) =>
-		api.getFollowings(this, options);
-
-	getHomeTimeline = async (options?: api.GetHomeTimelineOptions) =>
-		api.getHomeTimeline(this, options);
-
-	getInbox = async (options?: api.GetInboxOptions) =>
-		api.getInbox(this, options);
-
-	getMentions = async (options: api.GetMentionsOptions) =>
-		api.getMentions(this, options);
-
-	getNotification = async () => api.getNotification(this);
-
-	getPublicTimeline = async (options: api.GetPublicTimelineOptions) =>
-		api.getPublicTimeline(this, options);
-
-	getRateLimitStatus = async (options: api.GetRateLimitStatusOptions) =>
-		api.getRateLimitStatus(this, options);
-
-	getRecentFollowers = async (options: api.GetRecentFollowersOptions) =>
-		api.getRecentFollowers(this, options);
-
-	getRecentUsers = async (options: api.GetRecentUsersOptions) =>
-		api.getRecentUsers(this, options);
-
-	getRecommendedUsers = async (options: api.GetRecommendedUsersOptions) =>
-		api.getRecommendedUsers(this, options);
-
-	getReplies = async (options: api.GetRepliesOptions) =>
-		api.getReplies(this, options);
-
-	getSavedSearch = async (options: api.GetSavedSearchOptions) =>
-		api.getSavedSearch(this, options);
-
-	getSavedSearches = async (options: api.GetSavedSearchesOptions) =>
-		api.getSavedSearches(this, options);
-
-	getSent = async (options: api.GetSentOptions) => api.getSent(this, options);
-
-	getStatus = async (options: api.GetStatusOptions) =>
-		api.getStatus(this, options);
-
-	getTaggedUsers = async (options: api.GetTaggedUsersOptions) =>
-		api.getTaggedUsers(this, options);
-
-	getTrends = async (options: api.GetTrendsOptions) =>
-		api.getTrends(this, options);
-
-	getUser = async (options: api.GetUserOptions) => api.getUser(this, options);
-
-	getUserPhotos = async (options: api.GetUserPhotosOptions) =>
-		api.getUserPhotos(this, options);
-
-	getUserTags = async (options: api.GetUserTagsOptions) =>
-		api.getUserTags(this, options);
-
-	getUserTimeline = async (options: api.GetUserTimelineOptions) =>
-		api.getUserTimeline(this, options);
-
-	searchPublicTimeline = async (options: api.SearchPublicTimelineOptions) =>
-		api.searchPublicTimeline(this, options);
-
-	searchUserTimeline = async (options: api.SearchUserTimelineOptions) =>
-		api.searchUserTimeline(this, options);
-
-	searchUsers = async (options: api.SearchUsersOptions) =>
-		api.searchUsers(this, options);
-
-	updateNotifyNumber = async (options: api.UpdateNotifyNumberOptions) =>
-		api.updateNotifyNumber(this, options);
-
-	updateProfile = async (options: api.UpdateProfileOptions) =>
-		api.updateProfile(this, options);
-
-	updateProfileImage = async (options: api.UpdateProfileImageOptions) =>
-		api.updateProfileImage(this, options);
-
-	uploadPhoto = async (options: api.UploadPhotoOptions) =>
-		api.uploadPhoto(this, options);
-
-	verifyCredentials = async (options: api.VerifyCredentialsOptions) =>
-		api.verifyCredentials(this, options);
-	/* c8 ignore stop */
-	/* eslint-enable unicorn/consistent-class-member-order */
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unsafe-declaration-merging -- Declares dynamically assigned API methods.
+interface Fanfou extends BoundApi {}
 
 export default Fanfou;
