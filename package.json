@@ -14,19 +14,19 @@
 		"form-data": "^4.0.6",
 		"he": "^1.2.0",
 		"hmacsha1": "^1.0.0",
-		"ky": "^2.0.2",
+		"ky": "^2.1.0",
 		"oauth-1.0a": "^2.2.6",
-		"query-string": "^9.4.1"
+		"query-string": "^9.5.0"
 	},
 	"devDependencies": {
 		"@ava/typescript": "^7.0.0",
 		"@sindresorhus/tsconfig": "^8.1.0",
 		"@types/express": "^5.0.6",
 		"@types/he": "^1.2.3",
-		"@types/node": "^26.1.1",
+		"@types/node": "^26.4.0",
 		"@types/test-listen": "^1.1.2",
 		"ava": "^8.0.1",
-		"c8": "^11.0.0",
+		"c8": "^12.0.0",
 		"del-cli": "^7.0.0",
 		"express": "^5.2.1",
 		"gh-pages": "^6.3.0",
@@ -34,7 +34,7 @@
 		"ts-node": "^10.9.2",
 		"typedoc": "^0.28.20",
 		"typescript": "npm:@typescript/typescript6@^6.0.2",
-		"typescript-7": "npm:typescript@^7.0.1-rc",
+		"typescript-7": "npm:typescript@^7.0.2",
 		"xo": "^4.0.0"
 	},
 	"engines": {
