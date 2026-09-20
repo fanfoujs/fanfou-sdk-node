@@ -1,10 +1,5 @@
 {
 	"extends": "@sindresorhus/tsconfig",
-	"include": [
-		"source",
-		"test"
-	],
-	"files": [
-		"source/declaration.d.ts"
-	]
+	"include": ["source", "test"],
+	"files": ["source/declaration.d.ts"]
 }

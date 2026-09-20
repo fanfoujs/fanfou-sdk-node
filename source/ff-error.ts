@@ -12,7 +12,7 @@ class FanfouError extends Error {
 				: new Error('Unknown error');
 
 		/* c8 ignore start */
-		if (error instanceof HTTPError && body !== undefined) {
+		if (body !== undefined && error instanceof HTTPError) {
 			const contentType = error.response.headers.get('content-type');
 			const [type] = contentType ? contentType.split(';') : [];
 

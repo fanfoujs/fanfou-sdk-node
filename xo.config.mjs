@@ -3,6 +3,7 @@ const xoConfig = [
 		prettier: true,
 		rules: {
 			'@typescript-eslint/strict-boolean-expressions': 'off',
+			'node-test/no-import-test-files': 'off',
 			'sort-imports': [
 				'error',
 				{

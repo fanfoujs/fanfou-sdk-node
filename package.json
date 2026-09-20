@@ -2,11 +2,32 @@
 	"name": "fanfou-sdk",
 	"version": "7.0.0-beta.2",
 	"description": "Fanfou SDK for Node.js",
+	"license": "MIT",
+	"repository": "github:fanfoujs/fanfou-sdk-node",
+	"homepage": "https://github.com/fanfoujs/fanfou-sdk-node#readme",
+	"bugs": "https://github.com/fanfoujs/fanfou-sdk-node/issues",
+	"author": "LitoMore",
 	"type": "module",
-	"exports": "./distribution/source/index.js",
-	"types": "distribution/source",
+	"exports": {
+		"types": "./distribution/source/index.d.ts",
+		"default": "./distribution/source/index.js"
+	},
+	"sideEffects": false,
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"build": "del-cli distribution && tsc",
+		"pretest": "npm run build",
+		"test": "xo && c8 ava",
+		"typedoc": "npm run build && del-cli docs && typedoc --gitRevision main source/index.ts",
+		"deploy:doc": "gh-pages -d docs"
+	},
 	"files": [
 		"distribution/source"
+	],
+	"keywords": [
+		"fanfou"
 	],
 	"dependencies": {
 		"camelcase-keys": "^10.0.2",
@@ -35,29 +56,6 @@
 		"typedoc": "^0.28.20",
 		"typescript": "npm:@typescript/typescript6@^6.0.2",
 		"typescript-7": "npm:typescript@^7.0.2",
-		"xo": "^4.0.0"
-	},
-	"engines": {
-		"node": ">=22"
-	},
-	"scripts": {
-		"build": "del-cli distribution && tsc",
-		"pretest": "npm run build",
-		"test": "xo && c8 ava",
-		"typedoc": "npm run build && del-cli docs && typedoc --gitRevision main source/index.ts",
-		"deploy:doc": "gh-pages -d docs"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/fanfoujs/fanfou-sdk-node.git"
-	},
-	"keywords": [
-		"fanfou"
-	],
-	"author": "LitoMore",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/fanfoujs/fanfou-sdk-node/issues"
-	},
-	"homepage": "https://github.com/fanfoujs/fanfou-sdk-node#readme"
+		"xo": "^5.0.1"
+	}
 }

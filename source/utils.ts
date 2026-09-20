@@ -18,11 +18,7 @@ export const getType = (status: Status) => {
 		return 'reply';
 	}
 
-	if (isRepost(status)) {
-		return 'repost';
-	}
-
-	return 'origin';
+	return isRepost(status) ? 'repost' : 'origin';
 };
 
 export const hasBold = (text: string) => /<b>[\s\S]*?<\/b>/v.test(text);

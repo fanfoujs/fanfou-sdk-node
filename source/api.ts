@@ -466,6 +466,7 @@ export type CheckFriendshipOptions = {
 	userB: string;
 };
 
+// eslint-disable-next-line unicorn/consistent-boolean-name
 export const checkFriendship = async (
 	ff: Fanfou,
 	options: CheckFriendshipOptions,
