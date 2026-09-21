@@ -77,7 +77,7 @@ class Fanfou {
 		this.oauthTokenSecret = options.oauthTokenSecret ?? '';
 		this.username = options.username ?? '';
 		this.password = options.password ?? '';
-		this.protocol = options.protocol ?? 'http:';
+		this.protocol = options.protocol ?? 'https:';
 		this.apiDomain = options.apiDomain ?? 'api.fanfou.com';
 		this.oauthDomain = options.oauthDomain ?? 'fanfou.com';
 		this.hooks = options.hooks ?? {};

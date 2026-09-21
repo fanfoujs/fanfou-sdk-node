@@ -23,6 +23,8 @@ test.before(async (t) => {
 	t.context.ff = new Fanfou({
 		apiDomain: domain,
 		oauthDomain: domain,
+		// Use the `http:` protocol for the local test server
+		protocol: 'http:',
 	});
 });
 
@@ -39,7 +41,7 @@ test('create instance without options', (t) => {
 	t.is(ff.oauthTokenSecret, '');
 	t.is(ff.username, '');
 	t.is(ff.password, '');
-	t.is(ff.protocol, 'http:');
+	t.is(ff.protocol, 'https:');
 	t.is(ff.apiDomain, 'api.fanfou.com');
 	t.is(ff.oauthDomain, 'fanfou.com');
 });
