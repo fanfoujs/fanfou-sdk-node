@@ -67,6 +67,8 @@ const status = await ff.createStatus({status: 'Hi Fanfou'});
 
 For full SDK API, please refer to the [documentation](https://fanfoujs.github.io/fanfou-sdk-node/modules.html).
 
+Request parameters and response fields use `camelCase`. The SDK converts parameters like `sinceId` to `since_id` for Fanfou, and response fields like `created_at` to `createdAt`, including nested objects like `user.screenName`.
+
 **Examples**
 
 ```ts
@@ -115,6 +117,75 @@ const ff = new Fanfou({
 	},
 });
 ```
+
+## Utilities
+
+### Status text
+
+Use `format: 'html'` when fetching statuses. `getEntities` splits the HTML text into text, mentions (`at`), topics (`tag`) and links, so you can render each part in your client.
+
+```ts
+import {getEntities, getPlainText} from 'fanfou-sdk';
+
+const status = await ff.getStatus({id: 'statusId', format: 'html'});
+const entities = getEntities(status.text);
+const text = getPlainText(entities);
+
+getEntities('Hi @<a href="https://fanfou.com/lito">Lito</a>');
+// [
+//   {type: 'text', text: 'Hi '},
+//   {type: 'at', text: '@Lito', name: 'Lito', id: 'lito'},
+// ]
+```
+
+Entities include `boldTexts` for highlighted text, such as search matches. `getPlainText` joins the entities into plain text and decodes HTML entities.
+
+### Bold text
+
+Check for bold tags, remove them, or split text into regular and bold parts.
+
+```ts
+import {hasBold, removeBoldTag, getBoldTexts} from 'fanfou-sdk';
+
+const text = 'Hi <b>Fanfou</b>';
+
+hasBold(text); // true
+removeBoldTag(text); // "Hi Fanfou"
+getBoldTexts(text);
+// [
+//   {text: "Hi ", isBold: false},
+//   {text: "Fanfou", isBold: true},
+// ]
+```
+
+### Status types
+
+```ts
+import {getType, isReply, isRepost, isOrigin, isOriginRepost} from 'fanfou-sdk';
+
+const status = await ff.getStatus({id: 'statusId'});
+
+getType(status); // "reply", "repost" or "origin"
+isReply(status); // Has a reply status or user ID
+isRepost(status); // Has a repost status ID
+isOrigin(status); // Neither a reply nor a repost
+isOriginRepost(status); // An original status containing "转@"
+```
+
+### Status source
+
+Extract the name and URL from a status's `source` field.
+
+```ts
+import {getSourceName, getSourceUrl} from 'fanfou-sdk';
+
+const source = '<a href="https://fanfou.com" target="_blank">Fanfou</a>';
+
+getSourceName(source); // "Fanfou"
+getSourceUrl(source); // "https://fanfou.com"
+```
+
+For a source without a link, `getSourceName` returns the source text and `getSourceUrl` returns an empty string.
 
 ## Related
 
