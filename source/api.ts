@@ -396,7 +396,7 @@ export const getFavorites = async (
 	options: GetFavoritesOptions = {},
 ): Promise<Status[]> => {
 	const {id, ...restOptions} = options;
-	return ff.get(`/favorites/${id}`, restOptions);
+	return ff.get(id ? `/favorites/${id}` : '/favorites', restOptions);
 };
 
 export type CreateFavoriteOptions = {
